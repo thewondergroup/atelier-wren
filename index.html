@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Atelier Wren — Luxury Interior & Hospitality Design</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --bg: #080808;
   --text: #e8e4df;
-  --text-muted: #8a8580;
   --accent: #c9a96e;
   --heading: 'Barlow Condensed', sans-serif;
   --body: 'Fira Code', monospace;
@@ -25,74 +24,67 @@ body {
   overflow-x: hidden; -webkit-font-smoothing: antialiased;
 }
 
-/* ── NOISE ── */
-.noise {
-  position: fixed; inset: 0; z-index: 9990; pointer-events: none; opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 256px;
-}
-
-/* ── CURSOR ── */
-.cur-d { position: fixed; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 10001; mix-blend-mode: difference; opacity: 0; transition: opacity 0.3s; }
-.cur-d.visible { opacity: 1; }
-.cur-r { position: fixed; width: 44px; height: 44px; border: 1px solid rgba(201,169,110,0.3); border-radius: 50%; pointer-events: none; z-index: 10001; transition: width 0.4s var(--ease), height 0.4s var(--ease), border-color 0.3s, opacity 0.3s; opacity: 0; }
-.cur-r.visible { opacity: 1; }
-.cur-r.h { width: 70px; height: 70px; border-color: var(--accent); }
-@media (max-width: 768px) { .cur-d, .cur-r { display: none; } }
-
 /* ── LOADER ── */
 .loader {
-  position: fixed; inset: 0; z-index: 10000; background: var(--bg);
+  position: fixed; inset: 0; z-index: 9999; background: var(--bg);
   pointer-events: none;
-  animation: loaderHide 1.2s ease 1.8s forwards;
+  animation: loaderHide 1s ease 2s forwards;
 }
 @keyframes loaderHide { to { opacity: 0; visibility: hidden; } }
-.loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* ── NAV ── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.8rem clamp(1.5rem, 4vw, 4rem);
-  mix-blend-mode: difference;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem clamp(1.5rem, 4vw, 4rem);
 }
 .nav-logo {
-  font-family: var(--heading); font-size: 1.25rem; font-weight: 700;
+  font-family: var(--heading); font-size: 0.85rem; font-weight: 700;
   letter-spacing: 0.04em; text-transform: uppercase; color: #fff; text-decoration: none;
+  position: absolute; left: clamp(1.5rem, 4vw, 4rem);
+  opacity: 0; transition: opacity 0.5s ease;
 }
-.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+nav.scrolled .nav-logo { opacity: 1; }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
 .nav-links a {
-  font-family: var(--body); font-size: 0.6rem; font-weight: 400;
-  letter-spacing: 0.18em; text-transform: uppercase; color: #fff;
+  font-family: var(--body); font-size: 0.45rem; font-weight: 400;
+  letter-spacing: 0.15em; text-transform: uppercase; color: #fff;
   text-decoration: none; position: relative; transition: opacity 0.3s;
 }
-.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.4s var(--ease); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1px; background: #fff; transition: width 0.4s var(--ease);
+}
 .nav-links a:hover { opacity: 0.7; }
 .nav-links a:hover::after { width: 100%; }
-.ham { display: none; cursor: pointer; padding: 8px; z-index: 200; flex-direction: column; gap: 6px; }
+
+/* Hamburger */
+.ham { display: none; cursor: pointer; padding: 8px; z-index: 300; flex-direction: column; gap: 6px; position: absolute; right: clamp(1.5rem, 4vw, 4rem); }
 .ham span { display: block; width: 26px; height: 1px; background: #fff; transition: transform 0.4s var(--ease), opacity 0.3s; }
 .ham.open span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
 .ham.open span:nth-child(2) { opacity: 0; }
 .ham.open span:nth-child(3) { transform: translateY(-3.5px) rotate(-45deg); }
+
+/* Mobile nav */
 .m-nav {
-  position: fixed; inset: 0; z-index: 150; background: var(--bg);
-  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2.5rem;
+  position: fixed; inset: 0; z-index: 250; background: var(--bg);
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2rem;
   opacity: 0; visibility: hidden; transition: opacity 0.5s, visibility 0.5s;
 }
 .m-nav.open { opacity: 1; visibility: visible; }
 .m-nav a {
-  font-family: var(--heading); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
-  color: var(--text); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase;
-  transform: translateY(30px); opacity: 0; transition: transform 0.5s var(--ease), opacity 0.5s, color 0.3s;
+  font-family: var(--heading); font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700;
+  color: var(--text); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
+  transition: color 0.3s;
 }
-.m-nav.open a { transform: translateY(0); opacity: 1; }
 .m-nav a:hover { color: var(--accent); }
+
 @media (max-width: 768px) { .nav-links { display: none; } .ham { display: flex; } }
 
-/* ── SNAP ── */
+/* ── SCROLL SNAP ── */
 .snap { height: 100vh; overflow-y: auto; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
 
-/* ── HERO CAROUSEL ── */
+/* ── HERO ── */
 .hero {
   position: relative; height: 100vh; scroll-snap-align: start; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
@@ -101,40 +93,42 @@ nav {
 .hero-slide {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  opacity: 0; transform: scale(1.08);
+  opacity: 0; transform: scale(1.06);
   transition: opacity 1.4s ease, transform 7s linear;
 }
 .hero-slide.active { opacity: 1; transform: scale(1); }
+
 .hero-ov { position: absolute; inset: 0; background: rgba(8,8,8,0.25); pointer-events: none; }
-.hero-ov::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 120px 30px rgba(0,0,0,0.2); }
 
 .hero-logo {
-  position: relative; z-index: 10001; text-align: center;
-  opacity: 0; animation: logoIn 1s var(--ease) 0.3s forwards;
+  position: relative; z-index: 3; text-align: center;
+  opacity: 0; animation: fadeIn 1s ease 2.2s forwards;
 }
-@keyframes logoIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
 .hero-logo-text {
   font-family: var(--heading); font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; line-height: 0.95;
-}
-.hero-logo-sub {
-  font-family: var(--heading); font-size: clamp(0.7rem, 1.3vw, 1rem);
-  font-weight: 300; letter-spacing: 0.55em; text-transform: uppercase;
-  color: rgba(255,255,255,0.55); margin-top: 1rem;
 }
 
 .hero-scroll {
   position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
   z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
-  opacity: 0; animation: fadeIn 1s ease 2.5s forwards;
+  opacity: 0; animation: fadeIn 1s ease 2.8s forwards;
 }
-.hero-scroll span { font-family: var(--body); font-size: 0.48rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--text-muted); }
-.scroll-line { width: 1px; height: 45px; background: linear-gradient(to bottom, var(--accent), transparent); animation: pulse 2.2s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.2;transform:scaleY(0.45)} }
-@keyframes fadeIn { to { opacity: 1; } }
+.hero-scroll span {
+  font-family: var(--body); font-size: 0.45rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: pulse 2.2s ease-in-out infinite;
+}
 
 .hero-prog { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; z-index: 4; background: rgba(255,255,255,0.06); }
 .hero-prog-bar { height: 100%; width: 0; background: var(--accent); }
+
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes pulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.2;transform:scaleY(0.4)} }
 
 /* ── PROJECT PANELS ── */
 .panel {
@@ -143,140 +137,136 @@ nav {
 }
 .panel-bg {
   position: absolute; inset: 0; background-size: cover; background-position: center;
-  transition: transform 8s linear; will-change: transform;
+  transition: transform 8s linear;
 }
-.panel.active .panel-bg { transform: scale(1.05); }
+.panel.active .panel-bg { transform: scale(1.04); }
 .panel-ov {
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, rgba(8,8,8,0.15) 30%, transparent 60%);
 }
-.panel-ov::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 80px 15px rgba(0,0,0,0.15); pointer-events: none; }
 
 .p-content {
-  position: relative; z-index: 2; padding: clamp(2rem, 5vw, 5rem); padding-bottom: clamp(3rem, 7vw, 7rem);
+  position: relative; z-index: 2;
+  padding: clamp(2rem, 5vw, 5rem); padding-bottom: clamp(3rem, 7vw, 7rem);
   width: 100%; display: flex; align-items: flex-end; justify-content: space-between;
 }
 .p-meta { transition: transform 0.9s var(--ease), opacity 0.8s ease; }
-.p-meta.animated { transform: translateY(40px); opacity: 0; }
-.panel.active .p-meta.animated { transform: translateY(0); opacity: 1; }
-.p-label { font-family: var(--body); font-size: 0.48rem; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-.p-name { font-family: var(--heading); font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 700; line-height: 0.95; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
-.p-loc { font-family: var(--body); font-size: 0.55rem; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); }
-.p-action { transition: transform 0.9s var(--ease) 0.15s, opacity 0.8s ease 0.15s; }
-.p-action.animated { transform: translateY(30px); opacity: 0; }
-.panel.active .p-action.animated { transform: translateY(0); opacity: 1; }
-.disc-btn {
-  display: inline-flex; align-items: center; gap: 1rem;
-  text-decoration: none; color: var(--text);
-  font-family: var(--body); font-size: 0.5rem; letter-spacing: 0.3em;
-  text-transform: uppercase; padding: 0.9rem 0; position: relative;
+.p-meta.anim { transform: translateY(40px); opacity: 0; }
+.panel.active .p-meta.anim { transform: translateY(0); opacity: 1; }
+.p-label {
+  font-family: var(--body); font-size: 0.42rem; font-weight: 400;
+  letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.7rem;
 }
-.disc-btn::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease); }
+.p-name {
+  font-family: var(--heading); font-size: clamp(1.8rem, 4vw, 3.5rem); font-weight: 700;
+  line-height: 0.95; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.4rem;
+}
+.p-loc {
+  font-family: var(--body); font-size: 0.48rem; font-weight: 300;
+  letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+}
+.p-action { transition: transform 0.9s var(--ease) 0.15s, opacity 0.8s ease 0.15s; }
+.p-action.anim { transform: translateY(30px); opacity: 0; }
+.panel.active .p-action.anim { transform: translateY(0); opacity: 1; }
+.disc-btn {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  text-decoration: none; color: var(--text);
+  font-family: var(--body); font-size: 0.44rem; letter-spacing: 0.25em;
+  text-transform: uppercase; padding: 0.8rem 0; position: relative;
+}
+.disc-btn::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease);
+}
 .disc-btn:hover::after { transform: scaleX(1); }
-.disc-btn svg { width: 16px; height: 16px; transition: transform 0.3s var(--ease); }
+.disc-btn svg { width: 13px; height: 13px; transition: transform 0.3s var(--ease); }
 .disc-btn:hover svg { transform: translateX(5px); }
 
 /* ── DOTS ── */
 .dots {
-  position: fixed; right: clamp(1.2rem, 2.5vw, 2.5rem); top: 50%; transform: translateY(-50%);
-  z-index: 100; display: flex; flex-direction: column; align-items: center; gap: 1rem;
-  mix-blend-mode: difference;
+  position: fixed; right: clamp(1rem, 2vw, 2rem); top: 50%; transform: translateY(-50%);
+  z-index: 200; display: flex; flex-direction: column; gap: 0.8rem;
 }
 .dot {
-  width: 6px; height: 6px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.35);
-  background: transparent; cursor: pointer; transition: background 0.4s, border-color 0.4s, transform 0.3s var(--ease);
+  width: 5px; height: 5px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3);
+  background: transparent; cursor: pointer; transition: background 0.3s, transform 0.3s var(--ease);
 }
-.dot.on { background: #fff; border-color: #fff; transform: scale(1.5); }
-.dot:hover { border-color: #fff; }
+.dot.on { background: #fff; border-color: #fff; transform: scale(1.4); }
 @media (max-width: 768px) { .dots { display: none; } }
 
-/* ── BOTTOM ── */
+/* ── BOTTOM (white) ── */
 .bottom { scroll-snap-align: start; background: #fff; color: #1a1a1a; }
+
 .reveal { transition: opacity 0.8s ease, transform 0.8s var(--ease); }
-.reveal.animated { opacity: 0; transform: translateY(50px); }
+.reveal.anim { opacity: 0; transform: translateY(40px); }
 .reveal.vis { opacity: 1; transform: translateY(0); }
 
-/* Nav links section */
 .nav-section {
-  padding: clamp(6rem,10vw,10rem) clamp(2rem,6vw,8rem);
-  display: flex; justify-content: center; gap: clamp(3rem,6vw,8rem);
+  padding: clamp(5rem, 8vw, 8rem) clamp(2rem, 6vw, 8rem);
+  display: flex; justify-content: center; gap: clamp(3rem, 6vw, 8rem);
 }
-.nav-block { text-align: center; }
 .nav-block a {
-  font-family: var(--heading); font-size: clamp(1.6rem,3vw,2.8rem);
+  font-family: var(--heading); font-size: clamp(1.4rem, 2.5vw, 2.2rem);
   font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-  color: #1a1a1a; text-decoration: none;
-  position: relative; transition: color 0.3s;
+  color: #1a1a1a; text-decoration: none; position: relative;
 }
 .nav-block a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-  background: #1a1a1a; transition: width 0.4s var(--ease);
+  content: ''; position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1.5px; background: #1a1a1a; transition: width 0.4s var(--ease);
 }
 .nav-block a:hover::after { width: 100%; }
 
-/* Footer - white theme matching their design */
+/* Footer */
 footer {
-  padding: clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem);
+  padding: clamp(3rem, 5vw, 5rem) clamp(2rem, 6vw, 8rem);
   border-top: 1px solid rgba(0,0,0,0.08);
   display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: clamp(2rem,3vw,4rem); align-items: start;
+  gap: clamp(2rem, 3vw, 4rem);
 }
 .ft-col h4 {
-  font-family: var(--heading); font-size: 0.85rem; font-weight: 700;
+  font-family: var(--heading); font-size: 0.8rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.04em; color: #1a1a1a;
-  margin-bottom: 0.8rem; text-decoration: underline; text-underline-offset: 4px;
+  margin-bottom: 0.6rem; text-decoration: underline; text-underline-offset: 4px;
 }
 .ft-col p, .ft-col a {
-  font-family: var(--body); font-size: 0.6rem; color: #555;
-  line-height: 1.8; text-decoration: none;
+  font-family: var(--body); font-size: 0.55rem; color: #666; line-height: 1.8; text-decoration: none;
 }
 .ft-col a:hover { color: #1a1a1a; }
 .ft-bottom {
   grid-column: 1 / -1; text-align: center;
-  padding-top: 3rem; margin-top: 1rem;
-  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 2.5rem; margin-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 .ft-bottom-logo {
-  font-family: var(--heading); font-size: clamp(2rem,5vw,4rem);
+  font-family: var(--heading); font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-  color: #1a1a1a; margin-bottom: 1.5rem;
+  color: #1a1a1a; margin-bottom: 1.2rem;
 }
-.ft-bottom-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; }
+.ft-bottom-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
 .ft-bottom-links a {
-  font-family: var(--body); font-size: 0.5rem; letter-spacing: 0.15em;
-  text-transform: uppercase; color: #888; text-decoration: none; transition: color 0.3s;
+  font-family: var(--body); font-size: 0.45rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #999; text-decoration: none; transition: color 0.3s;
 }
 .ft-bottom-links a:hover { color: #1a1a1a; }
 .ft-copy {
-  font-family: var(--body); font-size: 0.45rem; color: #bbb;
-  letter-spacing: 0.15em; margin-top: 1.5rem;
+  font-family: var(--body); font-size: 0.4rem; color: #ccc; letter-spacing: 0.12em; margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
-  .nav-section { flex-direction: column; align-items: center; gap: 2rem; }
+  .p-content { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+  .nav-section { flex-direction: column; align-items: center; gap: 1.5rem; }
   footer { grid-template-columns: 1fr 1fr; }
-}
-
-@media (max-width: 768px) {
-  .p-content { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-  .svc-grid { grid-template-columns: 1fr; }
-  .proc-row { flex-direction: column; }
-  .proc { border-left: none; border-top: 1px solid rgba(255,255,255,0.04); }
-  .proc:first-child { border-top: none; }
-  footer { grid-template-columns: 1fr; text-align: center; }
-  .ft-l, .ft-r { text-align: center; }
 }
 </style>
 </head>
 <body>
 
-<div class="noise"></div>
-<div class="cur-d" id="cD"></div>
-<div class="cur-r" id="cR"></div>
+<!-- Loader -->
+<div class="loader"></div>
 
-<div class="loader" id="loader"></div>
-
-<nav>
+<!-- Nav -->
+<nav id="nav">
   <a href="#" class="nav-logo">Atelier Wren</a>
   <ul class="nav-links">
     <li><a href="#">Home</a></li>
@@ -289,7 +279,9 @@ footer {
   </ul>
   <div class="ham" id="ham"><span></span><span></span><span></span></div>
 </nav>
-<div class="m-nav" id="mN">
+
+<!-- Mobile nav -->
+<div class="m-nav" id="mNav">
   <a href="#" onclick="closeM()">Home</a>
   <a href="#" data-goto="1" onclick="closeM()">Projects</a>
   <a href="#" onclick="closeM()">Studio</a>
@@ -299,13 +291,15 @@ footer {
   <a href="#" onclick="closeM()">Contact</a>
 </div>
 
+<!-- Dots -->
 <div class="dots" id="dots"></div>
 
+<!-- Scroll-snap container -->
 <div class="snap" id="snap">
 
-  <!-- HERO: Centred logo + auto-cycling background -->
+  <!-- Hero -->
   <section class="hero" data-index="0">
-    <div class="hero-slides" id="hSlides">
+    <div class="hero-slides">
       <div class="hero-slide active" style="background-image:url('assets/img-silva.webp')"></div>
       <div class="hero-slide" style="background-image:url('assets/img-saltigirl.webp')"></div>
       <div class="hero-slide" style="background-image:url('assets/img-rebase.webp')"></div>
@@ -316,14 +310,12 @@ footer {
       <div class="hero-slide" style="background-image:url('assets/img-quilon.webp')"></div>
     </div>
     <div class="hero-ov"></div>
-    <div class="hero-logo">
-      <div class="hero-logo-text">Atelier Wren</div>
-    </div>
+    <div class="hero-logo"><div class="hero-logo-text">Atelier Wren</div></div>
     <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
     <div class="hero-prog"><div class="hero-prog-bar" id="progBar"></div></div>
   </section>
 
-  <!-- PROJECT PANELS -->
+  <!-- Projects -->
   <section class="panel" data-index="1"><div class="panel-bg" style="background-image:url('assets/img-silva.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Silva</div><div class="p-loc">Mayfair, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
 
   <section class="panel" data-index="2"><div class="panel-bg" style="background-image:url('assets/img-rebase.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Rebase</div><div class="p-loc">Marylebone, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
@@ -340,86 +332,124 @@ footer {
 
   <section class="panel" data-index="8"><div class="panel-bg" style="background-image:url('assets/img-pitch.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Pitch</div><div class="p-loc">Canary Wharf, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
 
-  <!-- BOTTOM CONTENT -->
+  <!-- Bottom -->
   <div class="bottom">
-    <!-- Nav Links -->
     <div class="nav-section reveal">
       <div class="nav-block"><a href="#">Projects</a></div>
       <div class="nav-block"><a href="#">About</a></div>
       <div class="nav-block"><a href="#">Contact</a></div>
     </div>
-
-    <!-- Footer -->
     <footer>
-      <div class="ft-col">
-        <h4>Address</h4>
-        <p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p>
-      </div>
-      <div class="ft-col">
-        <h4>Phone</h4>
-        <p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p>
-      </div>
-      <div class="ft-col">
-        <h4>Email</h4>
-        <p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p>
-      </div>
-      <div class="ft-col">
-        <h4>Press</h4>
-        <p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p>
-      </div>
+      <div class="ft-col"><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
+      <div class="ft-col"><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
+      <div class="ft-col"><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
+      <div class="ft-col"><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
       <div class="ft-bottom">
         <div class="ft-bottom-logo">Atelier Wren</div>
         <div class="ft-bottom-links">
-          <a href="#">Home</a>
-          <a href="#">Projects</a>
-          <a href="#">Studio</a>
-          <a href="#">Services</a>
-          <a href="#">Stories</a>
-          <a href="#">Press</a>
-          <a href="#">Contact</a>
-          <a href="https://www.instagram.com/atelierwren/" target="_blank">Instagram</a>
+          <a href="#">Home</a><a href="#">Projects</a><a href="#">Studio</a><a href="#">Services</a><a href="#">Stories</a><a href="#">Press</a><a href="#">Contact</a><a href="https://www.instagram.com/atelierwren/" target="_blank">Instagram</a>
         </div>
         <div class="ft-copy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
       </div>
     </footer>
   </div>
+
 </div>
 
 <script>
-// Add animation classes (so site works without JS too)
-document.querySelectorAll('.p-meta').forEach(el=>el.classList.add('animated'));
-document.querySelectorAll('.p-action').forEach(el=>el.classList.add('animated'));
-document.querySelectorAll('.reveal').forEach(el=>el.classList.add('animated'));
+(function(){
+  var snap = document.getElementById('snap');
+  var nav = document.getElementById('nav');
+  var ham = document.getElementById('ham');
+  var mNav = document.getElementById('mNav');
+  var progBar = document.getElementById('progBar');
+  var slides = document.querySelectorAll('.hero-slide');
+  var panels = document.querySelectorAll('[data-index]');
+  var dotsC = document.getElementById('dots');
 
-// LOADER
-setTimeout(()=>document.getElementById('loader').classList.add('done'),2400);
+  // Animate classes for progressive enhancement
+  document.querySelectorAll('.p-meta').forEach(function(el){ el.classList.add('anim'); });
+  document.querySelectorAll('.p-action').forEach(function(el){ el.classList.add('anim'); });
+  document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('anim'); });
 
-// CURSOR
-const cD=document.getElementById('cD'),cR=document.getElementById('cR');
-let mx=-100,my=-100,rx=-100,ry=-100;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cD.style.left=mx-4+'px';cD.style.top=my-4+'px';cD.classList.add('visible');cR.classList.add('visible');});
-(function loop(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;cR.style.left=rx-22+'px';cR.style.top=ry-22+'px';requestAnimationFrame(loop)})();
-document.querySelectorAll('a,.disc-btn,.cta-btn,.ham,.dot').forEach(el=>{el.addEventListener('mouseenter',()=>cR.classList.add('h'));el.addEventListener('mouseleave',()=>cR.classList.remove('h'));});
+  // Nav logo on scroll
+  snap.addEventListener('scroll', function(){
+    if(snap.scrollTop > window.innerHeight * 0.5){
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
 
-// HERO CAROUSEL
-const slides=document.querySelectorAll('.hero-slide'),progBar=document.getElementById('progBar');
-let cur=0;const IV=3000;
-function animProg(){progBar.style.transition='none';progBar.style.width='0%';requestAnimationFrame(()=>{requestAnimationFrame(()=>{progBar.style.transition='width '+IV+'ms linear';progBar.style.width='100%';});});}
-animProg();
-setInterval(()=>{slides[cur].classList.remove('active');cur=(cur+1)%slides.length;slides[cur].classList.add('active');animProg();},IV);
+  // Hero carousel
+  var cur = 0;
+  var IV = 3000;
+  function animProg(){
+    progBar.style.transition = 'none';
+    progBar.style.width = '0%';
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        progBar.style.transition = 'width ' + IV + 'ms linear';
+        progBar.style.width = '100%';
+      });
+    });
+  }
+  animProg();
+  setInterval(function(){
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+    animProg();
+  }, IV);
 
-// PANELS & DOTS
-const snap=document.getElementById('snap'),panels=document.querySelectorAll('.hero,.panel'),dotsC=document.getElementById('dots');
-panels.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.addEventListener('click',()=>panels[i].scrollIntoView({behavior:'smooth'}));dotsC.appendChild(d);});
-const dots=dotsC.querySelectorAll('.dot');
-const pObs=new IntersectionObserver(entries=>{entries.forEach(ent=>{const idx=parseInt(ent.target.dataset.index);if(ent.isIntersecting&&ent.intersectionRatio>0.5){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));if(ent.target.classList.contains('panel'))ent.target.classList.add('active');dots.forEach((d,i)=>d.classList.toggle('on',i===idx));}});},{root:snap,threshold:0.5});
-panels.forEach(p=>pObs.observe(p));
+  // Dot navigation
+  panels.forEach(function(p, i){
+    var d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' on' : '');
+    d.addEventListener('click', function(){ panels[i].scrollIntoView({behavior:'smooth'}); });
+    dotsC.appendChild(d);
+  });
+  var dots = dotsC.querySelectorAll('.dot');
 
-// REVEAL
-const rObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{root:snap,threshold:0.1,rootMargin:'0px 0px -50px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>rObs.observe(el));
+  // Panel observer
+  var pObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(ent){
+      var idx = parseInt(ent.target.dataset.index);
+      if(ent.isIntersecting && ent.intersectionRatio > 0.5){
+        document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+        if(ent.target.classList.contains('panel')) ent.target.classList.add('active');
+        dots.forEach(function(d, i){ d.classList.toggle('on', i === idx); });
+      }
+    });
+  }, {root: snap, threshold: 0.5});
+  panels.forEach(function(p){ pObs.observe(p); });
 
-// MOBILE
-const ham=document.getElementById('ham'),mN=document.getElementById('mN');
-ham.addEventListener('click',()=>{ham.classList.toggle('open');mN.classList.toggle('open');document.body.style.overflow=mN.classList.contains('open')?'hidden':'';});
-function closeM(){ham.classList.remove('open');mN.classList.remove('open');document.body.style.overflow='';}
+  // Reveal observer
+  var rObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('vis'); });
+  }, {root: snap, threshold: 0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ rObs.observe(el); });
+
+  // Mobile menu
+  ham.addEventListener('click', function(){
+    ham.classList.toggle('open');
+    mNav.classList.toggle('open');
+  });
+  window.closeM = function(){
+    ham.classList.remove('open');
+    mNav.classList.remove('open');
+  };
+
+  // Nav goto links
+  document.querySelectorAll('[data-goto]').forEach(function(l){
+    l.addEventListener('click', function(e){
+      e.preventDefault();
+      var idx = parseInt(l.dataset.goto);
+      if(panels[idx]) panels[idx].scrollIntoView({behavior:'smooth'});
+      closeM();
+    });
+  });
+})();
+</script>
+</body>
+</html>
