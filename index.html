@@ -8,12 +8,9 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#080808;--text:#e8e4df;--accent:#c9a96e;--heading:'Barlow Condensed',sans-serif;--body:'Fira Code',monospace;--ease:cubic-bezier(.16,1,.3,1)}
-html{scrollbar-width:thin;scrollbar-color:#8b7345 var(--bg)}
-body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;overflow-x:hidden}
 .loader{position:fixed;inset:0;z-index:9999;background:var(--bg);pointer-events:none;animation:loaderOut 1s ease 2s forwards}
 @keyframes loaderOut{to{opacity:0;visibility:hidden}}
-
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);animation:navIn .8s var(--ease) 2.5s forwards}
 @keyframes navIn{to{opacity:1;transform:translateY(0)}}
 .nav-logo{display:none}
@@ -32,16 +29,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .m-nav a{font-family:var(--heading);font-size:clamp(1.5rem,4vw,2.5rem);font-weight:700;color:var(--text);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .3s}
 .m-nav a:hover{color:var(--accent)}
 @media(max-width:768px){.nav-links{display:none}.ham{display:flex}}
-
 .snap{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
-
 .hero{position:relative;height:100vh;scroll-snap-align:start;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .hero-slides{position:absolute;inset:0}
 .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.06);transition:opacity 1.4s ease,transform 7s linear}
 .hero-slide.active{opacity:1;transform:scale(1)}
 .hero-ov{position:absolute;inset:0;background:rgba(8,8,8,.25);pointer-events:none}
 .hero-logo{position:relative;z-index:3;text-align:center;opacity:0;animation:fadeIn 1s ease 2.2s forwards}
-.hero-logo-text{font-family:var(--heading);font-size:clamp(2rem,5vw,4rem);font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff;line-height:.95}
+.hero-logo-text{font-family:var(--heading);font-size:clamp(2rem,5vw,4rem);font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff}
 .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.7rem;opacity:0;animation:fadeIn 1s ease 2.8s forwards}
 .hero-scroll span{font-family:var(--body);font-size:.45rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:pulse 2.2s ease-in-out infinite}
@@ -49,18 +44,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hero-prog-bar{height:100%;width:0;background:var(--accent)}
 @keyframes fadeIn{to{opacity:1}}
 @keyframes pulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.2;transform:scaleY(.4)}}
-
 .panel{position:relative;height:100vh;scroll-snap-align:start;overflow:hidden;display:flex;align-items:flex-end}
 .panel-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 8s linear}
 .panel.active .panel-bg{transform:scale(1.04)}
 .panel-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.7) 0%,rgba(8,8,8,.15) 30%,transparent 60%)}
 .p-content{position:relative;z-index:2;padding:clamp(2rem,5vw,5rem);padding-bottom:clamp(3rem,7vw,7rem);width:100%;display:flex;align-items:flex-end;justify-content:space-between}
-.p-meta{transition:opacity .8s ease,transform .8s var(--ease)}
-.p-meta.anim{opacity:0;transform:translateY(30px)}
-.panel.active .p-meta.anim{opacity:1;transform:translateY(0)}
-.p-action{transition:opacity .8s ease .15s,transform .8s var(--ease) .15s}
-.p-action.anim{opacity:0;transform:translateY(20px)}
-.panel.active .p-action.anim{opacity:1;transform:translateY(0)}
+.p-meta,.p-action{transition:opacity .8s ease,transform .8s var(--ease)}
+.p-label,.p-name,.p-loc,.disc-btn{transition:opacity .7s ease,transform .7s var(--ease)}
+.panel.js .p-label{opacity:0;transform:translateY(20px)}
+.panel.js .p-name{opacity:0;transform:translateY(20px);transition-delay:.15s}
+.panel.js .p-loc{opacity:0;transform:translateY(20px);transition-delay:.3s}
+.panel.js .disc-btn{opacity:0;transform:translateY(20px);transition-delay:.45s}
+.panel.active .p-label,.panel.active .p-name,.panel.active .p-loc,.panel.active .disc-btn{opacity:1;transform:translateY(0)}
 .p-label{font-family:var(--body);font-size:.55rem;font-weight:400;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
 .p-name{font-family:var(--heading);font-size:clamp(1.8rem,4vw,3.5rem);font-weight:700;line-height:.95;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.4rem}
 .p-loc{font-family:var(--body);font-size:.6rem;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6)}
@@ -69,12 +64,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .disc-btn:hover::after{transform:scaleX(1)}
 .disc-btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
 .disc-btn:hover svg{transform:translateX(5px)}
-
 .dots{position:fixed;right:clamp(1rem,2vw,2rem);top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:.8rem}
 .dot{width:5px;height:5px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:transparent;cursor:pointer;transition:background .3s,transform .3s var(--ease)}
 .dot.on{background:#fff;border-color:#fff;transform:scale(1.4)}
 @media(max-width:768px){.dots{display:none}}
-
 .bottom{scroll-snap-align:start;background:#fff;color:#1a1a1a}
 .nav-section{padding:clamp(5rem,8vw,8rem) clamp(2rem,6vw,8rem);display:flex;justify-content:center;gap:clamp(3rem,6vw,8rem)}
 .nav-block{transition:opacity .8s ease,transform .8s var(--ease)}
@@ -85,7 +78,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-block a{font-family:var(--heading);font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;text-decoration:none;position:relative;display:inline-block}
 .nav-block a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:#1a1a1a;transition:width .4s var(--ease)}
 .nav-block a:hover::after{width:100%}
-
 footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rgba(0,0,0,.08);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2rem,3vw,4rem)}
 .ft-col h4{font-family:var(--heading);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:.6rem;text-decoration:underline;text-underline-offset:4px}
 .ft-col p,.ft-col a{font-family:var(--body);font-size:.55rem;color:#666;line-height:1.8;text-decoration:none}
@@ -96,95 +88,108 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rg
 .ft-bottom-links a{font-family:var(--body);font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:#999;text-decoration:none;transition:color .3s}
 .ft-bottom-links a:hover{color:#1a1a1a}
 .ft-copy{font-family:var(--body);font-size:.4rem;color:#ccc;letter-spacing:.12em;margin-top:1rem}
-
-@media(max-width:768px){
-.p-content{flex-direction:column;align-items:flex-start;gap:1.2rem}
-.nav-section{flex-direction:column;align-items:center;gap:1.5rem}
-footer{grid-template-columns:1fr 1fr}
-}
+@media(max-width:768px){.p-content{flex-direction:column;align-items:flex-start;gap:1.2rem}.nav-section{flex-direction:column;align-items:center;gap:1.5rem}footer{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <div class="loader"></div>
-<nav id="nav">
-  <a href="#" class="nav-logo">Atelier Wren</a>
-  <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#" class="goto" data-i="1">Projects</a></li>
-    <li><a href="#">Studio</a></li>
-    <li><a href="#">Services</a></li>
-    <li><a href="#">Stories</a></li>
-    <li><a href="#">Press</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-  <div class="ham" id="ham"><span></span><span></span><span></span></div>
-</nav>
-<div class="m-nav" id="mNav">
-  <a href="#">Home</a>
-  <a href="#" class="goto" data-i="1">Projects</a>
-  <a href="#">Studio</a>
-  <a href="#">Services</a>
-  <a href="#">Stories</a>
-  <a href="#">Press</a>
-  <a href="#">Contact</a>
-</div>
+<nav id="nav"><a href="#" class="nav-logo">Atelier Wren</a><ul class="nav-links"><li><a href="#">Home</a></li><li><a href="#" class="goto" data-i="1">Projects</a></li><li><a href="#">Studio</a></li><li><a href="#">Services</a></li><li><a href="#">Stories</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul><div class="ham" id="ham"><span></span><span></span><span></span></div></nav>
+<div class="m-nav" id="mNav"><a href="#">Home</a><a href="#" class="goto" data-i="1">Projects</a><a href="#">Studio</a><a href="#">Services</a><a href="#">Stories</a><a href="#">Press</a><a href="#">Contact</a></div>
 <div class="dots" id="dots"></div>
 <div class="snap" id="snap">
-  <section class="hero" data-index="0">
-    <div class="hero-slides">
-      <div class="hero-slide active" style="background-image:url('assets/img-silva.webp')"></div>
-      <div class="hero-slide" style="background-image:url('assets/img-saltigirl.webp')"></div>
-      <div class="hero-slide" style="background-image:url('assets/img-rebase.webp')"></div>
-      <div class="hero-slide" style="background-image:url('assets/img-shahnameh.webp')"></div>
-      <div class="hero-slide" style="background-image:url('assets/img-caia.webp')"></div>
-      <div class="hero-slide" style="background-image:url('assets/img-houseofming.webp')"></div>
-      <div class="hero-slide" style="background-image:url('assets/img-pitch.webp')"></div>
-      <div class="hero-slide" style="background-image:url('assets/img-quilon.webp')"></div>
-    </div>
-    <div class="hero-ov"></div>
-    <div class="hero-logo"><div class="hero-logo-text">Atelier Wren</div></div>
-    <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
-    <div class="hero-prog"><div class="hero-prog-bar" id="progBar"></div></div>
-  </section>
-  <section class="panel" data-index="1"><div class="panel-bg" style="background-image:url('assets/img-silva.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Silva</div><div class="p-loc">Mayfair, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
-  <section class="panel" data-index="2"><div class="panel-bg" style="background-image:url('assets/img-rebase.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Rebase</div><div class="p-loc">Marylebone, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
-  <section class="panel" data-index="3"><div class="panel-bg" style="background-image:url('assets/img-caia.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Caia</div><div class="p-loc">Notting Hill, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
-  <section class="panel" data-index="4"><div class="panel-bg" style="background-image:url('assets/img-quilon.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Quilon</div><div class="p-loc">London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
-  <section class="panel" data-index="5"><div class="panel-bg" style="background-image:url('assets/img-shahnameh.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Shahnameh</div><div class="p-loc">Mayfair, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
-  <section class="panel" data-index="6"><div class="panel-bg" style="background-image:url('assets/img-houseofming.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">House of Ming</div><div class="p-loc">St James', London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
-  <section class="panel" data-index="7"><div class="panel-bg" style="background-image:url('assets/img-saltigirl.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Saltigirl</div><div class="p-loc">London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
-  <section class="panel" data-index="8"><div class="panel-bg" style="background-image:url('assets/img-pitch.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Pitch</div><div class="p-loc">Canary Wharf, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
-  <div class="bottom">
-    <div class="nav-section">
-      <div class="nav-block"><a href="#">Projects</a></div>
-      <div class="nav-block"><a href="#">About</a></div>
-      <div class="nav-block"><a href="#">Contact</a></div>
-    </div>
-    <footer>
-      <div class="ft-col"><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
-      <div class="ft-col"><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
-      <div class="ft-col"><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
-      <div class="ft-col"><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
-      <div class="ft-bottom">
-        <div class="ft-bottom-logo">Atelier Wren</div>
-        <div class="ft-bottom-links">
-          <a href="#">Home</a><a href="#">Projects</a><a href="#">Studio</a><a href="#">Services</a><a href="#">Stories</a><a href="#">Press</a><a href="#">Contact</a><a href="https://www.instagram.com/atelierwren/" target="_blank">Instagram</a>
-        </div>
-        <div class="ft-copy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
-      </div>
-    </footer>
-  </div>
+<section class="hero" data-index="0"><div class="hero-slides"><div class="hero-slide active" style="background-image:url('assets/img-silva.webp')"></div><div class="hero-slide" style="background-image:url('assets/img-saltigirl.webp')"></div><div class="hero-slide" style="background-image:url('assets/img-rebase.webp')"></div><div class="hero-slide" style="background-image:url('assets/img-shahnameh.webp')"></div><div class="hero-slide" style="background-image:url('assets/img-caia.webp')"></div><div class="hero-slide" style="background-image:url('assets/img-houseofming.webp')"></div><div class="hero-slide" style="background-image:url('assets/img-pitch.webp')"></div><div class="hero-slide" style="background-image:url('assets/img-quilon.webp')"></div></div><div class="hero-ov"></div><div class="hero-logo"><div class="hero-logo-text">Atelier Wren</div></div><div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div><div class="hero-prog"><div class="hero-prog-bar" id="progBar"></div></div></section>
+<section class="panel" data-index="1"><div class="panel-bg" style="background-image:url('assets/img-silva.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Silva</div><div class="p-loc">Mayfair, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
+<section class="panel" data-index="2"><div class="panel-bg" style="background-image:url('assets/img-rebase.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Rebase</div><div class="p-loc">Marylebone, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
+<section class="panel" data-index="3"><div class="panel-bg" style="background-image:url('assets/img-caia.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Caia</div><div class="p-loc">Notting Hill, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
+<section class="panel" data-index="4"><div class="panel-bg" style="background-image:url('assets/img-quilon.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Quilon</div><div class="p-loc">London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
+<section class="panel" data-index="5"><div class="panel-bg" style="background-image:url('assets/img-shahnameh.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Shahnameh</div><div class="p-loc">Mayfair, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
+<section class="panel" data-index="6"><div class="panel-bg" style="background-image:url('assets/img-houseofming.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">House of Ming</div><div class="p-loc">St James', London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
+<section class="panel" data-index="7"><div class="panel-bg" style="background-image:url('assets/img-saltigirl.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Saltigirl</div><div class="p-loc">London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
+<section class="panel" data-index="8"><div class="panel-bg" style="background-image:url('assets/img-pitch.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Pitch</div><div class="p-loc">Canary Wharf, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
+<div class="bottom">
+<div class="nav-section"><div class="nav-block"><a href="#">Projects</a></div><div class="nav-block"><a href="#">About</a></div><div class="nav-block"><a href="#">Contact</a></div></div>
+<footer>
+<div class="ft-col"><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
+<div class="ft-col"><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
+<div class="ft-col"><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
+<div class="ft-col"><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
+<div class="ft-bottom"><div class="ft-bottom-logo">Atelier Wren</div><div class="ft-bottom-links"><a href="#">Home</a><a href="#">Projects</a><a href="#">Studio</a><a href="#">Services</a><a href="#">Stories</a><a href="#">Press</a><a href="#">Contact</a><a href="https://www.instagram.com/atelierwren/" target="_blank">Instagram</a></div><div class="ft-copy">&copy; 2026 Atelier Wren. All Rights Reserved.</div></div>
+</footer>
+</div>
 </div>
 <script>
-!function(){
-var s=document.getElementById('snap'),n=document.getElementById('nav'),h=document.getElementById('ham'),m=document.getElementById('mNav'),pb=document.getElementById('progBar'),sl=document.querySelectorAll('.hero-slide'),pa=document.querySelectorAll('[data-index]'),dc=document.getElementById('dots');
-var c=0,iv=3e3;
-function ap(){pb.style.transition='none';pb.style.width='0%';requestAnimationFrame(function(){requestAnimationFrame(function(){pb.style.transition='width '+iv+'ms linear';pb.style.width='100%'})})}
-ap();setInterval(function(){sl[c].classList.remove('active');c=(c+1)%sl.length;sl[c].classList.add('active');ap()},iv);
-pa.forEach(function(p,i){var d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.onclick=function(){pa[i].scrollIntoView({behavior:'smooth'})};dc.appendChild(d)});
+var s=document.getElementById('snap');
+var h=document.getElementById('ham');
+var m=document.getElementById('mNav');
+var pb=document.getElementById('progBar');
+var sl=document.querySelectorAll('.hero-slide');
+var pa=document.querySelectorAll('[data-index]');
+var dc=document.getElementById('dots');
+
+// Add animation classes
+document.querySelectorAll('.panel').forEach(function(e){e.classList.add('js')});
+document.querySelectorAll('.nav-block').forEach(function(e){e.classList.add('anim')});
+
+// Carousel
+var c=0;
+setInterval(function(){
+  sl[c].classList.remove('active');
+  c=(c+1)%sl.length;
+  sl[c].classList.add('active');
+  pb.style.transition='none';
+  pb.style.width='0%';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      pb.style.transition='width 3000ms linear';
+      pb.style.width='100%';
+    });
+  });
+},3000);
+pb.style.transition='width 3000ms linear';
+pb.style.width='100%';
+
+// Dots
+pa.forEach(function(p,i){
+  var d=document.createElement('div');
+  d.className='dot'+(i===0?' on':'');
+  d.onclick=function(){pa[i].scrollIntoView({behavior:'smooth'})};
+  dc.appendChild(d);
+});
 var dots=dc.querySelectorAll('.dot');
-var po=new IntersectionObserver(function(es){es.forEach(function(e){var i=parseInt(e.target.dataset.index);if(e.isIntersecting&&e.intersectionRatio>.5){document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});if(e.target.classList.contains('panel'))e.target.classList.add('active');dots.forEach(function(d,j){d.classList.toggle('on',j===i)})}})},{root:s,threshold:.5});
+
+// Panel active state
+var po=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    var i=parseInt(e.target.dataset.index);
+    if(e.isIntersecting && e.intersectionRatio>0.5){
+      document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
+      if(e.target.classList.contains('panel')) e.target.classList.add('active');
+      dots.forEach(function(d,j){d.classList.toggle('on',j===i)});
+    }
+  });
+},{root:s,threshold:0.5});
 pa.forEach(function(p){po.observe(p)});
-var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{root:s,threshold:.1});
-document.querySelectorAll('.nav-block').forEach(function(e){e.classList.add('anim');ro.observe(e)});
-h.onclick=function(){h.classList.toggle('open');m.classList.toggle('open')
+
+// Reveal nav-blocks
+var ro=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting) e.target.classList.add('vis');
+  });
+},{root:s,threshold:0.1});
+document.querySelectorAll('.nav-block').forEach(function(e){ro.observe(e)});
+
+// Mobile menu
+h.onclick=function(){h.classList.toggle('open');m.classList.toggle('open')};
+
+// Goto links
+document.querySelectorAll('.goto').forEach(function(l){
+  l.onclick=function(e){
+    e.preventDefault();
+    pa[parseInt(l.dataset.i)].scrollIntoView({behavior:'smooth'});
+    h.classList.remove('open');
+    m.classList.remove('open');
+  };
+});
+</script>
+</body>
+</html>
