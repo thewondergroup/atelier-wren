@@ -19,14 +19,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-links a:hover{opacity:.7}
 .nav-links a:hover::after{width:100%}
 .ham{display:none;cursor:pointer;padding:8px;flex-direction:column;gap:6px;z-index:300;position:absolute;right:clamp(1.5rem,4vw,4rem)}
-.ham span{display:block;width:26px;height:1px;background:#fff;transition:transform .4s var(--ease),opacity .3s}
+.ham span{display:block;width:26px;height:1px;background:#fff;transition:transform .4s var(--ease),opacity .3s,background .3s}
+.ham.open span{background:#1a1a1a}
 .ham.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
 .ham.open span:nth-child(2){opacity:0}
 .ham.open span:nth-child(3){transform:translateY(-3.5px) rotate(-45deg)}
-.m-nav{position:fixed;inset:0;z-index:250;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem;opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+.m-nav{position:fixed;inset:0;z-index:250;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
 .m-nav.open{opacity:1;visibility:visible}
-.m-nav a{font-family:var(--heading);font-size:clamp(1.5rem,4vw,2.5rem);font-weight:700;color:#1a1a1a;text-decoration:none;text-transform:uppercase;transition:color .3s}
-.m-nav a:hover{color:#999}
+.m-nav-close{position:absolute;top:1.5rem;right:clamp(1.5rem,4vw,4rem);cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center}
+.m-nav-close::before,.m-nav-close::after{content:'';position:absolute;width:22px;height:1px;background:#1a1a1a}
+.m-nav-close::before{transform:rotate(45deg)}
+.m-nav-close::after{transform:rotate(-45deg)}
+.m-nav-links{display:flex;flex-direction:column;align-items:center;gap:1.5rem;margin-bottom:3rem}
+.m-nav-links a{font-family:var(--heading);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;color:#1a1a1a;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;opacity:0;transform:translateY(25px);transition:opacity .5s ease,transform .5s var(--ease),color .3s}
+.m-nav.open .m-nav-links a{opacity:1;transform:translateY(0)}
+.m-nav.open .m-nav-links a:nth-child(1){transition-delay:.1s}
+.m-nav.open .m-nav-links a:nth-child(2){transition-delay:.15s}
+.m-nav.open .m-nav-links a:nth-child(3){transition-delay:.2s}
+.m-nav.open .m-nav-links a:nth-child(4){transition-delay:.25s}
+.m-nav.open .m-nav-links a:nth-child(5){transition-delay:.3s}
+.m-nav.open .m-nav-links a:nth-child(6){transition-delay:.35s}
+.m-nav.open .m-nav-links a:nth-child(7){transition-delay:.4s}
+.m-nav-links a:hover{color:var(--accent)}
+.m-nav-contact{text-align:center;opacity:0;transform:translateY(15px);transition:opacity .5s ease .5s,transform .5s var(--ease) .5s}
+.m-nav.open .m-nav-contact{opacity:1;transform:translateY(0)}
+.m-nav-contact p{font-family:var(--body);font-size:.5rem;color:rgba(0,0,0,.35);line-height:2;letter-spacing:.1em}
+.m-nav-contact a{color:rgba(0,0,0,.45);text-decoration:none;transition:color .3s}
+.m-nav-contact a:hover{color:#1a1a1a}
+.m-nav-divider{width:40px;height:1px;background:var(--accent);margin:0 auto 1.2rem;opacity:0;transition:opacity .5s ease .45s}
+.m-nav.open .m-nav-divider{opacity:1}
 @media(max-width:768px){.nav-links{display:none}.ham{display:flex}}
 
 /* HERO */
@@ -104,13 +125,22 @@ footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);te
   <div class="ham" id="ham"><span></span><span></span><span></span></div>
 </nav>
 <div class="m-nav" id="mNav">
-  <a href="index.html">Home</a>
-  <a href="projects.html">Projects</a>
-  <a href="#">Studio</a>
-  <a href="#">Services</a>
-  <a href="#">Stories</a>
-  <a href="#">Press</a>
-  <a href="#">Contact</a>
+  <div class="m-nav-close" id="mClose"></div>
+  <div class="m-nav-links">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="#">Studio</a>
+    <a href="#">Services</a>
+    <a href="#">Stories</a>
+    <a href="#">Press</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="m-nav-divider"></div>
+  <div class="m-nav-contact">
+    <p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p>
+    <p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p>
+    <p>53 New Oxford Street, London</p>
+  </div>
 </div>
 
 <section class="hero">
@@ -139,15 +169,19 @@ footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);te
   <div class="ft-cols">
     <div class="ft-col"><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
     <div class="ft-col"><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
-    <div class="ft-col"><h4>Email</h4><p><a href="/cdn-cgi/l/email-protection#b5dcdbd3daf5d4c1d0d9dcd0c7c2c7d0db9bd6dad8"><span class="__cf_email__" data-cfemail="41282f272e012035242d2824333633242f6f222e2c">[email&#160;protected]</span></a></p></div>
-    <div class="ft-col"><h4>Press</h4><p><a href="/cdn-cgi/l/email-protection#e1828980938d8e959584a1958984968e8f858493cf86938e9491"><span class="__cf_email__" data-cfemail="0e6d666f7c62617a7a6b4e7a666b7961606a6b7c20697c617b7e">[email&#160;protected]</span></a></p></div>
+    <div class="ft-col"><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
+    <div class="ft-col"><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
   </div>
   <div class="ft-copy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 var h=document.getElementById('ham'),m=document.getElementById('mNav');
 h.onclick=function(){h.classList.toggle('open');m.classList.toggle('open')};
+document.getElementById('mClose').onclick=function(){h.classList.remove('open');m.classList.remove('open')};
+document.querySelectorAll('.m-nav-links a').forEach(function(a){
+  a.addEventListener('click',function(){h.classList.remove('open');m.classList.remove('open')});
+});
 
 // Staggered card reveal on scroll
 var cards=document.querySelectorAll('.card');
