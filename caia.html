@@ -8,7 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--h:'Barlow Condensed',sans-serif;--b:'Fira Code',monospace;--a:#c9a96e;--e:cubic-bezier(.16,1,.3,1)}
-body{background:#fff;color:#1a1a1a;font-family:var(--b);font-weight:300;overflow-x:hidden}
+body{background:#fff;color:#1a1a1a;font-family:var(--b);font-weight:300;overflow:hidden}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);animation:navIn .8s var(--e) .5s forwards}
 @keyframes navIn{to{opacity:1;transform:translateY(0)}}
@@ -38,141 +38,139 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .mcc a{color:rgba(0,0,0,.45);text-decoration:none}
 @media(max-width:768px){.nl{display:none}.hb{display:flex}}
 
-.r{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s var(--e)}.r.v{opacity:1;transform:translateY(0)}
+/* SNAP */
+.snap{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
 
-/* HERO - parallax */
-.hero{position:relative;height:85vh;min-height:500px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.hero-img{position:absolute;inset:-15% 0;background-size:cover;background-position:center;will-change:transform}
-.hero-ov{position:absolute;inset:0;background:rgba(0,0,0,.28)}
+/* SECTION BASE */
+.sec{height:100vh;scroll-snap-align:start;overflow:hidden;position:relative}
+
+/* HERO */
+.hero{display:flex;align-items:center;justify-content:center}
+.hero-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.hero-ov{position:absolute;inset:0;background:rgba(0,0,0,.25)}
 .hero-content{position:relative;z-index:2;text-align:center}
 .hero h1{font-family:var(--h);font-size:clamp(2.2rem,5vw,4rem);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;overflow:hidden;margin-bottom:.8rem}
 .hero h1 span{display:inline-block;transform:translateY(110%);animation:su 1s var(--e) .5s forwards}
 @keyframes su{to{transform:translateY(0)}}
 .hero-meta{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fi .8s ease 1.2s forwards}
-.hero-meta span,.hero-meta a{font-family:var(--b);font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;transition:color .3s}
+.hero-meta span,.hero-meta a{font-family:var(--b);font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;transition:color .3s}
 .hero-meta a:hover{color:#fff}
 @keyframes fi{to{opacity:1}}
 
-/* INTRO with video */
-.intro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,5vw,6rem);padding:clamp(5rem,8vw,8rem) clamp(2rem,6vw,8rem);align-items:start}
-.intro-line{width:40px;height:1px;background:var(--a);margin-bottom:1.5rem}
-.intro-text h2{font-family:var(--h);font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.15;margin-bottom:1.5rem}
-.intro-text p{font-family:var(--b);font-size:.55rem;line-height:2;color:#555;margin-bottom:1rem}
-.intro-vid{overflow:hidden;aspect-ratio:9/16;max-height:75vh}
+/* INTRO */
+.intro{display:flex;align-items:flex-start;justify-content:center}
+.intro-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,5vw,6rem);padding:0 clamp(2rem,6vw,8rem);align-items:start;max-width:1400px;width:100%;padding-top:clamp(6rem,10vw,10rem)}
+.intro-line{width:35px;height:1px;background:var(--a);margin-bottom:1.5rem}
+.intro-text h2{font-family:var(--h);font-size:clamp(1.1rem,1.8vw,1.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.2;margin-bottom:1.5rem}
+.intro-text p{font-family:var(--b);font-size:.52rem;line-height:2.1;color:#555;margin-bottom:.8rem}
+.intro-vid{overflow:hidden;height:calc(100vh - clamp(6rem,10vw,10rem) - 2rem)}
 .intro-vid video{width:100%;height:100%;object-fit:cover}
 
-/* FULL IMAGE with clip reveal */
-.clip-img{width:100%;overflow:hidden;position:relative}
-.clip-img img{width:100%;display:block}
-.clip-img::after{content:'';position:absolute;inset:0;background:#fff;transform:scaleX(1);transform-origin:right;transition:transform 1.2s var(--e)}
-.clip-img.v::after{transform:scaleX(0)}
+/* FULL IMAGE SECTION */
+.sec-img{display:flex;align-items:stretch}
+.sec-img img{width:100%;height:100%;object-fit:cover}
 
 /* IMAGE PAIR */
-.img-pair{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.img-pair .clip-img::after{transition-delay:0s}
-.img-pair .clip-img:nth-child(2)::after{transition-delay:.15s}
+.sec-pair{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.sec-pair img{width:100%;height:100%;object-fit:cover}
 
-/* PULL QUOTE */
-.quote{padding:clamp(4rem,7vw,7rem) clamp(2rem,10vw,14rem);text-align:center}
-.quote p{font-family:var(--h);font-size:clamp(1.2rem,2.2vw,1.8rem);font-weight:300;font-style:italic;line-height:1.5;color:#1a1a1a}
-.quote-line{width:30px;height:1px;background:var(--a);margin:1.5rem auto 0}
+/* QUOTE */
+.sec-quote{display:flex;align-items:center;justify-content:center;background:#fff}
+.sec-quote-inner{max-width:700px;text-align:center;padding:0 clamp(2rem,6vw,6rem)}
+.sec-quote-inner p{font-family:var(--h);font-size:clamp(1.2rem,2.2vw,1.8rem);font-weight:300;line-height:1.5;color:#1a1a1a;letter-spacing:.02em}
+.sec-quote-line{width:30px;height:1px;background:var(--a);margin:1.5rem auto 0}
 
-/* HORIZONTAL SCROLL GALLERY */
-.hscroll{padding:clamp(2rem,4vw,4rem) 0;overflow:hidden}
-.hscroll-track{display:flex;gap:4px;animation:hscrollAnim 40s linear infinite;width:max-content}
+/* HORIZONTAL GALLERY */
+.sec-hscroll{display:flex;align-items:center;background:#f5f4f2;overflow:hidden}
+.hscroll-track{display:flex;gap:4px;animation:hs 40s linear infinite;width:max-content}
 .hscroll-track:hover{animation-play-state:paused}
-.hscroll-item{height:clamp(250px,35vw,400px);flex-shrink:0;overflow:hidden}
+.hscroll-item{height:80vh;flex-shrink:0;overflow:hidden}
 .hscroll-item img{height:100%;width:auto;display:block;transition:transform .8s var(--e)}
-.hscroll-item:hover img{transform:scale(1.05)}
-@keyframes hscrollAnim{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hscroll-item:hover img{transform:scale(1.04)}
+@keyframes hs{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* FEATURE */
-.feature{padding:clamp(5rem,8vw,8rem) clamp(2rem,10vw,14rem);text-align:center}
-.feature h2{font-family:var(--h);font-size:clamp(1.2rem,2vw,1.6rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.25;margin-bottom:1.5rem}
-.feature p{font-family:var(--b);font-size:.55rem;line-height:2;color:#555;max-width:550px;margin:0 auto}
+.sec-feature{display:flex;align-items:center;justify-content:center;background:#fff}
+.sec-feature-inner{max-width:550px;text-align:center;padding:0 clamp(2rem,6vw,6rem)}
+.sec-feature-inner h2{font-family:var(--h);font-size:clamp(1rem,1.8vw,1.4rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.25;margin-bottom:1.5rem}
+.sec-feature-inner p{font-family:var(--b);font-size:.52rem;line-height:2.1;color:#555}
 
-/* CINEMA */
-.cinema{width:100%;height:70vh;min-height:350px;overflow:hidden}
-.cinema img{width:100%;height:100%;object-fit:cover}
-
-/* DISCOVER MORE */
+/* BOTTOM (no snap) */
+.bottom{scroll-snap-align:start;background:#fff}
 .more{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem)}
-.more-label{font-family:var(--b);font-size:.45rem;letter-spacing:.3em;text-transform:uppercase;color:var(--a);text-align:center;margin-bottom:.8rem}
-.more-title{font-family:var(--h);font-size:clamp(1.2rem,2vw,1.6rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:clamp(2rem,3vw,3rem)}
-.more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:1.5rem}
-.mc2{position:relative;overflow:hidden;aspect-ratio:1/1.15;text-decoration:none;color:#fff}
-.mc2 img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--e)}
-.mc2:hover img{transform:scale(1.1)}
-.mc2-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);transition:background .5s}
-.mc2:hover .mc2-ov{background:rgba(0,0,0,.5)}
-.mc2-info{position:absolute;bottom:0;left:0;right:0;padding:clamp(.6rem,1.2vw,1rem)}
-.mc2-name{font-family:var(--h);font-size:clamp(.7rem,1.2vw,.95rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;transition:transform .5s var(--e)}
-.mc2:hover .mc2-name{transform:translateY(-5px)}
-.mc2-desc{font-family:var(--b);font-size:.38rem;color:rgba(255,255,255,.7);letter-spacing:.1em;margin-top:.3rem;opacity:0;transform:translateY(8px);transition:opacity .4s ease .1s,transform .4s var(--e) .1s}
-.mc2:hover .mc2-desc{opacity:1;transform:translateY(0)}
-.mc2-line{width:0;height:1px;background:var(--a);margin-top:.35rem;transition:width .5s var(--e) .05s}
-.mc2:hover .mc2-line{width:30px}
-.more-all{display:block;text-align:center;font-family:var(--b);font-size:.45rem;letter-spacing:.25em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;transition:color .3s}
+.more-label{font-family:var(--b);font-size:.42rem;letter-spacing:.3em;text-transform:uppercase;color:var(--a);text-align:center;margin-bottom:.6rem}
+.more-title{font-family:var(--h);font-size:clamp(1rem,1.8vw,1.4rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:clamp(2rem,3vw,3rem)}
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:1.5rem}
+.mc{position:relative;overflow:hidden;aspect-ratio:1/1.15;text-decoration:none;color:#fff}
+.mc img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--e)}
+.mc:hover img{transform:scale(1.1)}
+.mc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);transition:background .5s}
+.mc:hover .mc-ov{background:rgba(0,0,0,.5)}
+.mc-i{position:absolute;bottom:0;left:0;right:0;padding:clamp(.5rem,1vw,.8rem)}
+.mc-n{font-family:var(--h);font-size:clamp(.65rem,1.1vw,.85rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;transition:transform .5s var(--e)}
+.mc:hover .mc-n{transform:translateY(-4px)}
+.mc-l{width:0;height:1px;background:var(--a);margin-top:.3rem;transition:width .5s var(--e) .05s}
+.mc:hover .mc-l{width:25px}
+.mc-d{font-family:var(--b);font-size:.35rem;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-top:.25rem;opacity:0;transform:translateY(6px);transition:opacity .4s ease .1s,transform .4s var(--e) .1s}
+.mc:hover .mc-d{opacity:1;transform:translateY(0)}
+.more-all{display:block;text-align:center;font-family:var(--b);font-size:.42rem;letter-spacing:.25em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;transition:color .3s}
 .more-all:hover{color:var(--a)}
-
-/* WORK WITH US */
-.wku{padding:clamp(5rem,8vw,8rem) clamp(2rem,10vw,14rem);text-align:center}
-.wku h2{font-family:var(--h);font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1.5rem}
-.wku p{font-family:var(--b);font-size:.55rem;line-height:2;color:#555;max-width:500px;margin:0 auto 2rem}
-.wku-btn{display:inline-flex;align-items:center;gap:.8rem;font-family:var(--b);font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:.7rem 2rem;border:1px solid #1a1a1a;transition:background .4s,color .4s}
+.wku{padding:clamp(4rem,6vw,5rem) clamp(2rem,10vw,14rem);text-align:center}
+.wku h2{font-family:var(--h);font-size:clamp(1.1rem,1.8vw,1.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1rem}
+.wku p{font-family:var(--b);font-size:.5rem;line-height:2;color:#555;max-width:450px;margin:0 auto 1.5rem}
+.wku-btn{display:inline-block;font-family:var(--b);font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:.6rem 1.8rem;border:1px solid #1a1a1a;transition:background .4s,color .4s}
 .wku-btn:hover{background:#1a1a1a;color:#fff}
-
-footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,3rem);text-align:center}
-.fl{font-family:var(--h);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:2rem}
-.fc{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2rem,3vw,4rem);text-align:left;border-top:1px solid rgba(0,0,0,.08);padding-top:2rem}
-.fc h4{font-family:var(--h);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem;text-decoration:underline;text-underline-offset:4px}
-.fc p,.fc a{font-family:var(--b);font-size:.48rem;color:#666;line-height:1.8;text-decoration:none}
-.fc a:hover{color:#1a1a1a}
-.fy{text-align:center;font-family:var(--b);font-size:.38rem;color:#ccc;letter-spacing:.12em;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,.06)}
-
-@media(max-width:900px){.intro{grid-template-columns:1fr}.intro-vid{max-height:50vh}.more-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.fc{grid-template-columns:1fr 1fr}.img-pair{grid-template-columns:1fr}}
+footer{padding:clamp(2.5rem,4vw,4rem) clamp(2rem,6vw,8rem) clamp(1.5rem,3vw,2rem);text-align:center}
+.fl{font-family:var(--h);font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:1.5rem}
+.ftc{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.5rem,2.5vw,3rem);text-align:left;border-top:1px solid rgba(0,0,0,.08);padding-top:1.5rem}
+.ftc h4{font-family:var(--h);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem;text-decoration:underline;text-underline-offset:3px}
+.ftc p,.ftc a{font-family:var(--b);font-size:.45rem;color:#666;line-height:1.8;text-decoration:none}
+.ftc a:hover{color:#1a1a1a}
+.fy{text-align:center;font-family:var(--b);font-size:.35rem;color:#ccc;letter-spacing:.1em;margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(0,0,0,.06)}
+@media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:2rem;padding-top:clamp(5rem,8vw,6rem)}.intro-vid{height:50vh}.mg{grid-template-columns:repeat(2,1fr)}.sec-pair{grid-template-columns:1fr}}
+@media(max-width:768px){.ftc{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <nav><ul class="nl"><li><a href="index.html">Home</a></li><li><a href="projects.html">Projects</a></li><li><a href="#">Studio</a></li><li><a href="#">Services</a></li><li><a href="#">Stories</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul><div class="hb" id="hb"><span></span><span></span><span></span></div></nav>
 <div class="mn" id="mn"><div class="mnx" id="mx"></div><div class="ml"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="#">Studio</a><a href="#">Services</a><a href="#">Stories</a><a href="#">Press</a><a href="#">Contact</a></div><div class="mdv"></div><div class="mcc"><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p><p>53 New Oxford Street, London</p></div></div>
 
-<section class="hero">
-  <div class="hero-img" id="hImg" style="background-image:url('assets/img-caia.webp')"></div>
+<div class="snap" id="snap">
+
+<section class="sec hero">
+  <div class="hero-img" style="background-image:url('assets/img-caia.webp')"></div>
   <div class="hero-ov"></div>
-  <div class="hero-content">
-    <h1><span>Caia</span></h1>
-    <div class="hero-meta"><span>Notting Hill, London</span><a href="#">www.caia.com</a><a href="#">@caialondon</a></div>
+  <div class="hero-content"><h1><span>Caia</span></h1><div class="hero-meta"><span>Notting Hill, London</span><a href="#">www.caia.com</a><a href="#">@caialondon</a></div></div>
+</section>
+
+<section class="sec intro">
+  <div class="intro-inner">
+    <div class="intro-text">
+      <div class="intro-line"></div>
+      <h2>Chic and fun, with food, drink and music at its heart</h2>
+      <p>The founders of Caia wanted to open a restaurant with food, drink and music at its heart. In equal measures chic and fun, the restaurant now proudly sits at the top of fashionable Meard Street in Notting Hill.</p>
+      <p>Since opening, Caia has won plaudits for its welcoming yet sophisticated design that features an open woodfire grill framed by a white textured-tiled and Nero marquina bar front and blackened steel gantry.</p>
+      <p>Downstairs diners and revellers are treated to DJs spinning tunes from a sapele DJ booth inspired by 70s home cocktail bars. Glistening crystal palm shaped wall-lights and Ralph Lauren fabric upholstered banquettes catch the eye.</p>
+    </div>
+    <div class="intro-vid"><video autoplay muted loop playsinline><source src="assets/caia-video.mp4" type="video/mp4"></video></div>
   </div>
 </section>
 
-<section class="intro">
-  <div class="intro-text r">
-    <div class="intro-line"></div>
-    <h2>Chic and fun, with food, drink and music at its heart</h2>
-    <p>The founders of Caia wanted to open a restaurant with food, drink and music at its heart. In equal measures chic and fun, the restaurant now proudly sits at the top of fashionable Meard Street in Notting Hill.</p>
-    <p>Since opening, Caia has won plaudits for its welcoming yet sophisticated design that features an open woodfire grill framed by a white textured-tiled and Nero marquina bar front and blackened steel gantry.</p>
-    <p>Downstairs diners and revellers are treated to DJs spinning tunes from a sapele DJ booth inspired by 70s home cocktail bars. Glistening crystal palm shaped wall-lights and Ralph Lauren fabric upholstered banquettes catch the eye.</p>
-  </div>
-  <div class="intro-vid r" style="transition-delay:.15s">
-    <video autoplay muted loop playsinline><source src="assets/caia-video.mp4" type="video/mp4"></video>
+<section class="sec sec-img"><img src="assets/img-caia.webp" alt="Caia"></section>
+
+<section class="sec sec-pair">
+  <img src="assets/img-saltigirl.webp" alt="Caia detail">
+  <img src="assets/img-pitch.webp" alt="Caia bar">
+</section>
+
+<section class="sec sec-quote">
+  <div class="sec-quote-inner">
+    <p>A space where the warmth of natural materials meets the energy of live music — designed to make every guest feel like they've discovered somewhere truly special.</p>
+    <div class="sec-quote-line"></div>
   </div>
 </section>
 
-<div class="clip-img r"><img src="assets/img-caia.webp" alt="Caia restaurant"></div>
-
-<div class="img-pair">
-  <div class="clip-img r"><img src="assets/img-saltigirl.webp" alt="Caia detail"></div>
-  <div class="clip-img r"><img src="assets/img-pitch.webp" alt="Caia bar"></div>
-</div>
-
-<section class="quote r">
-  <p>A space where the warmth of natural materials meets the energy of live music — designed to make every guest feel like they've discovered somewhere truly special.</p>
-  <div class="quote-line"></div>
-</section>
-
-<div class="hscroll">
+<section class="sec sec-hscroll">
   <div class="hscroll-track">
     <div class="hscroll-item"><img src="assets/img-caia.webp" alt="Caia"></div>
     <div class="hscroll-item"><img src="assets/img-houseofming.webp" alt="Detail"></div>
@@ -187,57 +185,55 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,3rem);te
     <div class="hscroll-item"><img src="assets/img-quilon.webp" alt="Detail"></div>
     <div class="hscroll-item"><img src="assets/img-shahnameh.webp" alt="Detail"></div>
   </div>
+</section>
+
+<section class="sec sec-feature">
+  <div class="sec-feature-inner">
+    <h2>A design that celebrates craft, texture and atmosphere</h2>
+    <p>Every surface has been considered — from the hand-laid tiles to the bespoke brass lighting fixtures, each element contributes to a space that feels both intimate and theatrical.</p>
+  </div>
+</section>
+
+<section class="sec sec-img"><img src="assets/img-quilon.webp" alt="Caia fire"></section>
+
+<div class="bottom">
+  <section class="more">
+    <div class="more-label">Discover More</div>
+    <div class="more-title">Projects</div>
+    <div class="mg">
+      <a href="#" class="mc"><img src="assets/img-houseofming.webp" alt="House of Ming"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">House of Ming</div><div class="mc-l"></div><div class="mc-d">East Asian fine dining, St James'</div></div></a>
+      <a href="#" class="mc"><img src="assets/img-silva.webp" alt="Silva"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Silva</div><div class="mc-l"></div><div class="mc-d">Contemporary Mediterranean, Mayfair</div></div></a>
+      <a href="#" class="mc"><img src="assets/img-shahnameh.webp" alt="Shahnamah"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Shahnamah</div><div class="mc-l"></div><div class="mc-d">Persian fine dining, Mayfair</div></div></a>
+      <a href="#" class="mc"><img src="assets/img-pitch.webp" alt="Pitch"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Pitch</div><div class="mc-l"></div><div class="mc-d">Social dining, Canary Wharf</div></div></a>
+      <a href="#" class="mc"><img src="assets/img-rebase.webp" alt="Rebase"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Rebase</div><div class="mc-l"></div><div class="mc-d">Wellness retreat, Marylebone</div></div></a>
+      <a href="#" class="mc"><img src="assets/img-saltigirl.webp" alt="Saltie Girl"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Saltie Girl</div><div class="mc-l"></div><div class="mc-d">Seafood bar, Mayfair</div></div></a>
+    </div>
+    <a href="projects.html" class="more-all">All Projects</a>
+  </section>
+  <section class="wku">
+    <h2>Work With Us</h2>
+    <p>Ready to create something extraordinary? We'd love to hear about your project.</p>
+    <a href="mailto:info@atelierwren.com" class="wku-btn">Get in Touch</a>
+  </section>
+  <footer>
+    <div class="fl">Atelier Wren</div>
+    <div class="ftc">
+      <div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
+      <div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
+      <div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
+      <div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
+    </div>
+    <div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
+  </footer>
 </div>
 
-<section class="feature r">
-  <h2>A design that celebrates craft, texture and atmosphere</h2>
-  <p>Every surface has been considered — from the hand-laid tiles to the bespoke brass lighting fixtures, each element contributes to a space that feels both intimate and theatrical.</p>
-</section>
-
-<div class="cinema r"><img src="assets/img-quilon.webp" alt="Caia woodfire"></div>
-
-<section class="more">
-  <div class="more-label r">Discover More</div>
-  <div class="more-title r">Projects</div>
-  <div class="more-grid">
-    <a href="#" class="mc2 r"><img src="assets/img-houseofming.webp" alt="House of Ming"><div class="mc2-ov"></div><div class="mc2-info"><div class="mc2-name">House of Ming</div><div class="mc2-line"></div><div class="mc2-desc">East Asian fine dining, St James'</div></div></a>
-    <a href="#" class="mc2 r" style="transition-delay:.08s"><img src="assets/img-silva.webp" alt="Silva"><div class="mc2-ov"></div><div class="mc2-info"><div class="mc2-name">Silva</div><div class="mc2-line"></div><div class="mc2-desc">Contemporary Mediterranean, Mayfair</div></div></a>
-    <a href="#" class="mc2 r" style="transition-delay:.16s"><img src="assets/img-shahnameh.webp" alt="Shahnamah"><div class="mc2-ov"></div><div class="mc2-info"><div class="mc2-name">Shahnamah</div><div class="mc2-line"></div><div class="mc2-desc">Persian fine dining, Mayfair</div></div></a>
-    <a href="#" class="mc2 r" style="transition-delay:0s"><img src="assets/img-pitch.webp" alt="Pitch"><div class="mc2-ov"></div><div class="mc2-info"><div class="mc2-name">Pitch</div><div class="mc2-line"></div><div class="mc2-desc">Social dining, Canary Wharf</div></div></a>
-    <a href="#" class="mc2 r" style="transition-delay:.08s"><img src="assets/img-rebase.webp" alt="Rebase"><div class="mc2-ov"></div><div class="mc2-info"><div class="mc2-name">Rebase</div><div class="mc2-line"></div><div class="mc2-desc">Wellness retreat, Marylebone</div></div></a>
-    <a href="#" class="mc2 r" style="transition-delay:.16s"><img src="assets/img-saltigirl.webp" alt="Saltie Girl"><div class="mc2-ov"></div><div class="mc2-info"><div class="mc2-name">Saltie Girl</div><div class="mc2-line"></div><div class="mc2-desc">Seafood bar, Mayfair</div></div></a>
-  </div>
-  <a href="projects.html" class="more-all r">All Projects</a>
-</section>
-
-<section class="wku r">
-  <h2>Work With Us</h2>
-  <p>Ready to create something extraordinary? We'd love to hear about your project and explore how we can bring your vision to life.</p>
-  <a href="mailto:info@atelierwren.com" class="wku-btn">Get in Touch</a>
-</section>
-
-<footer>
-  <div class="fl">Atelier Wren</div>
-  <div class="fc">
-    <div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
-    <div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
-    <div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
-    <div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
-  </div>
-  <div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
-</footer>
+</div>
 
 <script>
 var hb=document.getElementById('hb'),mn=document.getElementById('mn'),mx=document.getElementById('mx');
 hb.onclick=function(){hb.classList.toggle('open');mn.classList.toggle('open')};
 mx.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')};
 document.querySelectorAll('.ml a').forEach(function(a){a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}});
-// Reveal
-var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.r').forEach(function(e){obs.observe(e)});
-// Parallax hero
-var hImg=document.getElementById('hImg');
-window.addEventListener('scroll',function(){var s=window.scrollY;if(s<window.innerHeight){hImg.style.transform='translateY('+s*.3+'px)'}});
 </script>
 </body>
 </html>
