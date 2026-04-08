@@ -13,8 +13,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 @keyframes navIn{to{opacity:1;transform:translateY(0)}}
 .nl{display:flex;gap:2rem;list-style:none}
 .nl a{font-family:var(--b);font-size:.55rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-decoration:none;position:relative;transition:opacity .3s}
-.nl a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#fff;transition:width .4s var(--e)}
-.nl a:hover{opacity:.7}.nl a:hover::after{width:100%}
+.nl a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#fff;transition:width .4s var(--e)}.nl a:hover{opacity:.7}.nl a:hover::after{width:100%}
 .hb{display:none;cursor:pointer;padding:8px;flex-direction:column;gap:6px;z-index:300;position:absolute;right:clamp(1.5rem,4vw,4rem)}
 .hb span{display:block;width:26px;height:1px;background:#fff;transition:transform .4s var(--e),opacity .3s,background .3s}
 .hb.open span{background:#1a1a1a}.hb.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}.hb.open span:nth-child(2){opacity:0}.hb.open span:nth-child(3){transform:translateY(-3.5px) rotate(-45deg)}
@@ -23,8 +22,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .mnx::before,.mnx::after{content:'';position:absolute;width:22px;height:1px;background:#1a1a1a}.mnx::before{transform:rotate(45deg)}.mnx::after{transform:rotate(-45deg)}
 .ml{display:flex;flex-direction:column;align-items:center;gap:1.5rem;margin-bottom:3rem}
 .ml a{font-family:var(--h);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;color:#1a1a1a;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;opacity:0;transform:translateY(25px);transition:opacity .5s ease,transform .5s var(--e),color .3s}
-.mn.open .ml a{opacity:1;transform:translateY(0)}
-.mn.open .ml a:nth-child(1){transition-delay:.1s}.mn.open .ml a:nth-child(2){transition-delay:.15s}.mn.open .ml a:nth-child(3){transition-delay:.2s}.mn.open .ml a:nth-child(4){transition-delay:.25s}.mn.open .ml a:nth-child(5){transition-delay:.3s}.mn.open .ml a:nth-child(6){transition-delay:.35s}.mn.open .ml a:nth-child(7){transition-delay:.4s}
+.mn.open .ml a{opacity:1;transform:translateY(0)}.mn.open .ml a:nth-child(1){transition-delay:.1s}.mn.open .ml a:nth-child(2){transition-delay:.15s}.mn.open .ml a:nth-child(3){transition-delay:.2s}.mn.open .ml a:nth-child(4){transition-delay:.25s}.mn.open .ml a:nth-child(5){transition-delay:.3s}.mn.open .ml a:nth-child(6){transition-delay:.35s}.mn.open .ml a:nth-child(7){transition-delay:.4s}
 .ml a:hover{color:var(--a)}
 .mdv{width:40px;height:1px;background:var(--a);margin:0 auto 1.2rem;opacity:0;transition:opacity .5s ease .45s}.mn.open .mdv{opacity:1}
 .mcc{text-align:center;opacity:0;transform:translateY(15px);transition:opacity .5s ease .5s,transform .5s var(--e) .5s}.mn.open .mcc{opacity:1;transform:translateY(0)}
@@ -40,8 +38,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hero h1 span{display:inline-block;transform:translateY(110%);animation:su 1s var(--e) .5s forwards}
 @keyframes su{to{transform:translateY(0)}}
 .hero-meta{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fi .8s ease 1.2s forwards}
-.hero-meta span,.hero-meta a{font-family:var(--b);font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;transition:color .3s}
-.hero-meta a:hover{color:#fff}
+.hero-meta span,.hero-meta a{font-family:var(--b);font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;transition:color .3s}.hero-meta a:hover{color:#fff}
 @keyframes fi{to{opacity:1}}
 .intro{display:flex;align-items:center;justify-content:center}
 .intro-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,5vw,6rem);padding:0 clamp(2rem,6vw,8rem);align-items:center;max-width:1400px;width:100%;height:100%}
@@ -60,9 +57,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .intro.js .intro-text p{opacity:0;transform:translateY(15px);transition:opacity .6s ease,transform .6s var(--e)}
 .intro.js .intro-text p:nth-child(3){transition-delay:.5s}.intro.js .intro-text p:nth-child(4){transition-delay:.65s}.intro.js .intro-text p:nth-child(5){transition-delay:.8s}
 .intro.js .intro-vid{opacity:0;transform:translateX(40px);transition:opacity .8s ease .4s,transform .8s var(--e) .4s}
-.intro.js.active .intro-line{width:35px}
-.intro.js.active .intro-text h2,.intro.js.active .intro-text p{opacity:1;transform:translateY(0)}
-.intro.js.active .intro-vid{opacity:1;transform:translateX(0)}
+.intro.js.active .intro-line{width:35px}.intro.js.active .intro-text h2,.intro.js.active .intro-text p{opacity:1;transform:translateY(0)}.intro.js.active .intro-vid{opacity:1;transform:translateX(0)}
 .sec-gallery{display:flex;align-items:center;justify-content:center;padding:2rem clamp(1rem,3vw,4rem)}
 .masonry{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:4px;width:100%;height:calc(100vh - 4rem)}
 .masonry a{overflow:hidden;display:block}.masonry a:nth-child(1){grid-row:span 2}.masonry a:nth-child(5){grid-row:span 2}
@@ -131,27 +126,44 @@ footer{padding:clamp(2rem,4vw,3.5rem) clamp(2rem,6vw,8rem) clamp(1.5rem,3vw,2rem
 <div class="bottom">
 <div class="pnav"><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Berenjak</a><span class="pnav-c">3 / 12</span><a href="#">House of Ming <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
 <section class="more"><div class="more-l">Discover More</div><div class="more-t">Projects</div><div class="mg">
-<a href="#" class="mc"><img src="assets/img-houseofming.webp" alt="House of Ming"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">House of Ming</div><div class="mc-ln"></div><div class="mc-d">East Asian fine dining, St James'</div></div></a>
-<a href="#" class="mc"><img src="assets/img-silva.webp" alt="Silva"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Silva</div><div class="mc-ln"></div><div class="mc-d">Contemporary Mediterranean, Mayfair</div></div></a>
-<a href="#" class="mc"><img src="assets/img-shahnameh.webp" alt="Shahnamah"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Shahnamah</div><div class="mc-ln"></div><div class="mc-d">Persian fine dining, Mayfair</div></div></a>
-<a href="#" class="mc"><img src="assets/img-pitch.webp" alt="Pitch"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Pitch</div><div class="mc-ln"></div><div class="mc-d">Social dining, Canary Wharf</div></div></a>
-<a href="#" class="mc"><img src="assets/img-rebase.webp" alt="Rebase"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Rebase</div><div class="mc-ln"></div><div class="mc-d">Wellness retreat, Marylebone</div></div></a>
-<a href="#" class="mc"><img src="assets/img-saltigirl.webp" alt="Saltie Girl"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Saltie Girl</div><div class="mc-ln"></div><div class="mc-d">Seafood bar, Mayfair</div></div></a>
+<a href="#" class="mc"><img src="assets/img-houseofming.webp" alt="HoM"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">House of Ming</div><div class="mc-ln"></div><div class="mc-d">East Asian fine dining</div></div></a>
+<a href="#" class="mc"><img src="assets/img-silva.webp" alt="Silva"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Silva</div><div class="mc-ln"></div><div class="mc-d">Mediterranean, Mayfair</div></div></a>
+<a href="#" class="mc"><img src="assets/img-shahnameh.webp" alt="Shah"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Shahnamah</div><div class="mc-ln"></div><div class="mc-d">Persian fine dining</div></div></a>
+<a href="#" class="mc"><img src="assets/img-pitch.webp" alt="Pitch"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Pitch</div><div class="mc-ln"></div><div class="mc-d">Social dining</div></div></a>
+<a href="#" class="mc"><img src="assets/img-rebase.webp" alt="Rebase"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Rebase</div><div class="mc-ln"></div><div class="mc-d">Wellness, Marylebone</div></div></a>
+<a href="#" class="mc"><img src="assets/img-saltigirl.webp" alt="SG"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Saltie Girl</div><div class="mc-ln"></div><div class="mc-d">Seafood bar, Mayfair</div></div></a>
 </div><a href="projects.html" class="more-all">All Projects</a></section>
-<section class="wku"><h2>Work With Us</h2><p>Ready to create something extraordinary? We'd love to hear about your project.</p><a href="mailto:info@atelierwren.com" class="wku-btn">Get in Touch</a></section>
-<footer><div class="fl">Atelier Wren</div><div class="ftc"><div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div><div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div><div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div><div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div></div><div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div></footer>
+<section class="wku"><h2>Work With Us</h2><p>Ready to create something extraordinary?</p><a href="mailto:info@atelierwren.com" class="wku-btn">Get in Touch</a></section>
+<footer><div class="fl">Atelier Wren</div><div class="ftc"><div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div><div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div><div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div><div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div></div><div class="fy">&copy; 2026 Atelier Wren</div></footer>
 </div></div>
 <script>
-var hb=document.getElementById('hb'),mn=document.getElementById('mn'),mx=document.getElementById('mx');
-var sn=document.getElementById('sn'),intro=document.getElementById('intro');
-var vid=document.getElementById('vid'),vidOv=document.getElementById('vidOv'),vidBtn=document.getElementById('vidBtn');
+var hb=document.getElementById('hb');
+var mn=document.getElementById('mn');
+var mx=document.getElementById('mx');
+var sn=document.getElementById('sn');
+var intro=document.getElementById('intro');
+var vid=document.getElementById('vid');
+var vidOv=document.getElementById('vidOv');
+var vidBtn=document.getElementById('vidBtn');
 hb.onclick=function(){hb.classList.toggle('open');mn.classList.toggle('open')};
 mx.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')};
-document.querySelectorAll('.ml a').forEach(function(a){a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}});
+document.querySelectorAll('.ml a').forEach(function(a){
+  a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}
+});
 intro.classList.add('js');
-new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active')})},{root:sn,threshold:.5}).observe(intro);
-vidBtn.onclick=function(){vid.play();vidOv.classList.add('hide')};
-vid.onclick=function(){vid.pause();vidOv.classList.remove('hide')};
+new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active')})
+},{root:sn,threshold:.5}).observe(intro);
+vidBtn.onclick=function(){
+  vid.muted=false;
+  vid.play();
+  vidOv.classList.add('hide');
+};
+vid.onclick=function(){
+  vid.pause();
+  vid.muted=true;
+  vidOv.classList.remove('hide');
+};
 </script>
 </body>
 </html>
