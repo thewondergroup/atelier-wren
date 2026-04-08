@@ -14,8 +14,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:
 .loader{position:fixed;inset:0;z-index:9999;background:var(--bg);pointer-events:none;animation:loaderOut 1s ease 2s forwards}
 @keyframes loaderOut{to{opacity:0;visibility:hidden}}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);transition:opacity .6s ease,transform .6s var(--ease)}
-nav.show{opacity:1;transform:translateY(0)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);animation:navIn .8s var(--ease) 2.5s forwards}
+@keyframes navIn{to{opacity:1;transform:translateY(0)}}
 .nav-logo{display:none}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{font-family:var(--body);font-size:.55rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-decoration:none;position:relative;transition:opacity .3s}
@@ -58,16 +58,16 @@ nav.show{opacity:1;transform:translateY(0)}
 .p-meta{transition:transform .9s var(--ease),opacity .8s ease}
 .p-meta.anim{transform:translateY(40px);opacity:0}
 .panel.active .p-meta.anim{transform:translateY(0);opacity:1}
-.p-label{font-family:var(--body);font-size:.42rem;font-weight:400;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
+.p-label{font-family:var(--body);font-size:.55rem;font-weight:400;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
 .p-name{font-family:var(--heading);font-size:clamp(1.8rem,4vw,3.5rem);font-weight:700;line-height:.95;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.4rem}
-.p-loc{font-family:var(--body);font-size:.48rem;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.p-loc{font-family:var(--body);font-size:.6rem;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 .p-action{transition:transform .9s var(--ease) .15s,opacity .8s ease .15s}
 .p-action.anim{transform:translateY(30px);opacity:0}
 .panel.active .p-action.anim{transform:translateY(0);opacity:1}
-.disc-btn{display:inline-flex;align-items:center;gap:.8rem;text-decoration:none;color:var(--text);font-family:var(--body);font-size:.44rem;letter-spacing:.25em;text-transform:uppercase;padding:.8rem 0;position:relative}
+.disc-btn{display:inline-flex;align-items:center;gap:.8rem;text-decoration:none;color:var(--text);font-family:var(--body);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;padding:.8rem 0;position:relative}
 .disc-btn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
 .disc-btn:hover::after{transform:scaleX(1)}
-.disc-btn svg{width:13px;height:13px;transition:transform .3s var(--ease)}
+.disc-btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
 .disc-btn:hover svg{transform:translateX(5px)}
 
 .dots{position:fixed;right:clamp(1rem,2vw,2rem);top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:.8rem}
@@ -179,7 +179,6 @@ footer{grid-template-columns:1fr 1fr}
 var s=document.getElementById('snap'),n=document.getElementById('nav'),h=document.getElementById('ham'),m=document.getElementById('mNav'),pb=document.getElementById('progBar'),sl=document.querySelectorAll('.hero-slide'),pa=document.querySelectorAll('[data-index]'),dc=document.getElementById('dots');
 document.querySelectorAll('.p-meta').forEach(function(e){e.classList.add('anim')});
 document.querySelectorAll('.p-action').forEach(function(e){e.classList.add('anim')});
-setTimeout(function(){n.classList.add('show')},2500);
 var c=0,iv=3e3;
 function ap(){pb.style.transition='none';pb.style.width='0%';requestAnimationFrame(function(){requestAnimationFrame(function(){pb.style.transition='width '+iv+'ms linear';pb.style.width='100%'})})}
 ap();setInterval(function(){sl[c].classList.remove('active');c=(c+1)%sl.length;sl[c].classList.add('active');ap()},iv);
