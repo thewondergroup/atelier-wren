@@ -11,13 +11,14 @@
 body{background:#fff;color:#1a1a1a;font-family:var(--body);font-weight:300;overflow-x:hidden}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem clamp(1.5rem,4vw,4rem);opacity:0;animation:fadeIn .6s ease .3s forwards}
-.nav-left{display:flex;gap:1.8rem;list-style:none}
-.nav-left a{font-family:var(--body);font-size:.5rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-decoration:none;transition:opacity .3s}
-.nav-left a:hover{opacity:.6}
-.nav-right a{font-family:var(--heading);font-size:.9rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff;text-decoration:none;transition:opacity .3s}
-.nav-right a:hover{opacity:.6}
-.ham{display:none;cursor:pointer;padding:8px;flex-direction:column;gap:6px;z-index:300}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);animation:navIn .8s var(--ease) .5s forwards}
+@keyframes navIn{to{opacity:1;transform:translateY(0)}}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:var(--body);font-size:.55rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-decoration:none;position:relative;transition:opacity .3s}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#fff;transition:width .4s var(--ease)}
+.nav-links a:hover{opacity:.7}
+.nav-links a:hover::after{width:100%}
+.ham{display:none;cursor:pointer;padding:8px;flex-direction:column;gap:6px;z-index:300;position:absolute;right:clamp(1.5rem,4vw,4rem)}
 .ham span{display:block;width:26px;height:1px;background:#fff;transition:transform .4s var(--ease),opacity .3s}
 .ham.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
 .ham.open span:nth-child(2){opacity:0}
@@ -26,7 +27,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .m-nav.open{opacity:1;visibility:visible}
 .m-nav a{font-family:var(--heading);font-size:clamp(1.5rem,4vw,2.5rem);font-weight:700;color:#1a1a1a;text-decoration:none;text-transform:uppercase;transition:color .3s}
 .m-nav a:hover{color:#999}
-@media(max-width:768px){.nav-left,.nav-right{display:none}.ham{display:flex}}
+@media(max-width:768px){.nav-links{display:none}.ham{display:flex}}
 
 /* HERO */
 .hero{position:relative;height:70vh;min-height:400px;overflow:hidden;display:flex;align-items:center;justify-content:center}
@@ -91,12 +92,15 @@ footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);te
 <body>
 
 <nav>
-  <ul class="nav-left">
-    <li><a href="#">Projects</a></li>
-    <li><a href="#">About</a></li>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="#">Studio</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Stories</a></li>
+    <li><a href="#">Press</a></li>
     <li><a href="#">Contact</a></li>
   </ul>
-  <div class="nav-right"><a href="index.html">Atelier Wren</a></div>
   <div class="ham" id="ham"><span></span><span></span><span></span></div>
 </nav>
 <div class="m-nav" id="mNav">
@@ -135,31 +139,17 @@ footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);te
   <div class="ft-cols">
     <div class="ft-col"><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
     <div class="ft-col"><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
-    <div class="ft-col"><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
-    <div class="ft-col"><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
+    <div class="ft-col"><h4>Email</h4><p><a href="/cdn-cgi/l/email-protection#b5dcdbd3daf5d4c1d0d9dcd0c7c2c7d0db9bd6dad8"><span class="__cf_email__" data-cfemail="41282f272e012035242d2824333633242f6f222e2c">[email&#160;protected]</span></a></p></div>
+    <div class="ft-col"><h4>Press</h4><p><a href="/cdn-cgi/l/email-protection#e1828980938d8e959584a1958984968e8f858493cf86938e9491"><span class="__cf_email__" data-cfemail="0e6d666f7c62617a7a6b4e7a666b7961606a6b7c20697c617b7e">[email&#160;protected]</span></a></p></div>
   </div>
   <div class="ft-copy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var h=document.getElementById('ham'),m=document.getElementById('mNav');
 h.onclick=function(){h.classList.toggle('open');m.classList.toggle('open')};
 
 // Staggered card reveal on scroll
 var cards=document.querySelectorAll('.card');
 var observer=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){
-    if(e.isIntersecting){
-      var i=Array.from(cards).indexOf(e.target);
-      var row=Math.floor(i/3);
-      var col=i%3;
-      var delay=row*.15+col*.08;
-      e.target.style.transitionDelay=delay+'s';
-      e.target.classList.add('vis');
-    }
-  });
-},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-cards.forEach(function(c){observer.observe(c)});
-</script>
-</body>
-</html>
+  entries.forEach(f
