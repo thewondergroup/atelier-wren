@@ -49,53 +49,43 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .intro-text h2{font-family:var(--h);font-size:clamp(1.4rem,2.4vw,2rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.2;margin-bottom:2rem}
 .intro-text p{font-family:var(--b);font-size:.65rem;line-height:2;color:#555;margin-bottom:1.2rem}
 .intro-vid{overflow:hidden;height:75vh;position:relative}
-.intro-vid video{width:100%;height:100%;object-fit:cover}
-.vid-ov{position:absolute;inset:0;display:flex;align-items:flex-end;padding:clamp(1.2rem,2vw,2rem);pointer-events:none}
-.vid-btn{pointer-events:auto;display:inline-flex;align-items:center;gap:.6rem;font-family:var(--b);font-size:.45rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;text-decoration:none;padding:.6rem 1.4rem;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.3);backdrop-filter:blur(6px);transition:background .3s,border-color .3s}
-.vid-btn:hover{background:rgba(0,0,0,.5);border-color:#fff}
-.vid-btn svg{width:12px;height:12px}
-/* JS-enhanced intro animation */
+.intro-vid video{width:100%;height:100%;object-fit:cover;cursor:pointer}
+.vid-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.2);transition:opacity .5s ease;cursor:pointer}
+.vid-ov.hide{opacity:0;pointer-events:none}
+.vid-btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--b);font-size:.45rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;padding:.7rem 1.6rem;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.25);backdrop-filter:blur(6px);transition:background .3s,border-color .3s;cursor:pointer}
+.vid-btn:hover{background:rgba(0,0,0,.45);border-color:#fff}
+.vid-btn svg{width:14px;height:14px}
 .intro.js .intro-line{width:0;transition:width .8s var(--e)}
 .intro.js .intro-text h2{opacity:0;transform:translateY(20px);transition:opacity .6s ease .3s,transform .6s var(--e) .3s}
 .intro.js .intro-text p{opacity:0;transform:translateY(15px);transition:opacity .6s ease,transform .6s var(--e)}
-.intro.js .intro-text p:nth-child(3){transition-delay:.5s}
-.intro.js .intro-text p:nth-child(4){transition-delay:.65s}
-.intro.js .intro-text p:nth-child(5){transition-delay:.8s}
+.intro.js .intro-text p:nth-child(3){transition-delay:.5s}.intro.js .intro-text p:nth-child(4){transition-delay:.65s}.intro.js .intro-text p:nth-child(5){transition-delay:.8s}
 .intro.js .intro-vid{opacity:0;transform:translateX(40px);transition:opacity .8s ease .4s,transform .8s var(--e) .4s}
 .intro.js.active .intro-line{width:35px}
 .intro.js.active .intro-text h2,.intro.js.active .intro-text p{opacity:1;transform:translateY(0)}
 .intro.js.active .intro-vid{opacity:1;transform:translateX(0)}
 .sec-gallery{display:flex;align-items:center;justify-content:center;padding:2rem clamp(1rem,3vw,4rem)}
 .masonry{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:4px;width:100%;height:calc(100vh - 4rem)}
-.masonry a{overflow:hidden;position:relative;display:block}
-.masonry a:nth-child(1){grid-row:span 2}
-.masonry a:nth-child(5){grid-row:span 2}
-.masonry img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--e)}
-.masonry a:hover img{transform:scale(1.06)}
-.sec-quote{display:flex;align-items:center;justify-content:center;background:#fff}
+.masonry a{overflow:hidden;display:block}.masonry a:nth-child(1){grid-row:span 2}.masonry a:nth-child(5){grid-row:span 2}
+.masonry img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--e)}.masonry a:hover img{transform:scale(1.06)}
+.sec-quote{display:flex;align-items:center;justify-content:center}
 .sec-quote-inner{max-width:700px;text-align:center;padding:0 clamp(2rem,6vw,6rem)}
-.sec-quote-inner p{font-family:var(--h);font-size:clamp(1.2rem,2.2vw,1.8rem);font-weight:300;line-height:1.5;color:#1a1a1a;letter-spacing:.02em}
+.sec-quote-inner p{font-family:var(--h);font-size:clamp(1.2rem,2.2vw,1.8rem);font-weight:300;line-height:1.5;letter-spacing:.02em}
 .sec-quote-line{width:30px;height:1px;background:var(--a);margin:1.5rem auto 0}
 .sec-hscroll{display:flex;align-items:center;background:#f5f4f2;overflow:hidden;position:relative}
 .wm{position:absolute;top:50%;left:0;transform:translateY(-50%);white-space:nowrap;font-family:var(--h);font-size:clamp(8rem,18vw,16rem);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(0,0,0,.03);pointer-events:none;animation:wms 25s linear infinite}
 @keyframes wms{0%{transform:translateY(-50%) translateX(0)}100%{transform:translateY(-50%) translateX(-50%)}}
-.ht{display:flex;gap:4px;animation:hs 40s linear infinite;width:max-content;position:relative;z-index:1}
-.ht:hover{animation-play-state:paused}
-.hi{height:80vh;flex-shrink:0;overflow:hidden}
-.hi img{height:100%;width:auto;display:block;transition:transform .8s var(--e)}
-.hi:hover img{transform:scale(1.04)}
+.ht{display:flex;gap:4px;animation:hs 40s linear infinite;width:max-content;position:relative;z-index:1}.ht:hover{animation-play-state:paused}
+.hi{height:80vh;flex-shrink:0;overflow:hidden}.hi img{height:100%;width:auto;display:block;transition:transform .8s var(--e)}.hi:hover img{transform:scale(1.04)}
 @keyframes hs{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.sec-feature{display:flex;align-items:center;justify-content:center;background:#fff}
+.sec-feature{display:flex;align-items:center;justify-content:center}
 .sf-inner{max-width:550px;text-align:center;padding:0 clamp(2rem,6vw,6rem)}
 .sf-inner h2{font-family:var(--h);font-size:clamp(1rem,1.8vw,1.4rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.25;margin-bottom:1.5rem}
 .sf-inner p{font-family:var(--b);font-size:.55rem;line-height:2;color:#555}
 .sec-cinema{display:flex;align-items:stretch}.sec-cinema img{width:100%;height:100%;object-fit:cover}
 .bottom{scroll-snap-align:start;background:#fff}
 .pnav{display:flex;justify-content:space-between;align-items:center;padding:clamp(2rem,3vw,3rem) clamp(2rem,6vw,8rem);border-bottom:1px solid rgba(0,0,0,.06)}
-.pnav a{font-family:var(--b);font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;transition:color .3s}
-.pnav a:hover{color:var(--a)}
-.pnav svg{width:14px;height:14px}
-.pnav-c{font-family:var(--b);font-size:.4rem;letter-spacing:.3em;text-transform:uppercase;color:#999}
+.pnav a{font-family:var(--b);font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;transition:color .3s}.pnav a:hover{color:var(--a)}
+.pnav svg{width:14px;height:14px}.pnav-c{font-family:var(--b);font-size:.4rem;letter-spacing:.3em;text-transform:uppercase;color:#999}
 .more{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem)}
 .more-l{font-family:var(--b);font-size:.42rem;letter-spacing:.3em;text-transform:uppercase;color:var(--a);text-align:center;margin-bottom:.6rem}
 .more-t{font-family:var(--h);font-size:clamp(1rem,1.8vw,1.4rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:clamp(1.5rem,2.5vw,2.5rem)}
@@ -113,11 +103,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .wku p{font-family:var(--b);font-size:.5rem;line-height:2;color:#555;max-width:450px;margin:0 auto 1.5rem}
 .wku-btn{display:inline-block;font-family:var(--b);font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:.6rem 1.8rem;border:1px solid #1a1a1a;transition:background .4s,color .4s}.wku-btn:hover{background:#1a1a1a;color:#fff}
 footer{padding:clamp(2rem,4vw,3.5rem) clamp(2rem,6vw,8rem) clamp(1.5rem,3vw,2rem);text-align:center}
-.fl{font-family:var(--h);font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:1.5rem}
+.fl{font-family:var(--h);font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1.5rem}
 .ftc{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.5rem,2.5vw,3rem);text-align:left;border-top:1px solid rgba(0,0,0,.08);padding-top:1.5rem}
 .ftc h4{font-family:var(--h);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem;text-decoration:underline;text-underline-offset:3px}
 .ftc p,.ftc a{font-family:var(--b);font-size:.45rem;color:#666;line-height:1.8;text-decoration:none}.ftc a:hover{color:#1a1a1a}
-.fy{text-align:center;font-family:var(--b);font-size:.35rem;color:#ccc;letter-spacing:.1em;margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(0,0,0,.06)}
+.fy{font-family:var(--b);font-size:.35rem;color:#ccc;letter-spacing:.1em;margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(0,0,0,.06)}
 @media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:2rem}.intro-vid{height:50vh}.mg{grid-template-columns:repeat(2,1fr)}.masonry{grid-template-columns:repeat(2,1fr)}.masonry a:nth-child(1),.masonry a:nth-child(5){grid-row:span 1}}
 @media(max-width:768px){.ftc{grid-template-columns:1fr 1fr}.pnav-c{display:none}}
 </style>
@@ -127,27 +117,15 @@ footer{padding:clamp(2rem,4vw,3.5rem) clamp(2rem,6vw,8rem) clamp(1.5rem,3vw,2rem
 <div class="mn" id="mn"><div class="mnx" id="mx"></div><div class="ml"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="#">Studio</a><a href="#">Services</a><a href="#">Stories</a><a href="#">Press</a><a href="#">Contact</a></div><div class="mdv"></div><div class="mcc"><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p><p>53 New Oxford Street, London</p></div></div>
 <div class="snap" id="sn">
 <section class="sec hero"><div class="hero-img" style="background-image:url('assets/img-caia.webp')"></div><div class="hero-ov"></div><div class="hero-content"><h1><span>Caia</span></h1><div class="hero-meta"><span>Notting Hill, London</span><a href="#">www.caia.com</a><a href="#">@caialondon</a></div></div></section>
-<section class="sec intro" id="intro">
-<div class="intro-inner">
+<section class="sec intro" id="intro"><div class="intro-inner">
 <div class="intro-text"><div class="intro-line"></div><h2>Chic and fun, with food, drink and music at its heart</h2><p>The founders of Caia wanted to open a restaurant with food, drink and music at its heart. In equal measures chic and fun, the restaurant now proudly sits at the top of fashionable Meard Street in Notting Hill.</p><p>Since opening, Caia has won plaudits for its welcoming yet sophisticated design that features an open woodfire grill framed by a white textured-tiled and Nero marquina bar front and blackened steel gantry.</p><p>Downstairs diners and revellers are treated to DJs spinning tunes from a sapele DJ booth inspired by 70s home cocktail bars. Glistening crystal palm shaped wall-lights and Ralph Lauren fabric upholstered banquettes catch the eye.</p></div>
-<div class="intro-vid"><video autoplay muted loop playsinline><source src="assets/caia-video.mp4" type="video/mp4"></video><div class="vid-ov"><a href="#" class="vid-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5,3 19,12 5,21"/></svg> Tour with the Founders</a></div></div>
-</div>
-</section>
+<div class="intro-vid"><video muted loop playsinline id="vid"><source src="assets/caia-video.mp4" type="video/mp4"></video><div class="vid-ov" id="vidOv"><div class="vid-btn" id="vidBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="6,3 20,12 6,21"/></svg> Tour with the Founders</div></div></div>
+</div></section>
 <section class="sec sec-gallery"><div class="masonry">
-<a href="#"><img src="assets/img-caia.webp" alt="Caia"></a>
-<a href="#"><img src="assets/img-houseofming.webp" alt="Detail"></a>
-<a href="#"><img src="assets/img-saltigirl.webp" alt="Detail"></a>
-<a href="#"><img src="assets/img-pitch.webp" alt="Detail"></a>
-<a href="#"><img src="assets/img-silva.webp" alt="Detail"></a>
-<a href="#"><img src="assets/img-shahnameh.webp" alt="Detail"></a>
-<a href="#"><img src="assets/img-quilon.webp" alt="Detail"></a>
-<a href="#"><img src="assets/img-rebase.webp" alt="Detail"></a>
-<a href="#"><img src="assets/img-caia.webp" alt="Detail"></a>
+<a href="#"><img src="assets/img-caia.webp" alt="Caia"></a><a href="#"><img src="assets/img-houseofming.webp" alt="D"></a><a href="#"><img src="assets/img-saltigirl.webp" alt="D"></a><a href="#"><img src="assets/img-pitch.webp" alt="D"></a><a href="#"><img src="assets/img-silva.webp" alt="D"></a><a href="#"><img src="assets/img-shahnameh.webp" alt="D"></a><a href="#"><img src="assets/img-quilon.webp" alt="D"></a><a href="#"><img src="assets/img-rebase.webp" alt="D"></a><a href="#"><img src="assets/img-caia.webp" alt="D"></a>
 </div></section>
 <section class="sec sec-quote"><div class="sec-quote-inner"><p>A space where the warmth of natural materials meets the energy of live music — designed to make every guest feel like they've discovered somewhere truly special.</p><div class="sec-quote-line"></div></div></section>
-<section class="sec sec-hscroll"><div class="wm">CAIA &nbsp;&nbsp; CAIA &nbsp;&nbsp; CAIA &nbsp;&nbsp; CAIA &nbsp;&nbsp; CAIA &nbsp;&nbsp; CAIA &nbsp;&nbsp; CAIA &nbsp;&nbsp; CAIA &nbsp;&nbsp;</div><div class="ht">
-<div class="hi"><img src="assets/img-caia.webp" alt="Caia"></div><div class="hi"><img src="assets/img-houseofming.webp" alt="D"></div><div class="hi"><img src="assets/img-saltigirl.webp" alt="D"></div><div class="hi"><img src="assets/img-silva.webp" alt="D"></div><div class="hi"><img src="assets/img-quilon.webp" alt="D"></div><div class="hi"><img src="assets/img-shahnameh.webp" alt="D"></div><div class="hi"><img src="assets/img-caia.webp" alt="Caia"></div><div class="hi"><img src="assets/img-houseofming.webp" alt="D"></div><div class="hi"><img src="assets/img-saltigirl.webp" alt="D"></div><div class="hi"><img src="assets/img-silva.webp" alt="D"></div><div class="hi"><img src="assets/img-quilon.webp" alt="D"></div><div class="hi"><img src="assets/img-shahnameh.webp" alt="D"></div>
-</div></section>
+<section class="sec sec-hscroll"><div class="wm">CAIA &nbsp; CAIA &nbsp; CAIA &nbsp; CAIA &nbsp; CAIA &nbsp; CAIA &nbsp; CAIA &nbsp; CAIA &nbsp;</div><div class="ht"><div class="hi"><img src="assets/img-caia.webp" alt="C"></div><div class="hi"><img src="assets/img-houseofming.webp" alt="D"></div><div class="hi"><img src="assets/img-saltigirl.webp" alt="D"></div><div class="hi"><img src="assets/img-silva.webp" alt="D"></div><div class="hi"><img src="assets/img-quilon.webp" alt="D"></div><div class="hi"><img src="assets/img-shahnameh.webp" alt="D"></div><div class="hi"><img src="assets/img-caia.webp" alt="C"></div><div class="hi"><img src="assets/img-houseofming.webp" alt="D"></div><div class="hi"><img src="assets/img-saltigirl.webp" alt="D"></div><div class="hi"><img src="assets/img-silva.webp" alt="D"></div><div class="hi"><img src="assets/img-quilon.webp" alt="D"></div><div class="hi"><img src="assets/img-shahnameh.webp" alt="D"></div></div></section>
 <section class="sec sec-feature"><div class="sf-inner"><h2>A design that celebrates craft, texture and atmosphere</h2><p>Every surface has been considered — from the hand-laid tiles to the bespoke brass lighting fixtures, each element contributes to a space that feels both intimate and theatrical.</p></div></section>
 <section class="sec sec-cinema"><img src="assets/img-quilon.webp" alt="Caia fire"></section>
 <div class="bottom">
@@ -164,12 +142,16 @@ footer{padding:clamp(2rem,4vw,3.5rem) clamp(2rem,6vw,8rem) clamp(1.5rem,3vw,2rem
 <footer><div class="fl">Atelier Wren</div><div class="ftc"><div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div><div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div><div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div><div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div></div><div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div></footer>
 </div></div>
 <script>
-var hb=document.getElementById('hb'),mn=document.getElementById('mn'),mx=document.getElementById('mx'),sn=document.getElementById('sn'),intro=document.getElementById('intro');
+var hb=document.getElementById('hb'),mn=document.getElementById('mn'),mx=document.getElementById('mx');
+var sn=document.getElementById('sn'),intro=document.getElementById('intro');
+var vid=document.getElementById('vid'),vidOv=document.getElementById('vidOv'),vidBtn=document.getElementById('vidBtn');
 hb.onclick=function(){hb.classList.toggle('open');mn.classList.toggle('open')};
 mx.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')};
 document.querySelectorAll('.ml a').forEach(function(a){a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}});
 intro.classList.add('js');
 new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active')})},{root:sn,threshold:.5}).observe(intro);
+vidBtn.onclick=function(){vid.play();vidOv.classList.add('hide')};
+vid.onclick=function(){vid.pause();vidOv.classList.remove('hide')};
 </script>
 </body>
 </html>
