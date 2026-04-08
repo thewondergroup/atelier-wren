@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio — Atelier Wren</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700&family=Fira+Code:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--h:'Barlow Condensed',sans-serif;--b:'Fira Code',monospace;--a:#c9a96e;--e:cubic-bezier(.16,1,.3,1)}
+body{background:#fff;color:#1a1a1a;font-family:var(--b);font-weight:300;overflow:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);animation:navIn .8s var(--e) .5s forwards}
+@keyframes navIn{to{opacity:1;transform:translateY(0)}}
+.nl{display:flex;gap:2rem;list-style:none}
+.nl a{font-family:var(--b);font-size:.55rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-decoration:none;position:relative;transition:opacity .3s,color .4s}
+.nl a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:currentColor;transition:width .4s var(--e)}
+.nl a:hover{opacity:.7}.nl a:hover::after{width:100%}
+nav.dark .nl a{color:#1a1a1a}
+nav.dark .hb span{background:#1a1a1a}
+
+/* HAMBURGER */
+.hb{display:none;cursor:pointer;padding:8px;flex-direction:column;gap:6px;z-index:300;position:absolute;right:clamp(1.5rem,4vw,4rem)}
+.hb span{display:block;width:26px;height:1px;background:#fff;transition:transform .4s var(--e),opacity .3s,background .3s}
+.hb.open span{background:#1a1a1a}
+.hb.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+.hb.open span:nth-child(2){opacity:0}
+.hb.open span:nth-child(3){transform:translateY(-3.5px) rotate(-45deg)}
+
+/* MOBILE MENU */
+.mn{position:fixed;inset:0;z-index:250;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.mn.open{opacity:1;visibility:visible}
+.mnx{position:absolute;top:1.5rem;right:clamp(1.5rem,4vw,4rem);cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center}
+.mnx::before,.mnx::after{content:'';position:absolute;width:22px;height:1px;background:#1a1a1a}
+.mnx::before{transform:rotate(45deg)}.mnx::after{transform:rotate(-45deg)}
+.ml{display:flex;flex-direction:column;align-items:center;gap:1.5rem;margin-bottom:3rem}
+.ml a{font-family:var(--h);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;color:#1a1a1a;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;opacity:0;transform:translateY(25px);transition:opacity .5s ease,transform .5s var(--e),color .3s}
+.mn.open .ml a{opacity:1;transform:translateY(0)}
+.mn.open .ml a:nth-child(1){transition-delay:.1s}
+.mn.open .ml a:nth-child(2){transition-delay:.15s}
+.mn.open .ml a:nth-child(3){transition-delay:.2s}
+.mn.open .ml a:nth-child(4){transition-delay:.25s}
+.mn.open .ml a:nth-child(5){transition-delay:.3s}
+.mn.open .ml a:nth-child(6){transition-delay:.35s}
+.mn.open .ml a:nth-child(7){transition-delay:.4s}
+.ml a:hover{color:var(--a)}
+.mdv{width:40px;height:1px;background:var(--a);margin:0 auto 1.2rem;opacity:0;transition:opacity .5s ease .45s}
+.mn.open .mdv{opacity:1}
+.mc-mob{text-align:center;opacity:0;transform:translateY(15px);transition:opacity .5s ease .5s,transform .5s var(--e) .5s}
+.mn.open .mc-mob{opacity:1;transform:translateY(0)}
+.mc-mob p{font-family:var(--b);font-size:.5rem;color:rgba(0,0,0,.35);line-height:2;letter-spacing:.1em}
+.mc-mob a{color:rgba(0,0,0,.45);text-decoration:none;transition:color .3s}
+.mc-mob a:hover{color:#1a1a1a}
+@media(max-width:768px){.nl{display:none}.hb{display:flex}}
+
+/* SCROLL SNAP */
+.snap{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.sec{height:100vh;scroll-snap-align:start;overflow:hidden;position:relative}
+
+/* HERO */
+.hero{display:flex;align-items:center;justify-content:center}
+.hero-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.hero-ov{position:absolute;inset:0;background:rgba(0,0,0,.3)}
+.hero h1{position:relative;z-index:2;font-family:var(--h);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#fff;overflow:hidden}
+.hero h1 span{display:inline-block;transform:translateY(110%);animation:su .8s var(--e) .6s forwards}
+@keyframes su{to{transform:translateY(0)}}
+
+/* ABOUT SECTION */
+.about{display:flex;align-items:center;justify-content:center}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,5vw,6rem);padding:0 clamp(2rem,6vw,8rem);align-items:center;max-width:1400px;width:100%}
+.about-text h2{font-family:var(--h);font-size:clamp(1.6rem,3vw,2.6rem);font-weight:700;text-transform:uppercase;letter-spacing:.03em;line-height:1.15;margin-bottom:2.5rem}
+.about-text p{font-family:var(--b);font-size:.65rem;line-height:2;color:#555;margin-bottom:1.2rem}
+.about-img{overflow:hidden}
+.about-img img{width:100%;height:auto;display:block;object-fit:cover}
+
+/* ANIMATIONS */
+.about.js .about-text h2,.about.js .about-text p,.about.js .about-img{opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s var(--e)}
+.about.js .about-text h2{transition-delay:.1s}
+.about.js .about-text p:nth-of-type(1){transition-delay:.25s}
+.about.js .about-text p:nth-of-type(2){transition-delay:.4s}
+.about.js .about-img{transform:translateX(30px);transition-delay:.2s}
+.about.js.active .about-text h2,.about.js.active .about-text p{opacity:1;transform:translateY(0)}
+.about.js.active .about-img{opacity:1;transform:translateX(0)}
+
+/* QUOTE */
+.sec-quote{display:flex;align-items:center;justify-content:center}
+.sec-quote-inner{max-width:900px;text-align:center;padding:0 clamp(2rem,6vw,6rem)}
+.sec-quote-inner blockquote{font-family:var(--h);font-size:clamp(1.4rem,2.8vw,2.2rem);font-weight:700;text-transform:uppercase;line-height:1.1;color:#1a1a1a;letter-spacing:.02em}
+
+/* QUOTE ANIMATION */
+.sec-quote.js blockquote{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s var(--e)}
+.sec-quote.js.active blockquote{opacity:1;transform:translateY(0)}
+
+/* BOTTOM (non-snap scrollable) */
+.bottom{scroll-snap-align:start;background:#fff}
+
+/* DISCOVER PROJECTS */
+.discover{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem)}
+.discover-l{font-family:var(--b);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#1a1a1a;text-align:center;margin-bottom:clamp(2rem,3vw,3rem)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:2rem}
+.pc{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:1/1.15;text-decoration:none;color:#fff;opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s var(--e)}
+.pc.vis{opacity:1;transform:translateY(0)}
+.pc img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--e)}
+.pc:hover img{transform:scale(1.1)}
+.pc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 50%);transition:background .6s}
+.pc:hover .pc-ov{background:rgba(0,0,0,.45)}
+.pc-i{position:absolute;bottom:0;left:0;right:0;padding:clamp(.8rem,1.5vw,1.5rem)}
+.pc-n{font-family:var(--h);font-size:clamp(.85rem,1.5vw,1.2rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#fff;transition:transform .5s var(--e)}
+.pc:hover .pc-n{transform:translateY(-6px)}
+.pc-ln{width:0;height:1px;background:var(--a);margin-top:.4rem;transition:width .6s var(--e) .1s}
+.pc:hover .pc-ln{width:40px}
+.pc-c{font-family:var(--b);font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:.5rem;opacity:0;transform:translateY(10px);transition:opacity .5s ease .15s,transform .5s var(--e) .15s;display:inline-flex;align-items:center;gap:.5rem}
+.pc:hover .pc-c{opacity:1;transform:translateY(0)}
+.pc-c svg{width:10px;height:10px}
+.discover-all{display:block;text-align:center;font-family:var(--b);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;transition:color .3s}
+.discover-all:hover{color:var(--a)}
+
+/* WORK WITH US */
+.wku{padding:clamp(5rem,8vw,8rem) clamp(2rem,10vw,14rem);text-align:center}
+.wku h2{font-family:var(--h);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1.2rem}
+.wku p{font-family:var(--b);font-size:.65rem;line-height:2;color:#555;max-width:500px;margin:0 auto 2rem}
+.wku-btn{display:inline-block;font-family:var(--b);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:.8rem 2.2rem;border:1px solid #1a1a1a;transition:background .4s,color .4s}
+.wku-btn:hover{background:#1a1a1a;color:#fff}
+
+/* FOOTER */
+footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);text-align:center}
+.fl{font-family:var(--h);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:2.5rem}
+.fc{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2rem,3vw,4rem);text-align:left;border-top:1px solid rgba(0,0,0,.08);padding-top:2rem}
+.fc h4{font-family:var(--h);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:.5rem;text-decoration:underline;text-underline-offset:4px}
+.fc p,.fc a{font-family:var(--b);font-size:.5rem;color:#666;line-height:1.8;text-decoration:none}
+.fc a:hover{color:#1a1a1a}
+.fy{text-align:center;font-family:var(--b);font-size:.4rem;color:#ccc;letter-spacing:.12em;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,.06)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+.about-inner{grid-template-columns:1fr;gap:2rem;padding:0 clamp(2rem,4vw,4rem)}
+.about-img{max-width:500px}
+.pg{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){.fc{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+<ul class="nl">
+<li><a href="index.html">Home</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="studio.html">Studio</a></li>
+<li><a href="#">Services</a></li>
+<li><a href="#">Stories</a></li>
+<li><a href="#">Press</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+<div class="hb" id="hb"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mn" id="mn">
+<div class="mnx" id="mx"></div>
+<div class="ml">
+<a href="index.html">Home</a>
+<a href="projects.html">Projects</a>
+<a href="studio.html">Studio</a>
+<a href="#">Services</a>
+<a href="#">Stories</a>
+<a href="#">Press</a>
+<a href="#">Contact</a>
+</div>
+<div class="mdv"></div>
+<div class="mc-mob">
+<p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p>
+<p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p>
+<p>53 New Oxford Street, London</p>
+</div>
+</div>
+
+<!-- SCROLL CONTAINER -->
+<div class="snap" id="sn">
+
+<!-- HERO -->
+<section class="sec hero" data-nav="light">
+<div class="hero-img" style="background-image:url('assets/img-rebase.webp')"></div>
+<div class="hero-ov"></div>
+<h1><span>Studio</span></h1>
+</section>
+
+<!-- ABOUT -->
+<section class="sec about" id="about" data-nav="dark">
+<div class="about-inner">
+<div class="about-text">
+<h2>Co-founded in 2021 by luxury hospitality designers Jake Raslan and Lorenzo Buscaroli</h2>
+<p>and boasting a truly multi-skilled team, Atelier Wren caters to all aspects of interior design.</p>
+<p>Their ethos is that design should be both thoughtful and refined — but always imbued with a sense of joy and a creative edge. Atelier Wren's lighting design concepts are all developed in-house, ensuring a heightened sense of drama and excitement to any space.</p>
+</div>
+<div class="about-img">
+<img src="assets/img-founders.webp" alt="Jake Raslan and Lorenzo Buscaroli, founders of Atelier Wren">
+</div>
+</div>
+</section>
+
+<!-- QUOTE -->
+<section class="sec sec-quote" id="quote" data-nav="dark">
+<div class="sec-quote-inner">
+<blockquote>"Atelier Wren are incredible people — timely, professional, respectful of budget as well as everyone on the job. I remain so impressed with their resourceful nature, creative openness &amp; enormous talent."</blockquote>
+</div>
+</section>
+
+<!-- BOTTOM -->
+<div class="bottom" data-nav="dark">
+
+<!-- DISCOVER OUR PROJECTS -->
+<section class="discover">
+<div class="discover-l">Discover Our Projects</div>
+<div class="pg">
+<a href="caia.html" class="pc"><img src="assets/img-caia.webp" alt="Caia"><div class="pc-ov"></div><div class="pc-i"><div class="pc-n">Caia</div><div class="pc-ln"></div><div class="pc-c">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
+<a href="#" class="pc"><img src="assets/img-houseofming.webp" alt="House of Ming"><div class="pc-ov"></div><div class="pc-i"><div class="pc-n">House of Ming</div><div class="pc-ln"></div><div class="pc-c">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
+<a href="#" class="pc"><img src="assets/img-quilon.webp" alt="Quilon"><div class="pc-ov"></div><div class="pc-i"><div class="pc-n">Quilon</div><div class="pc-ln"></div><div class="pc-c">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
+<a href="#" class="pc"><img src="assets/img-pitch.webp" alt="Pitch"><div class="pc-ov"></div><div class="pc-i"><div class="pc-n">Pitch</div><div class="pc-ln"></div><div class="pc-c">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
+<a href="#" class="pc"><img src="assets/img-silva.webp" alt="Silva"><div class="pc-ov"></div><div class="pc-i"><div class="pc-n">Silva</div><div class="pc-ln"></div><div class="pc-c">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
+<a href="#" class="pc"><img src="assets/img-shahnameh.webp" alt="Shahnamah"><div class="pc-ov"></div><div class="pc-i"><div class="pc-n">Shahnamah</div><div class="pc-ln"></div><div class="pc-c">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
+</div>
+<a href="projects.html" class="discover-all">All Projects</a>
+</section>
+
+<!-- WORK WITH US -->
+<section class="wku">
+<h2>Work With Us</h2>
+<p>Ready to create something extraordinary? We'd love to hear about your project.</p>
+<a href="mailto:info@atelierwren.com" class="wku-btn">Get in Touch</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="fl">Atelier Wren</div>
+<div class="fc">
+<div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
+<div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
+<div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
+<div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
+</div>
+<div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
+</footer>
+
+</div><!-- /bottom -->
+</div><!-- /snap -->
+
+<script>
+(function(){
+  var hb=document.getElementById('hb'),mn=document.getElementById('mn'),mx=document.getElementById('mx');
+  var nav=document.getElementById('nav'),sn=document.getElementById('sn');
+
+  /* Mobile menu */
+  hb.onclick=function(){hb.classList.toggle('open');mn.classList.toggle('open')};
+  mx.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')};
+  document.querySelectorAll('.ml a').forEach(function(a){a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}});
+
+  /* Nav colour — scroll-aware via data-nav attributes */
+  var sections=sn.querySelectorAll('[data-nav]');
+  function updateNav(){
+    var top=sn.scrollTop+60;
+    var c='light';
+    sections.forEach(function(s){if(s.offsetTop<=top)c=s.getAttribute('data-nav')});
+    if(c==='dark'){nav.classList.add('dark')}else{nav.classList.remove('dark')}
+  }
+  sn.addEventListener('scroll',updateNav);
+  updateNav();
+
+  /* About section animation */
+  var about=document.getElementById('about');
+  about.classList.add('js');
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active')})},{root:sn,threshold:.3}).observe(about);
+
+  /* Quote animation */
+  var quote=document.getElementById('quote');
+  quote.classList.add('js');
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active')})},{root:sn,threshold:.3}).observe(quote);
+
+  /* Project card stagger reveal */
+  var cards=document.querySelectorAll('.pc');
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=Array.from(cards).indexOf(e.target);e.target.style.transitionDelay=(Math.floor(i/3)*.12+i%3*.06)+'s';e.target.classList.add('vis')}})},{root:sn,threshold:.1});
+  cards.forEach(function(c){obs.observe(c)});
+})();
+</script>
+</body>
+</html>
