@@ -81,9 +81,7 @@ nav.dark .hb span{background:#1a1a1a}
 .svc-item.active .svc-item-name{color:#1a1a1a}
 .svc-item:hover .svc-item-name{color:rgba(0,0,0,.5)}
 .svc-item.active:hover .svc-item-name{color:#1a1a1a}
-.svc-item-right{display:flex;align-items:center;gap:1rem;flex-shrink:0}
-.svc-item-line{width:0;height:1px;background:var(--a);transition:width .6s var(--e)}
-.svc-item.active .svc-item-line{width:30px}
+.svc-item-right{display:flex;align-items:center;flex-shrink:0}
 .svc-item-icon{width:16px;height:16px;position:relative;flex-shrink:0}
 .svc-item-icon::before,.svc-item-icon::after{content:'';position:absolute;background:rgba(0,0,0,.2);transition:background .4s,transform .4s var(--e)}
 .svc-item-icon::before{width:16px;height:1px;top:50%;left:0;transform:translateY(-50%)}
@@ -98,9 +96,9 @@ nav.dark .hb span{background:#1a1a1a}
 
 /* Right: image area */
 .svc-img-area{position:relative;height:65%;margin-left:clamp(2rem,4vw,5rem);overflow:hidden}
-.svc-img-wrap{position:absolute;inset:0;opacity:0;transform:scale(1.06);transition:opacity .6s ease,transform .8s var(--e);overflow:hidden}
-.svc-img-wrap.active{opacity:1;transform:scale(1)}
-.svc-img-wrap.leaving{opacity:0;transform:scale(.97);transition:opacity .4s ease,transform .5s var(--e)}
+.svc-img-wrap{position:absolute;inset:0;opacity:0;transform:translateX(30px);transition:opacity .6s ease,transform .7s var(--e);overflow:hidden}
+.svc-img-wrap.active{opacity:1;transform:translateX(0)}
+.svc-img-wrap.leaving{opacity:0;transform:translateX(20px);transition:opacity .35s ease,transform .5s var(--e)}
 .svc-img-wrap img{width:100%;height:100%;object-fit:cover}
 
 /* BOTTOM */
@@ -183,42 +181,42 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 <div class="svc-item active" data-index="0">
 <div class="svc-item-top">
 <div class="svc-item-name">Interior Architecture</div>
-<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+<div class="svc-item-right"><div class="svc-item-icon"></div></div>
 </div>
 <div class="svc-item-desc"><p>We approach every project from the inside out. Beyond mere decoration, our interior architecture service focuses on the structural narrative of a space — optimising layouts, refining circulation, and ensuring that the physical bones of the building align perfectly with its intended function and flow.</p></div>
 </div>
 <div class="svc-item" data-index="1">
 <div class="svc-item-top">
 <div class="svc-item-name">Interior Design</div>
-<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+<div class="svc-item-right"><div class="svc-item-icon"></div></div>
 </div>
 <div class="svc-item-desc"><p>Texture, tone, and materiality form the language of our interiors. We curate bespoke palettes that reflect a unique identity while evoking a deep sense of comfort. From wall treatments to flooring, every surface is selected with precision to create a cohesive, immersive, and timeless aesthetic.</p></div>
 </div>
 <div class="svc-item" data-index="2">
 <div class="svc-item-top">
 <div class="svc-item-name">Lighting Design</div>
-<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+<div class="svc-item-right"><div class="svc-item-icon"></div></div>
 </div>
 <div class="svc-item-desc"><p>Light is our most powerful tool for drama. As specialists in bespoke lighting, we design custom fixtures and architectural lighting schemes that transform moods instantly. We believe lighting should be theatrical yet functional, guiding the eye and elevating the guest experience from day to night.</p></div>
 </div>
 <div class="svc-item" data-index="3">
 <div class="svc-item-top">
 <div class="svc-item-name">Furniture Design</div>
-<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+<div class="svc-item-right"><div class="svc-item-icon"></div></div>
 </div>
 <div class="svc-item-desc"><p>True luxury lies in exclusivity. We design custom furniture and joinery pieces tailored specifically for each project. By moving away from off-the-shelf solutions, we ensure that every chair, table, and cabinet contributes to a unique aesthetic signature that cannot be replicated elsewhere.</p></div>
 </div>
 <div class="svc-item" data-index="4">
 <div class="svc-item-top">
 <div class="svc-item-name">Procurement</div>
-<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+<div class="svc-item-right"><div class="svc-item-icon"></div></div>
 </div>
 <div class="svc-item-desc"><p>Our procurement team manages the complex logistics of sourcing, purchasing, and delivering every element of the design. We leverage our global network of suppliers to secure the best quality at the best value, handling everything from budget management to white-glove installation.</p></div>
 </div>
 <div class="svc-item" data-index="5">
 <div class="svc-item-top">
 <div class="svc-item-name">Visuals</div>
-<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+<div class="svc-item-right"><div class="svc-item-icon"></div></div>
 </div>
 <div class="svc-item-desc"><p>We bring visions to life before construction begins. Using cutting-edge CGI and 3D visualisation technology, we create hyper-realistic renders that allow clients to explore the space, understand the lighting, and feel the atmosphere, ensuring total alignment on the design direction.</p></div>
 </div>
