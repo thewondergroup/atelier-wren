@@ -96,9 +96,9 @@ nav.dark .hb span{background:#1a1a1a}
 
 /* Right: image area */
 .svc-img-area{position:relative;height:65%;margin-left:clamp(2rem,4vw,5rem);overflow:hidden}
-.svc-img-wrap{position:absolute;inset:0;opacity:0;transform:translateX(30px);transition:opacity .6s ease,transform .7s var(--e);overflow:hidden}
-.svc-img-wrap.active{opacity:1;transform:translateX(0)}
-.svc-img-wrap.leaving{opacity:0;transform:translateX(20px);transition:opacity .35s ease,transform .5s var(--e)}
+.svc-img-wrap{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;overflow:hidden}
+.svc-img-wrap.active{opacity:1}
+.svc-img-wrap.leaving{opacity:0;transition:opacity .35s ease}
 .svc-img-wrap img{width:100%;height:100%;object-fit:cover}
 
 /* BOTTOM */
