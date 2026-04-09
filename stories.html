@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories — Atelier Wren</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700&family=Fira+Code:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--h:'Barlow Condensed',sans-serif;--b:'Fira Code',monospace;--a:#c9a96e;--e:cubic-bezier(.16,1,.3,1)}
+body{background:#fff;color:#1a1a1a;font-family:var(--b);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);animation:navIn .8s var(--e) .5s forwards}
+@keyframes navIn{to{opacity:1;transform:translateY(0)}}
+.nl{display:flex;gap:2rem;list-style:none}
+.nl a{font-family:var(--b);font-size:.55rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-decoration:none;position:relative;transition:opacity .3s,color .4s}
+.nl a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:currentColor;transition:width .4s var(--e)}
+.nl a:hover{opacity:.7}.nl a:hover::after{width:100%}
+nav.dark .nl a{color:#1a1a1a}
+nav.dark .hb span{background:#1a1a1a}
+
+/* HAMBURGER */
+.hb{display:none;cursor:pointer;padding:8px;flex-direction:column;gap:6px;z-index:300;position:absolute;right:clamp(1.5rem,4vw,4rem)}
+.hb span{display:block;width:26px;height:1px;background:#fff;transition:transform .4s var(--e),opacity .3s,background .3s}
+.hb.open span{background:#1a1a1a}
+.hb.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+.hb.open span:nth-child(2){opacity:0}
+.hb.open span:nth-child(3){transform:translateY(-3.5px) rotate(-45deg)}
+
+/* MOBILE MENU */
+.mn{position:fixed;inset:0;z-index:250;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.mn.open{opacity:1;visibility:visible}
+.mnx{position:absolute;top:1.5rem;right:clamp(1.5rem,4vw,4rem);cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center}
+.mnx::before,.mnx::after{content:'';position:absolute;width:22px;height:1px;background:#1a1a1a}
+.mnx::before{transform:rotate(45deg)}.mnx::after{transform:rotate(-45deg)}
+.ml{display:flex;flex-direction:column;align-items:center;gap:1.5rem;margin-bottom:3rem}
+.ml a{font-family:var(--h);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;color:#1a1a1a;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;opacity:0;transform:translateY(25px);transition:opacity .5s ease,transform .5s var(--e),color .3s}
+.mn.open .ml a{opacity:1;transform:translateY(0)}
+.mn.open .ml a:nth-child(1){transition-delay:.1s}
+.mn.open .ml a:nth-child(2){transition-delay:.15s}
+.mn.open .ml a:nth-child(3){transition-delay:.2s}
+.mn.open .ml a:nth-child(4){transition-delay:.25s}
+.mn.open .ml a:nth-child(5){transition-delay:.3s}
+.mn.open .ml a:nth-child(6){transition-delay:.35s}
+.mn.open .ml a:nth-child(7){transition-delay:.4s}
+.ml a:hover{color:var(--a)}
+.mdv{width:40px;height:1px;background:var(--a);margin:0 auto 1.2rem;opacity:0;transition:opacity .5s ease .45s}
+.mn.open .mdv{opacity:1}
+.mc-mob{text-align:center;opacity:0;transform:translateY(15px);transition:opacity .5s ease .5s,transform .5s var(--e) .5s}
+.mn.open .mc-mob{opacity:1;transform:translateY(0)}
+.mc-mob p{font-family:var(--b);font-size:.5rem;color:rgba(0,0,0,.35);line-height:2;letter-spacing:.1em}
+.mc-mob a{color:rgba(0,0,0,.45);text-decoration:none;transition:color .3s}
+.mc-mob a:hover{color:#1a1a1a}
+@media(max-width:768px){.nl{display:none}.hb{display:flex}}
+
+/* HERO */
+.hero{position:relative;height:70vh;min-height:400px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.hero-ov{position:absolute;inset:0;background:rgba(0,0,0,.3)}
+.hero h1{position:relative;z-index:2;font-family:var(--h);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#fff;overflow:hidden}
+.hero h1 span{display:inline-block;transform:translateY(110%);animation:su .8s var(--e) .6s forwards}
+@keyframes su{to{transform:translateY(0)}}
+
+/* INTRO */
+.intro{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);text-align:center;max-width:800px;margin:0 auto}
+.intro p{font-family:var(--b);font-size:.65rem;line-height:2;color:#555}
+
+/* VIDEO GRID */
+.vg{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,2.5vw,2.5rem);padding:0 clamp(2rem,6vw,8rem) clamp(4rem,6vw,6rem)}
+
+/* Video card */
+.vc{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s var(--e)}
+.vc.vis{opacity:1;transform:translateY(0)}
+.vc-vid{position:relative;aspect-ratio:9/16;overflow:hidden;cursor:pointer;background:#f0eeeb}
+.vc-vid video{width:100%;height:100%;object-fit:cover;display:block}
+.vc-vid-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.3) 0%,transparent 40%);opacity:0;transition:opacity .4s ease;pointer-events:none}
+.vc:hover .vc-vid-ov{opacity:1}
+.vc-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .4s ease;pointer-events:none}
+.vc-play-btn{width:50px;height:50px;border:1px solid rgba(255,255,255,.6);border-radius:50%;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);background:rgba(0,0,0,.15)}
+.vc-play-btn svg{width:18px;height:18px;margin-left:3px}
+.vc:hover .vc-play{opacity:0}
+.vc-info{padding:1rem 0 0}
+.vc-cat{font-family:var(--b);font-size:.4rem;letter-spacing:.25em;text-transform:uppercase;color:var(--a);margin-bottom:.4rem}
+.vc-title{font-family:var(--h);font-size:clamp(.9rem,1.4vw,1.15rem);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:.4rem}
+.vc-desc{font-family:var(--b);font-size:.5rem;line-height:1.9;color:#888}
+
+/* VIDEO POPUP */
+.vp{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.vp.show{opacity:1;visibility:visible}
+.vp video{max-height:90vh;max-width:min(90vw,50vh);border-radius:2px;outline:none}
+.vp-close{position:absolute;top:1.5rem;right:1.5rem;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center}
+.vp-close::before,.vp-close::after{content:'';position:absolute;width:22px;height:1px;background:#fff}
+.vp-close::before{transform:rotate(45deg)}.vp-close::after{transform:rotate(-45deg)}
+
+/* CTA */
+.wku{padding:clamp(5rem,8vw,8rem) clamp(2rem,10vw,14rem);text-align:center}
+.wku h2{font-family:var(--h);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1rem}
+.wku p{font-family:var(--b);font-size:.65rem;line-height:2;color:#555;max-width:500px;margin:0 auto 2rem}
+.wku-btn{display:inline-block;font-family:var(--b);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:.8rem 2.2rem;border:1px solid #1a1a1a;transition:background .4s,color .4s}
+.wku-btn:hover{background:#1a1a1a;color:#fff}
+
+/* FOOTER */
+footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);text-align:center}
+.fl{font-family:var(--h);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:2.5rem}
+.fc{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2rem,3vw,4rem);text-align:left;border-top:1px solid rgba(0,0,0,.08);padding-top:2rem}
+.fc h4{font-family:var(--h);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:.5rem;text-decoration:underline;text-underline-offset:4px}
+.fc p,.fc a{font-family:var(--b);font-size:.5rem;color:#666;line-height:1.8;text-decoration:none}
+.fc a:hover{color:#1a1a1a}
+.fy{text-align:center;font-family:var(--b);font-size:.4rem;color:#ccc;letter-spacing:.12em;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,.06)}
+
+/* RESPONSIVE */
+@media(max-width:900px){.vg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.fc{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.vg{grid-template-columns:repeat(2,1fr);gap:1rem;padding:0 1rem 3rem}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+<ul class="nl">
+<li><a href="index.html">Home</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="studio.html">Studio</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="stories.html">Stories</a></li>
+<li><a href="#">Press</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+<div class="hb" id="hb"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mn" id="mn">
+<div class="mnx" id="mx"></div>
+<div class="ml">
+<a href="index.html">Home</a>
+<a href="projects.html">Projects</a>
+<a href="studio.html">Studio</a>
+<a href="services.html">Services</a>
+<a href="stories.html">Stories</a>
+<a href="#">Press</a>
+<a href="#">Contact</a>
+</div>
+<div class="mdv"></div>
+<div class="mc-mob">
+<p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p>
+<p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p>
+<p>53 New Oxford Street, London</p>
+</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-img" style="background-image:url('assets/img-shahnameh.webp')"></div>
+<div class="hero-ov"></div>
+<h1><span>Stories</span></h1>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+<p>Go behind the scenes with the artisans, makers, and founders who bring our projects to life. From the workshops of master craftspeople to guided tours of our latest spaces.</p>
+</section>
+
+<!-- VIDEO GRID -->
+<div class="vg">
+
+<div class="vc" data-src="assets/story-01.mp4">
+<div class="vc-vid">
+<video muted loop playsinline preload="metadata" poster="assets/img-caia.webp"><source src="assets/story-01.mp4" type="video/mp4"></video>
+<div class="vc-vid-ov"></div>
+<div class="vc-play"><div class="vc-play-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+</div>
+<div class="vc-info">
+<div class="vc-cat">Meet the Artisan</div>
+<div class="vc-title">The Tile Maker</div>
+<div class="vc-desc">Hand-glazed tiles crafted in a Lisbon workshop for the Caia bar front.</div>
+</div>
+</div>
+
+<div class="vc" data-src="assets/story-02.mp4">
+<div class="vc-vid">
+<video muted loop playsinline preload="metadata" poster="assets/img-houseofming.webp"><source src="assets/story-02.mp4" type="video/mp4"></video>
+<div class="vc-vid-ov"></div>
+<div class="vc-play"><div class="vc-play-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+</div>
+<div class="vc-info">
+<div class="vc-cat">Project Tour</div>
+<div class="vc-title">Inside House of Ming</div>
+<div class="vc-desc">A walk through the finished space with founder Jake Raslan.</div>
+</div>
+</div>
+
+<div class="vc" data-src="assets/story-03.mp4">
+<div class="vc-vid">
+<video muted loop playsinline preload="metadata" poster="assets/img-silva.webp"><source src="assets/story-03.mp4" type="video/mp4"></video>
+<div class="vc-vid-ov"></div>
+<div class="vc-play"><div class="vc-play-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+</div>
+<div class="vc-info">
+<div class="vc-cat">Meet the Artisan</div>
+<div class="vc-title">The Brass Smith</div>
+<div class="vc-desc">Bespoke lighting fixtures forged by hand for Silva's dining room.</div>
+</div>
+</div>
+
+<div class="vc" data-src="assets/story-04.mp4">
+<div class="vc-vid">
+<video muted loop playsinline preload="metadata" poster="assets/img-shahnameh.webp"><source src="assets/story-04.mp4" type="video/mp4"></video>
+<div class="vc-vid-ov"></div>
+<div class="vc-play"><div class="vc-play-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+</div>
+<div class="vc-info">
+<div class="vc-cat">Project Tour</div>
+<div class="vc-title">Shahnamah After Dark</div>
+<div class="vc-desc">Experiencing the lighting design as evening transforms the space.</div>
+</div>
+</div>
+
+<div class="vc" data-src="assets/story-05.mp4">
+<div class="vc-vid">
+<video muted loop playsinline preload="metadata" poster="assets/img-quilon.webp"><source src="assets/story-05.mp4" type="video/mp4"></video>
+<div class="vc-vid-ov"></div>
+<div class="vc-play"><div class="vc-play-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+</div>
+<div class="vc-info">
+<div class="vc-cat">Meet the Artisan</div>
+<div class="vc-title">The Woodworker</div>
+<div class="vc-desc">Sapele joinery crafted in East London for Quilon's private dining room.</div>
+</div>
+</div>
+
+<div class="vc" data-src="assets/story-06.mp4">
+<div class="vc-vid">
+<video muted loop playsinline preload="metadata" poster="assets/img-rebase.webp"><source src="assets/story-06.mp4" type="video/mp4"></video>
+<div class="vc-vid-ov"></div>
+<div class="vc-play"><div class="vc-play-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+</div>
+<div class="vc-info">
+<div class="vc-cat">Project Tour</div>
+<div class="vc-title">Rebase: The Build</div>
+<div class="vc-desc">From raw shell to finished wellness retreat in Marylebone.</div>
+</div>
+</div>
+
+</div>
+
+<!-- CTA -->
+<section class="wku">
+<h2>Work With Us</h2>
+<p>Ready to create something extraordinary? We'd love to hear about your project.</p>
+<a href="mailto:info@atelierwren.com" class="wku-btn">Get in Touch</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="fl">Atelier Wren</div>
+<div class="fc">
+<div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
+<div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
+<div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
+<div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
+</div>
+<div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
+</footer>
+
+<!-- VIDEO POPUP -->
+<div class="vp" id="vp">
+<div class="vp-close" id="vpClose"></div>
+<video id="vpVid" playsinline loop><source src="" type="video/mp4"></video>
+</div>
+
+<script>
+(function(){
+  var hb=document.getElementById('hb'),mn=document.getElementById('mn'),mx=document.getElementById('mx');
+  var nav=document.getElementById('nav');
+
+  /* Mobile menu */
+  hb.onclick=function(){hb.classList.toggle('open');mn.classList.toggle('open')};
+  mx.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')};
+  document.querySelectorAll('.ml a').forEach(function(a){a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}});
+
+  /* Nav colour — dark after hero */
+  var hero=document.querySelector('.hero');
+  function updateNav(){
+    if(window.scrollY > hero.offsetHeight - 80){nav.classList.add('dark')}
+    else{nav.classList.remove('dark')}
+  }
+  window.addEventListener('scroll',updateNav);
+  updateNav();
+
+  /* Card stagger reveal */
+  var cards=document.querySelectorAll('.vc');
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){
+      var i=Array.from(cards).indexOf(e.target);
+      e.target.style.transitionDelay=(Math.floor(i/3)*.12+i%3*.08)+'s';
+      e.target.classList.add('vis');
+    }
+  })},{threshold:.1});
+  cards.forEach(function(c){obs.observe(c)});
+
+  /* Hover to preview — autoplay muted on hover, pause on leave */
+  cards.forEach(function(card){
+    var vid=card.querySelector('video');
+    card.addEventListener('mouseenter',function(){
+      vid.currentTime=0;
+      vid.play().catch(function(){});
+    });
+    card.addEventListener('mouseleave',function(){
+      vid.pause();
+      vid.currentTime=0;
+    });
+  });
+
+  /* Click to open popup */
+  var vp=document.getElementById('vp');
+  var vpVid=document.getElementById('vpVid');
+  var vpClose=document.getElementById('vpClose');
+
+  cards.forEach(function(card){
+    card.querySelector('.vc-vid').addEventListener('click',function(){
+      var src=card.getAttribute('data-src');
+      vpVid.querySelector('source').src=src;
+      vpVid.load();
+      vp.classList.add('show');
+      vpVid.muted=false;
+      vpVid.play().catch(function(){});
+    });
+  });
+
+  function closePopup(){
+    vp.classList.remove('show');
+    vpVid.pause();
+    vpVid.muted=true;
+  }
+  vpClose.onclick=closePopup;
+  vp.onclick=function(e){if(e.target===vp)closePopup()};
+})();
+</script>
+</body>
+</html>
