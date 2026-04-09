@@ -98,46 +98,10 @@ nav.dark .hb span{background:#1a1a1a}
 
 /* Right: image area */
 .svc-img-area{position:relative;height:65%;margin-left:clamp(2rem,4vw,5rem);overflow:hidden}
-.svc-img-wrap{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;overflow:hidden}
-.svc-img-wrap.active{opacity:1}
-.svc-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--e)}
-.svc-item:hover ~ .svc-img-area .svc-img-wrap img,
-.svc-img-wrap.active img{transform:scale(1)}
-
-/* =========================================
-   HORIZONTAL SCROLL
-   ========================================= */
-.sec-hscroll{display:flex;align-items:center;background:#f5f4f2;overflow:hidden;position:relative}
-.wm{position:absolute;top:50%;left:0;transform:translateY(-50%);white-space:nowrap;font-family:var(--h);font-size:clamp(8rem,18vw,16rem);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(0,0,0,.03);pointer-events:none;animation:wms 25s linear infinite}
-@keyframes wms{0%{transform:translateY(-50%) translateX(0)}100%{transform:translateY(-50%) translateX(-50%)}}
-.ht{display:flex;gap:4px;animation:hs 40s linear infinite;width:max-content;position:relative;z-index:1}
-.ht:hover{animation-play-state:paused}
-.hi{height:70vh;flex-shrink:0;overflow:hidden;position:relative;text-decoration:none;color:#fff}
-.hi img{height:100%;width:auto;display:block;transition:transform .8s var(--e)}
-.hi:hover img{transform:scale(1.04)}
-.hi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45) 0%,transparent 40%)}
-.hi-info{position:absolute;bottom:0;left:0;right:0;padding:clamp(1rem,2vw,1.5rem)}
-.hi-n{font-family:var(--h);font-size:clamp(.8rem,1.2vw,1.1rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-.hi-l{font-family:var(--b);font-size:.45rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:.3rem}
-@keyframes hs{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* =========================================
-   PROCESS
-   ========================================= */
-.sec-process{display:flex;align-items:center;justify-content:center}
-.proc-inner{max-width:1200px;width:100%;padding:0 clamp(2rem,6vw,8rem)}
-.proc-label{font-family:var(--b);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--a);text-align:center;margin-bottom:.6rem}
-.proc-title{font-family:var(--h);font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:clamp(3rem,5vw,5rem)}
-.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2rem,4vw,5rem)}
-.proc-step{text-align:center}
-.proc-num{font-family:var(--h);font-size:clamp(3rem,5vw,5rem);font-weight:700;color:rgba(0,0,0,.06);line-height:1;margin-bottom:1rem}
-.proc-step h3{font-family:var(--h);font-size:clamp(.9rem,1.4vw,1.2rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1rem}
-.proc-step p{font-family:var(--b);font-size:.55rem;line-height:2;color:#555}
-.sec-process.js .proc-step{opacity:0;transform:translateY(25px);transition:opacity .6s ease,transform .6s var(--e)}
-.sec-process.js .proc-step:nth-child(1){transition-delay:.1s}
-.sec-process.js .proc-step:nth-child(2){transition-delay:.25s}
-.sec-process.js .proc-step:nth-child(3){transition-delay:.4s}
-.sec-process.js.active .proc-step{opacity:1;transform:translateY(0)}
+.svc-img-wrap{position:absolute;inset:0;opacity:0;transform:scale(1.06);transition:opacity .6s ease,transform .8s var(--e);overflow:hidden}
+.svc-img-wrap.active{opacity:1;transform:scale(1)}
+.svc-img-wrap.leaving{opacity:0;transform:scale(.97);transition:opacity .4s ease,transform .5s var(--e)}
+.svc-img-wrap img{width:100%;height:100%;object-fit:cover}
 
 /* BOTTOM */
 .bottom{scroll-snap-align:start;background:#fff}
@@ -161,7 +125,6 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 @media(max-width:900px){
 .svc-content{grid-template-columns:1fr;padding:clamp(5rem,10vw,7rem) clamp(1.5rem,4vw,3rem) clamp(2rem,4vw,3rem)}
 .svc-img-area{display:none}
-.proc-grid{grid-template-columns:1fr;gap:2.5rem}
 }
 @media(max-width:768px){.ftc{grid-template-columns:1fr 1fr}}
 </style>
@@ -273,51 +236,6 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 </div>
 </section>
 
-<!-- HORIZONTAL SCROLL PROJECTS -->
-<section class="sec sec-hscroll" data-nav="dark">
-<div class="wm">Atelier Wren &nbsp;&middot;&nbsp; Atelier Wren &nbsp;&middot;&nbsp; Atelier Wren &nbsp;&middot;&nbsp; Atelier Wren &nbsp;&middot;&nbsp;</div>
-<div class="ht">
-<a href="#" class="hi"><img src="assets/img-silva.webp" alt="Silva"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Silva</div><div class="hi-l">Mayfair, London</div></div></a>
-<a href="#" class="hi"><img src="assets/img-shahnameh.webp" alt="Shahnamah"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Shahnamah</div><div class="hi-l">Mayfair, London</div></div></a>
-<a href="#" class="hi"><img src="assets/img-rebase.webp" alt="Rebase"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Rebase</div><div class="hi-l">Marylebone, London</div></div></a>
-<a href="caia.html" class="hi"><img src="assets/img-caia.webp" alt="Caia"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Caia</div><div class="hi-l">Notting Hill, London</div></div></a>
-<a href="#" class="hi"><img src="assets/img-houseofming.webp" alt="House of Ming"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">House of Ming</div><div class="hi-l">St James', London</div></div></a>
-<a href="#" class="hi"><img src="assets/img-saltigirl.webp" alt="Saltie Girl"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Saltie Girl</div><div class="hi-l">Mayfair, London</div></div></a>
-<!-- duplicate for seamless loop -->
-<a href="#" class="hi"><img src="assets/img-silva.webp" alt="Silva"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Silva</div><div class="hi-l">Mayfair, London</div></div></a>
-<a href="#" class="hi"><img src="assets/img-shahnameh.webp" alt="Shahnamah"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Shahnamah</div><div class="hi-l">Mayfair, London</div></div></a>
-<a href="#" class="hi"><img src="assets/img-rebase.webp" alt="Rebase"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Rebase</div><div class="hi-l">Marylebone, London</div></div></a>
-<a href="caia.html" class="hi"><img src="assets/img-caia.webp" alt="Caia"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Caia</div><div class="hi-l">Notting Hill, London</div></div></a>
-<a href="#" class="hi"><img src="assets/img-houseofming.webp" alt="House of Ming"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">House of Ming</div><div class="hi-l">St James', London</div></div></a>
-<a href="#" class="hi"><img src="assets/img-saltigirl.webp" alt="Saltie Girl"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Saltie Girl</div><div class="hi-l">Mayfair, London</div></div></a>
-</div>
-</section>
-
-<!-- PROCESS -->
-<section class="sec sec-process" data-nav="dark" id="process">
-<div class="proc-inner">
-<div class="proc-label">How We Work</div>
-<div class="proc-title">Our Process</div>
-<div class="proc-grid">
-<div class="proc-step">
-<div class="proc-num">01</div>
-<h3>Discovery</h3>
-<p>Every project begins with a conversation. We delve deep into the brand DNA, understanding operational needs and aesthetic aspirations to form a solid strategic foundation.</p>
-</div>
-<div class="proc-step">
-<div class="proc-num">02</div>
-<h3>Creation</h3>
-<p>This is where the narrative takes shape. From spatial planning to bespoke lighting concepts, we layer textures and materials to craft an immersive environment unique to your vision.</p>
-</div>
-<div class="proc-step">
-<div class="proc-num">03</div>
-<h3>Delivery</h3>
-<p>Precision is key. We oversee the realisation of the design, working closely with craftsmen and contractors to ensure every detail is executed to perfection.</p>
-</div>
-</div>
-</div>
-</section>
-
 <!-- BOTTOM -->
 <div class="bottom" data-nav="dark">
 <section class="wku">
@@ -364,8 +282,12 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
   var imgWraps=document.querySelectorAll('.svc-img-wrap');
 
   function setActive(idx){
+    var current=document.querySelector('.svc-img-wrap.active');
+    if(current && parseInt(current.getAttribute('data-index'))===idx) return;
+    /* Animate out */
+    if(current){current.classList.remove('active');current.classList.add('leaving');
+      setTimeout(function(){current.classList.remove('leaving')},500);}
     items.forEach(function(it){it.classList.remove('active')});
-    imgWraps.forEach(function(iw){iw.classList.remove('active')});
     items[idx].classList.add('active');
     imgWraps[idx].classList.add('active');
   }
@@ -374,11 +296,6 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
     item.addEventListener('click',function(){setActive(i)});
     item.addEventListener('mouseenter',function(){setActive(i)});
   });
-
-  /* Process animation */
-  var proc=document.getElementById('process');
-  proc.classList.add('js');
-  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active')})},{root:sn,threshold:.3}).observe(proc);
 })();
 </script>
 </body>
