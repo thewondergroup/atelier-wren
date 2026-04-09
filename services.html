@@ -66,29 +66,47 @@ nav.dark .hb span{background:#1a1a1a}
 .hero h1 span{display:inline-block;transform:translateY(110%);animation:su .8s var(--e) .6s forwards}
 @keyframes su{to{transform:translateY(0)}}
 
-/* SERVICE SECTIONS */
-.svc{display:flex;align-items:center;justify-content:center}
-.svc-inner{display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%;height:100%}
-.svc-text{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,6vw,8rem)}
-.svc-line{width:35px;height:1px;background:var(--a);margin-bottom:1.5rem}
-.svc-text h2{font-family:var(--h);font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.2;margin-bottom:1.5rem}
-.svc-text p{font-family:var(--b);font-size:.6rem;line-height:2;color:#555}
-.svc-img{overflow:hidden;position:relative}
-.svc-img img{width:100%;height:100%;object-fit:cover}
+/* =========================================
+   SERVICES — WHITE BG, IMAGE ON HOVER
+   ========================================= */
+.sec-services{display:flex;align-items:center;background:#fff}
+.svc-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;width:100%;height:100%;padding:0 clamp(2rem,6vw,8rem);align-items:center}
 
-/* Flip: image left, text right */
-.svc.flip .svc-img{order:-1}
+/* Left: service list */
+.svc-list{display:flex;flex-direction:column}
+.svc-item{cursor:pointer;padding:clamp(.7rem,1.3vw,1.1rem) 0;border-bottom:1px solid rgba(0,0,0,.08);transition:border-color .4s}
+.svc-item:first-child{border-top:1px solid rgba(0,0,0,.08)}
+.svc-item-top{display:flex;align-items:center;justify-content:space-between}
+.svc-item-name{font-family:var(--h);font-size:clamp(1.2rem,2.8vw,2.4rem);font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:rgba(0,0,0,.2);transition:color .5s var(--e)}
+.svc-item.active .svc-item-name{color:#1a1a1a}
+.svc-item:hover .svc-item-name{color:rgba(0,0,0,.5)}
+.svc-item.active:hover .svc-item-name{color:#1a1a1a}
+.svc-item-right{display:flex;align-items:center;gap:1rem;flex-shrink:0}
+.svc-item-line{width:0;height:1px;background:var(--a);transition:width .6s var(--e)}
+.svc-item.active .svc-item-line{width:30px}
+.svc-item-icon{width:16px;height:16px;position:relative;flex-shrink:0}
+.svc-item-icon::before,.svc-item-icon::after{content:'';position:absolute;background:rgba(0,0,0,.2);transition:background .4s,transform .4s var(--e)}
+.svc-item-icon::before{width:16px;height:1px;top:50%;left:0;transform:translateY(-50%)}
+.svc-item-icon::after{width:1px;height:16px;left:50%;top:0;transform:translateX(-50%)}
+.svc-item.active .svc-item-icon::before{background:var(--a)}
+.svc-item.active .svc-item-icon::after{background:var(--a);transform:translateX(-50%) rotate(90deg)}
 
-/* Service animation */
-.svc.js .svc-line{width:0;transition:width .8s var(--e)}
-.svc.js .svc-text h2{opacity:0;transform:translateY(20px);transition:opacity .6s ease .2s,transform .6s var(--e) .2s}
-.svc.js .svc-text p{opacity:0;transform:translateY(15px);transition:opacity .6s ease .4s,transform .6s var(--e) .4s}
-.svc.js .svc-img img{transform:scale(1.08);transition:transform 1.2s var(--e) .1s}
-.svc.js.active .svc-line{width:35px}
-.svc.js.active .svc-text h2,.svc.js.active .svc-text p{opacity:1;transform:translateY(0)}
-.svc.js.active .svc-img img{transform:scale(1)}
+/* Description — slides open under active item */
+.svc-item-desc{max-height:0;overflow:hidden;transition:max-height .6s var(--e),opacity .4s ease;opacity:0}
+.svc-item.active .svc-item-desc{max-height:200px;opacity:1}
+.svc-item-desc p{font-family:var(--b);font-size:.6rem;line-height:2;color:#555;padding:.8rem 0 .4rem;max-width:480px}
 
-/* HORIZONTAL SCROLL PROJECTS */
+/* Right: image area */
+.svc-img-area{position:relative;height:70%;overflow:hidden}
+.svc-img-wrap{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;overflow:hidden}
+.svc-img-wrap.active{opacity:1}
+.svc-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--e)}
+.svc-item:hover ~ .svc-img-area .svc-img-wrap img,
+.svc-img-wrap.active img{transform:scale(1)}
+
+/* =========================================
+   HORIZONTAL SCROLL
+   ========================================= */
 .sec-hscroll{display:flex;align-items:center;background:#f5f4f2;overflow:hidden;position:relative}
 .wm{position:absolute;top:50%;left:0;transform:translateY(-50%);white-space:nowrap;font-family:var(--h);font-size:clamp(8rem,18vw,16rem);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(0,0,0,.03);pointer-events:none;animation:wms 25s linear infinite}
 @keyframes wms{0%{transform:translateY(-50%) translateX(0)}100%{transform:translateY(-50%) translateX(-50%)}}
@@ -103,7 +121,9 @@ nav.dark .hb span{background:#1a1a1a}
 .hi-l{font-family:var(--b);font-size:.45rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:.3rem}
 @keyframes hs{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* PROCESS */
+/* =========================================
+   PROCESS
+   ========================================= */
 .sec-process{display:flex;align-items:center;justify-content:center}
 .proc-inner{max-width:1200px;width:100%;padding:0 clamp(2rem,6vw,8rem)}
 .proc-label{font-family:var(--b);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--a);text-align:center;margin-bottom:.6rem}
@@ -113,8 +133,6 @@ nav.dark .hb span{background:#1a1a1a}
 .proc-num{font-family:var(--h);font-size:clamp(3rem,5vw,5rem);font-weight:700;color:rgba(0,0,0,.06);line-height:1;margin-bottom:1rem}
 .proc-step h3{font-family:var(--h);font-size:clamp(.9rem,1.4vw,1.2rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1rem}
 .proc-step p{font-family:var(--b);font-size:.55rem;line-height:2;color:#555}
-
-/* Process animation */
 .sec-process.js .proc-step{opacity:0;transform:translateY(25px);transition:opacity .6s ease,transform .6s var(--e)}
 .sec-process.js .proc-step:nth-child(1){transition-delay:.1s}
 .sec-process.js .proc-step:nth-child(2){transition-delay:.25s}
@@ -141,10 +159,8 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 
 /* RESPONSIVE */
 @media(max-width:900px){
-.svc-inner{grid-template-columns:1fr;height:auto}
-.svc{height:auto;min-height:100vh}
-.svc-img{height:40vh}
-.svc.flip .svc-img{order:0}
+.svc-content{grid-template-columns:1fr;padding:clamp(5rem,10vw,7rem) clamp(1.5rem,4vw,3rem) clamp(2rem,4vw,3rem)}
+.svc-img-area{display:none}
 .proc-grid{grid-template-columns:1fr;gap:2.5rem}
 }
 @media(max-width:768px){.ftc{grid-template-columns:1fr 1fr}}
@@ -196,75 +212,64 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 <h1><span>Services</span></h1>
 </section>
 
-<!-- SERVICE 1: Interior Architecture -->
-<section class="sec svc" data-nav="dark" id="svc1">
-<div class="svc-inner">
-<div class="svc-text">
-<div class="svc-line"></div>
-<h2>Interior Architecture</h2>
-<p>We approach every project from the inside out. Beyond mere decoration, our interior architecture service focuses on the structural narrative of a space — optimising layouts, refining circulation, and ensuring that the physical bones of the building align perfectly with its intended function and flow.</p>
+<!-- SERVICES INTERACTIVE -->
+<section class="sec sec-services" data-nav="dark" id="services">
+<div class="svc-content">
+<!-- Left: service names with expanding descriptions -->
+<div class="svc-list" id="svcList">
+<div class="svc-item active" data-index="0">
+<div class="svc-item-top">
+<div class="svc-item-name">Interior Architecture</div>
+<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
 </div>
-<div class="svc-img"><img src="assets/img-caia.webp" alt="Interior Architecture"></div>
+<div class="svc-item-desc"><p>We approach every project from the inside out. Beyond mere decoration, our interior architecture service focuses on the structural narrative of a space — optimising layouts, refining circulation, and ensuring that the physical bones of the building align perfectly with its intended function and flow.</p></div>
 </div>
-</section>
+<div class="svc-item" data-index="1">
+<div class="svc-item-top">
+<div class="svc-item-name">Interior Design</div>
+<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+</div>
+<div class="svc-item-desc"><p>Texture, tone, and materiality form the language of our interiors. We curate bespoke palettes that reflect a unique identity while evoking a deep sense of comfort. From wall treatments to flooring, every surface is selected with precision to create a cohesive, immersive, and timeless aesthetic.</p></div>
+</div>
+<div class="svc-item" data-index="2">
+<div class="svc-item-top">
+<div class="svc-item-name">Lighting Design</div>
+<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+</div>
+<div class="svc-item-desc"><p>Light is our most powerful tool for drama. As specialists in bespoke lighting, we design custom fixtures and architectural lighting schemes that transform moods instantly. We believe lighting should be theatrical yet functional, guiding the eye and elevating the guest experience from day to night.</p></div>
+</div>
+<div class="svc-item" data-index="3">
+<div class="svc-item-top">
+<div class="svc-item-name">Furniture Design</div>
+<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+</div>
+<div class="svc-item-desc"><p>True luxury lies in exclusivity. We design custom furniture and joinery pieces tailored specifically for each project. By moving away from off-the-shelf solutions, we ensure that every chair, table, and cabinet contributes to a unique aesthetic signature that cannot be replicated elsewhere.</p></div>
+</div>
+<div class="svc-item" data-index="4">
+<div class="svc-item-top">
+<div class="svc-item-name">Procurement</div>
+<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+</div>
+<div class="svc-item-desc"><p>Our procurement team manages the complex logistics of sourcing, purchasing, and delivering every element of the design. We leverage our global network of suppliers to secure the best quality at the best value, handling everything from budget management to white-glove installation.</p></div>
+</div>
+<div class="svc-item" data-index="5">
+<div class="svc-item-top">
+<div class="svc-item-name">Visuals</div>
+<div class="svc-item-right"><div class="svc-item-line"></div><div class="svc-item-icon"></div></div>
+</div>
+<div class="svc-item-desc"><p>We bring visions to life before construction begins. Using cutting-edge CGI and 3D visualisation technology, we create hyper-realistic renders that allow clients to explore the space, understand the lighting, and feel the atmosphere, ensuring total alignment on the design direction.</p></div>
+</div>
+</div>
 
-<!-- SERVICE 2: Interior Design -->
-<section class="sec svc flip" data-nav="light" id="svc2">
-<div class="svc-inner">
-<div class="svc-text">
-<div class="svc-line"></div>
-<h2>Interior Design</h2>
-<p>Texture, tone, and materiality form the language of our interiors. We curate bespoke palettes that reflect a unique identity while evoking a deep sense of comfort. From wall treatments to flooring, every surface is selected with precision to create a cohesive, immersive, and timeless aesthetic.</p>
+<!-- Right: image that changes on hover/click -->
+<div class="svc-img-area">
+<div class="svc-img-wrap active" data-index="0"><img src="assets/img-caia.webp" alt="Interior Architecture"></div>
+<div class="svc-img-wrap" data-index="1"><img src="assets/img-houseofming.webp" alt="Interior Design"></div>
+<div class="svc-img-wrap" data-index="2"><img src="assets/img-shahnameh.webp" alt="Lighting Design"></div>
+<div class="svc-img-wrap" data-index="3"><img src="assets/img-silva.webp" alt="Furniture Design"></div>
+<div class="svc-img-wrap" data-index="4"><img src="assets/img-pitch.webp" alt="Procurement"></div>
+<div class="svc-img-wrap" data-index="5"><img src="assets/img-rebase.webp" alt="Visuals"></div>
 </div>
-<div class="svc-img"><img src="assets/img-houseofming.webp" alt="Interior Design"></div>
-</div>
-</section>
-
-<!-- SERVICE 3: Lighting Design -->
-<section class="sec svc" data-nav="dark" id="svc3">
-<div class="svc-inner">
-<div class="svc-text">
-<div class="svc-line"></div>
-<h2>Lighting Design</h2>
-<p>Light is our most powerful tool for drama. As specialists in bespoke lighting, we design custom fixtures and architectural lighting schemes that transform moods instantly. We believe lighting should be theatrical yet functional, guiding the eye and elevating the guest experience from day to night.</p>
-</div>
-<div class="svc-img"><img src="assets/img-shahnameh.webp" alt="Lighting Design"></div>
-</div>
-</section>
-
-<!-- SERVICE 4: Furniture Design -->
-<section class="sec svc flip" data-nav="light" id="svc4">
-<div class="svc-inner">
-<div class="svc-text">
-<div class="svc-line"></div>
-<h2>Furniture Design</h2>
-<p>True luxury lies in exclusivity. We design custom furniture and joinery pieces tailored specifically for each project. By moving away from off-the-shelf solutions, we ensure that every chair, table, and cabinet contributes to a unique aesthetic signature that cannot be replicated elsewhere.</p>
-</div>
-<div class="svc-img"><img src="assets/img-silva.webp" alt="Furniture Design"></div>
-</div>
-</section>
-
-<!-- SERVICE 5: Procurement -->
-<section class="sec svc" data-nav="dark" id="svc5">
-<div class="svc-inner">
-<div class="svc-text">
-<div class="svc-line"></div>
-<h2>Procurement</h2>
-<p>Our procurement team manages the complex logistics of sourcing, purchasing, and delivering every element of the design. We leverage our global network of suppliers to secure the best quality at the best value, handling everything from budget management to white-glove installation with rigorous attention to detail.</p>
-</div>
-<div class="svc-img"><img src="assets/img-pitch.webp" alt="Procurement"></div>
-</div>
-</section>
-
-<!-- SERVICE 6: Visuals -->
-<section class="sec svc flip" data-nav="light" id="svc6">
-<div class="svc-inner">
-<div class="svc-text">
-<div class="svc-line"></div>
-<h2>Visuals</h2>
-<p>We bring visions to life before construction begins. Using cutting-edge CGI and 3D visualisation technology, we create hyper-realistic renders that allow clients to explore the space, understand the lighting, and feel the atmosphere, ensuring total alignment on the design direction.</p>
-</div>
-<div class="svc-img"><img src="assets/img-rebase.webp" alt="Visuals"></div>
 </div>
 </section>
 
@@ -278,7 +283,7 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 <a href="caia.html" class="hi"><img src="assets/img-caia.webp" alt="Caia"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Caia</div><div class="hi-l">Notting Hill, London</div></div></a>
 <a href="#" class="hi"><img src="assets/img-houseofming.webp" alt="House of Ming"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">House of Ming</div><div class="hi-l">St James', London</div></div></a>
 <a href="#" class="hi"><img src="assets/img-saltigirl.webp" alt="Saltie Girl"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Saltie Girl</div><div class="hi-l">Mayfair, London</div></div></a>
-<!-- duplicate set for seamless loop -->
+<!-- duplicate for seamless loop -->
 <a href="#" class="hi"><img src="assets/img-silva.webp" alt="Silva"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Silva</div><div class="hi-l">Mayfair, London</div></div></a>
 <a href="#" class="hi"><img src="assets/img-shahnameh.webp" alt="Shahnamah"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Shahnamah</div><div class="hi-l">Mayfair, London</div></div></a>
 <a href="#" class="hi"><img src="assets/img-rebase.webp" alt="Rebase"><div class="hi-ov"></div><div class="hi-info"><div class="hi-n">Rebase</div><div class="hi-l">Marylebone, London</div></div></a>
@@ -315,14 +320,10 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 
 <!-- BOTTOM -->
 <div class="bottom" data-nav="dark">
-
-<!-- CTA -->
 <section class="wku">
 <h2>Ready to transform your space?</h2>
 <a href="mailto:info@atelierwren.com" class="wku-btn">Start a Project</a>
 </section>
-
-<!-- FOOTER -->
 <footer>
 <div class="fl">Atelier Wren</div>
 <div class="ftc">
@@ -333,8 +334,8 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 </div>
 <div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
 </footer>
-
 </div><!-- /bottom -->
+
 </div><!-- /snap -->
 
 <script>
@@ -347,22 +348,31 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
   mx.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')};
   document.querySelectorAll('.ml a').forEach(function(a){a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}});
 
-  /* Nav colour — scroll-aware via data-nav */
-  var sections=sn.querySelectorAll('[data-nav]');
+  /* Nav colour */
+  var navSections=sn.querySelectorAll('[data-nav]');
   function updateNav(){
     var top=sn.scrollTop+60;
     var c='light';
-    sections.forEach(function(s){if(s.offsetTop<=top)c=s.getAttribute('data-nav')});
+    navSections.forEach(function(s){if(s.offsetTop<=top)c=s.getAttribute('data-nav')});
     if(c==='dark'){nav.classList.add('dark')}else{nav.classList.remove('dark')}
   }
   sn.addEventListener('scroll',updateNav);
   updateNav();
 
-  /* Service section animations */
-  var svcs=document.querySelectorAll('.svc');
-  svcs.forEach(function(s){
-    s.classList.add('js');
-    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active')})},{root:sn,threshold:.3}).observe(s);
+  /* ====== SERVICES INTERACTIVE ====== */
+  var items=document.querySelectorAll('.svc-item');
+  var imgWraps=document.querySelectorAll('.svc-img-wrap');
+
+  function setActive(idx){
+    items.forEach(function(it){it.classList.remove('active')});
+    imgWraps.forEach(function(iw){iw.classList.remove('active')});
+    items[idx].classList.add('active');
+    imgWraps[idx].classList.add('active');
+  }
+
+  items.forEach(function(item,i){
+    item.addEventListener('click',function(){setActive(i)});
+    item.addEventListener('mouseenter',function(){setActive(i)});
   });
 
   /* Process animation */
