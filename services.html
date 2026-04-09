@@ -96,9 +96,8 @@ nav.dark .hb span{background:#1a1a1a}
 
 /* Right: image area */
 .svc-img-area{position:relative;height:65%;margin-left:clamp(2rem,4vw,5rem);overflow:hidden}
-.svc-img-wrap{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;overflow:hidden}
-.svc-img-wrap.active{opacity:1}
-.svc-img-wrap.leaving{opacity:0;transition:opacity .35s ease}
+.svc-img-wrap{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;overflow:hidden}
+.svc-img-wrap.active{opacity:1;z-index:1}
 .svc-img-wrap img{width:100%;height:100%;object-fit:cover}
 
 /* BOTTOM */
@@ -280,11 +279,8 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
   var imgWraps=document.querySelectorAll('.svc-img-wrap');
 
   function setActive(idx){
-    var current=document.querySelector('.svc-img-wrap.active');
-    if(current && parseInt(current.getAttribute('data-index'))===idx) return;
-    /* Animate out */
-    if(current){current.classList.remove('active');current.classList.add('leaving');
-      setTimeout(function(){current.classList.remove('leaving')},500);}
+    if(imgWraps[idx].classList.contains('active')) return;
+    imgWraps.forEach(function(iw){iw.classList.remove('active')});
     items.forEach(function(it){it.classList.remove('active')});
     items[idx].classList.add('active');
     imgWraps[idx].classList.add('active');
