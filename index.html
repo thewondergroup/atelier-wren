@@ -151,10 +151,11 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rg
 <div class="ft-col"><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
 <div class="ft-col"><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
 <div class="ft-col"><h4>Press</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
-<div class="ft-bottom"><div class="ft-bottom-logo">Atelier Wren</div><div class="ft-bottom-links"><a href="index.html">Home</a><a href="#">Projects</a><a href="studio.html">Studio</a><a href="services.html">Services</a><a href="stories.html">Stories</a><a href="press.html">Press</a><a href="contact.html">Contact</a><a href="https://www.instagram.com/atelierwren/" target="_blank">Instagram</a></div><div class="ft-copy">&copy; 2026 Atelier Wren. All Rights Reserved.</div></div>
+<div class="ft-bottom"><div class="ft-bottom-logo">Atelier Wren</div><div class="ft-bottom-links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="studio.html">Studio</a><a href="services.html">Services</a><a href="stories.html">Stories</a><a href="press.html">Press</a><a href="contact.html">Contact</a><a href="https://www.instagram.com/atelierwren/" target="_blank">Instagram</a></div><div class="ft-copy">&copy; 2026 Atelier Wren. All Rights Reserved.</div></div>
 </footer>
 </div>
 </div>
+<script>
 var s=document.getElementById('snap');
 var h=document.getElementById('ham');
 var m=document.getElementById('mNav');
@@ -225,4 +226,13 @@ document.querySelectorAll('.m-nav-links a').forEach(function(a){
 });
 
 // Goto links
-document.querySelectorAll
+document.querySelectorAll('.goto').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var i=parseInt(this.dataset.i);
+    pa[i].scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>

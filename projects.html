@@ -104,10 +104,18 @@ footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);te
 <div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
 <div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
 <div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
-<div><h4>Press</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
+<div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
 </div>
 <div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
 </footer>
+<script>
 var hb=document.getElementById('hb'),mn=document.getElementById('mn'),mx=document.getElementById('mx');
 hb.onclick=function(){hb.classList.toggle('open');mn.classList.toggle('open')};
-mx.onclick=function(){hb.classList.remove('open');m
+mx.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')};
+document.querySelectorAll('.ml a').forEach(function(a){a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}});
+var cards=document.querySelectorAll('.card');
+var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=Array.from(cards).indexOf(e.target);e.target.style.transitionDelay=(Math.floor(i/3)*.12+i%3*.06)+'s';e.target.classList.add('vis')}})},{threshold:.1});
+cards.forEach(function(c){obs.observe(c)});
+</script>
+</body>
+</html>
