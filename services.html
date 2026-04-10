@@ -77,26 +77,26 @@ nav.dark .hb span{background:#1a1a1a}
 .svc-item{cursor:pointer;padding:clamp(.7rem,1.3vw,1.1rem) 0;border-bottom:1px solid rgba(0,0,0,.08);transition:border-color .4s}
 .svc-item:first-child{border-top:1px solid rgba(0,0,0,.08)}
 .svc-item-top{display:flex;align-items:center;justify-content:space-between}
-.svc-item-name{font-family:var(--h);font-size:clamp(1.2rem,2.8vw,2.4rem);font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:rgba(0,0,0,.2);transition:color .5s var(--e)}
+.svc-item-name{font-family:var(--h);font-size:clamp(1.2rem,2.8vw,2.4rem);font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:rgba(0,0,0,.2)}
 .svc-item.active .svc-item-name{color:#1a1a1a}
 .svc-item:hover .svc-item-name{color:rgba(0,0,0,.5)}
 .svc-item.active:hover .svc-item-name{color:#1a1a1a}
 .svc-item-right{display:flex;align-items:center;flex-shrink:0}
 .svc-item-icon{width:16px;height:16px;position:relative;flex-shrink:0}
-.svc-item-icon::before,.svc-item-icon::after{content:'';position:absolute;background:rgba(0,0,0,.2);transition:background .4s,transform .4s var(--e)}
+.svc-item-icon::before,.svc-item-icon::after{content:'';position:absolute;background:rgba(0,0,0,.2)}
 .svc-item-icon::before{width:16px;height:1px;top:50%;left:0;transform:translateY(-50%)}
 .svc-item-icon::after{width:1px;height:16px;left:50%;top:0;transform:translateX(-50%)}
 .svc-item.active .svc-item-icon::before{background:var(--a)}
 .svc-item.active .svc-item-icon::after{background:var(--a);transform:translateX(-50%) rotate(90deg)}
 
-/* Description — slides open under active item */
-.svc-item-desc{max-height:0;overflow:hidden;transition:max-height .6s var(--e),opacity .4s ease;opacity:0}
+/* Description — instant show/hide */
+.svc-item-desc{max-height:0;overflow:hidden;opacity:0}
 .svc-item.active .svc-item-desc{max-height:200px;opacity:1}
 .svc-item-desc p{font-family:var(--b);font-size:.6rem;line-height:2;color:#555;padding:.8rem 0 .4rem;max-width:480px}
 
-/* Right: image area */
+/* Right: image area — instant swap */
 .svc-img-area{position:relative;height:65%;margin-left:clamp(2rem,4vw,5rem);overflow:hidden}
-.svc-img-wrap{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;overflow:hidden}
+.svc-img-wrap{position:absolute;inset:0;opacity:0;overflow:hidden}
 .svc-img-wrap.active{opacity:1;z-index:1}
 .svc-img-wrap img{width:100%;height:100%;object-fit:cover}
 
