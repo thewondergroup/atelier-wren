@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quilon — Atelier Wren</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Fira+Code:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--h:'Barlow Condensed',sans-serif;--b:'Fira Code',monospace;--a:#c9a96e;--e:cubic-bezier(.16,1,.3,1)}
+body{background:#fff;color:#1a1a1a;font-family:var(--b);font-weight:300;overflow:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);animation:navIn .8s var(--e) .5s forwards}
+@keyframes navIn{to{opacity:1;transform:translateY(0)}}
+.nl{display:flex;gap:2rem;list-style:none}
+.nl a{font-family:var(--b);font-size:.55rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-decoration:none;position:relative;transition:opacity .3s}
+.nl a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#fff;transition:width .4s var(--e)}
+.nl a:hover{opacity:.7}.nl a:hover::after{width:100%}
+nav.dark .nl a{color:#1a1a1a}
+nav.dark .nl a::after{background:#1a1a1a}
+nav.dark .hb span{background:#1a1a1a}
+.hb{display:none;cursor:pointer;padding:8px;flex-direction:column;gap:6px;z-index:300;position:absolute;right:clamp(1.5rem,4vw,4rem)}
+.hb span{display:block;width:26px;height:1px;background:#fff;transition:transform .4s var(--e),opacity .3s,background .3s}
+.hb.open span{background:#1a1a1a}.hb.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}.hb.open span:nth-child(2){opacity:0}.hb.open span:nth-child(3){transform:translateY(-3.5px) rotate(-45deg)}
+.mn{position:fixed;inset:0;z-index:250;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}.mn.open{opacity:1;visibility:visible}
+.mnx{position:absolute;top:1.5rem;right:clamp(1.5rem,4vw,4rem);cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center}
+.mnx::before,.mnx::after{content:'';position:absolute;width:22px;height:1px;background:#1a1a1a}.mnx::before{transform:rotate(45deg)}.mnx::after{transform:rotate(-45deg)}
+.ml{display:flex;flex-direction:column;align-items:center;gap:1.5rem;margin-bottom:3rem}
+.ml a{font-family:var(--h);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;color:#1a1a1a;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;opacity:0;transform:translateY(25px);transition:opacity .5s ease,transform .5s var(--e),color .3s}
+.mn.open .ml a{opacity:1;transform:translateY(0)}
+.mn.open .ml a:nth-child(1){transition-delay:.1s}.mn.open .ml a:nth-child(2){transition-delay:.15s}.mn.open .ml a:nth-child(3){transition-delay:.2s}.mn.open .ml a:nth-child(4){transition-delay:.25s}.mn.open .ml a:nth-child(5){transition-delay:.3s}.mn.open .ml a:nth-child(6){transition-delay:.35s}.mn.open .ml a:nth-child(7){transition-delay:.4s}
+.ml a:hover{color:var(--a)}
+.mdv{width:40px;height:1px;background:var(--a);margin:0 auto 1.2rem;opacity:0;transition:opacity .5s ease .45s}.mn.open .mdv{opacity:1}
+.mcc{text-align:center;opacity:0;transform:translateY(15px);transition:opacity .5s ease .5s,transform .5s var(--e) .5s}.mn.open .mcc{opacity:1;transform:translateY(0)}
+.mcc p{font-family:var(--b);font-size:.5rem;color:rgba(0,0,0,.35);line-height:2;letter-spacing:.1em}.mcc a{color:rgba(0,0,0,.45);text-decoration:none}
+@media(max-width:768px){footer{grid-template-columns:1fr 1fr}.nl{display:none}.hb{display:flex}}
+.snap{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.sec{height:100vh;scroll-snap-align:start;overflow:hidden;position:relative}
+.hero{display:flex;align-items:center;justify-content:center}
+.hero-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.hero-ov{position:absolute;inset:0;background:rgba(0,0,0,.25)}
+.hero-content{position:relative;z-index:2;text-align:center}
+.hero h1{font-family:var(--h);font-size:clamp(2.2rem,5vw,4rem);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;overflow:hidden;margin-bottom:.8rem}
+.hero h1 span{display:inline-block;transform:translateY(110%);animation:su 1s var(--e) .5s forwards}
+@keyframes su{to{transform:translateY(0)}}
+.hero-meta{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fi .8s ease 1.2s forwards}
+.hero-meta span,.hero-meta a{font-family:var(--b);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;transition:color .3s}
+.hero-meta a:hover{color:#fff}
+@keyframes fi{to{opacity:1}}
+.intro{display:flex;align-items:center;justify-content:center}
+.intro-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,5vw,6rem);padding:0 clamp(2rem,6vw,8rem);align-items:center;max-width:1400px;width:100%;height:100%}
+.intro-line{width:35px;height:1px;background:var(--a);margin-bottom:2rem}
+.intro-text h2{font-family:var(--h);font-size:clamp(1.4rem,2.4vw,2rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.2;margin-bottom:2rem}
+.intro-text p{font-family:var(--b);font-size:.65rem;line-height:2;color:#555;margin-bottom:1.2rem}
+.intro-vid{overflow:hidden;height:75vh;position:relative}
+.intro-vid video{width:100%;height:100%;object-fit:cover;cursor:pointer}
+.vid-popup{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.vid-popup.show{opacity:1;visibility:visible}
+.vid-popup video{max-width:90vw;max-height:90vh;outline:none}
+.vid-popup-close{position:absolute;top:1.5rem;right:1.5rem;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center}
+.vid-popup-close::before,.vid-popup-close::after{content:'';position:absolute;width:22px;height:1px;background:#fff}
+.vid-popup-close::before{transform:rotate(45deg)}.vid-popup-close::after{transform:rotate(-45deg)}
+.vid-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.2);transition:opacity .5s ease;cursor:pointer}
+.vid-ov.hide{opacity:0;pointer-events:none}
+.vid-btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--b);font-size:.45rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;padding:.7rem 1.6rem;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.25);backdrop-filter:blur(6px);transition:background .3s,border-color .3s;cursor:pointer}
+.vid-btn:hover{background:rgba(0,0,0,.45);border-color:#fff}
+.vid-btn svg{width:14px;height:14px}
+.intro.js .intro-line{width:0;transition:width .8s var(--e)}
+.intro.js .intro-text h2{opacity:0;transform:translateY(20px);transition:opacity .6s ease .3s,transform .6s var(--e) .3s}
+.intro.js .intro-text p{opacity:0;transform:translateY(15px);transition:opacity .6s ease,transform .6s var(--e)}
+.intro.js .intro-text p:nth-child(3){transition-delay:.5s}.intro.js .intro-text p:nth-child(4){transition-delay:.65s}.intro.js .intro-text p:nth-child(5){transition-delay:.8s}
+.intro.js .intro-vid{opacity:0;transform:translateX(40px);transition:opacity .8s ease .4s,transform .8s var(--e) .4s}
+.intro.js.active .intro-line{width:35px}
+.intro.js.active .intro-text h2,.intro.js.active .intro-text p{opacity:1;transform:translateY(0)}
+.intro.js.active .intro-vid{opacity:1;transform:translateX(0)}
+.sec-gallery{padding:0;background:#fff}
+.masonry{display:grid;gap:4px;width:100%;height:100vh}
+.masonry.g1{padding-top:clamp(1.5rem,3vw,3rem)}
+.masonry.g2{padding-top:4px}
+.masonry.g1{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.masonry.g1 a:nth-child(1){grid-row:1/3}
+.masonry.g2{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.masonry.g2 a:nth-child(2){grid-row:1/3;grid-column:2}
+.masonry a{overflow:hidden;display:block;min-height:0}
+.masonry img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--e)}.masonry a:hover img{transform:scale(1.06)}
+.sec-quote{display:flex;align-items:center;justify-content:center}
+.sec-quote-inner{max-width:900px;text-align:center;padding:0 clamp(2rem,6vw,6rem)}
+.sec-quote-inner h2{font-family:var(--h);font-size:clamp(1.8rem,4vw,3.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.02em;line-height:1.1;margin-bottom:2rem}
+.sec-quote-inner p{font-family:var(--b);font-size:.6rem;line-height:2;color:#555;max-width:550px;margin:0 auto}
+.sec-hscroll{display:flex;align-items:center;background:#f5f4f2;overflow:hidden;position:relative}
+.wm{position:absolute;top:50%;left:0;transform:translateY(-50%);white-space:nowrap;font-family:var(--h);font-size:clamp(8rem,18vw,16rem);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(0,0,0,.03);pointer-events:none;animation:wms 25s linear infinite}
+@keyframes wms{0%{transform:translateY(-50%) translateX(0)}100%{transform:translateY(-50%) translateX(-50%)}}
+.ht{display:flex;gap:4px;animation:hs 40s linear infinite;width:max-content;position:relative;z-index:1}.ht:hover{animation-play-state:paused}
+.hi{height:80vh;flex-shrink:0;overflow:hidden}.hi img{height:100%;width:auto;display:block;transition:transform .8s var(--e)}.hi:hover img{transform:scale(1.04)}
+@keyframes hs{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.sec-feature{display:flex;align-items:center;justify-content:center}
+.sf-inner{max-width:550px;text-align:center;padding:0 clamp(2rem,6vw,6rem)}
+.sf-inner h2{font-family:var(--h);font-size:clamp(1rem,1.8vw,1.4rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.25;margin-bottom:1.5rem}
+.sf-inner p{font-family:var(--b);font-size:.55rem;line-height:2;color:#555}
+.sec-cinema{display:flex;align-items:stretch}.sec-cinema img{width:100%;height:100%;object-fit:cover}
+.bottom{scroll-snap-align:start;background:#fff}
+.pnav{display:flex;justify-content:space-between;align-items:center;padding:clamp(2rem,3vw,3rem) clamp(2rem,6vw,8rem);border-bottom:1px solid rgba(0,0,0,.06)}
+.pnav a{font-family:var(--b);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;transition:color .3s}.pnav a:hover{color:var(--a)}
+.pnav svg{width:16px;height:16px}.pnav-c{font-family:var(--b);font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:#999}
+.more{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem)}
+.more-l{font-family:var(--b);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--a);text-align:center;margin-bottom:.8rem}
+.more-t{font-family:var(--h);font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:clamp(2rem,3vw,3rem)}
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:2rem}
+.mc{position:relative;overflow:hidden;aspect-ratio:1/1.15;text-decoration:none;color:#fff}
+.mc img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--e)}.mc:hover img{transform:scale(1.1)}
+.mc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);transition:background .5s}.mc:hover .mc-ov{background:rgba(0,0,0,.5)}
+.mc-i{position:absolute;bottom:0;left:0;right:0;padding:clamp(.8rem,1.5vw,1.2rem)}
+.mc-n{font-family:var(--h);font-size:clamp(1.1rem,1.8vw,1.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;transition:transform .5s var(--e)}.mc:hover .mc-n{transform:translateY(-4px)}
+.mc-ln{width:0;height:1px;background:var(--a);margin-top:.5rem;transition:width .5s var(--e) .05s}.mc:hover .mc-ln{width:30px}
+.mc-d{font-family:var(--b);font-size:.6rem;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-top:.4rem;opacity:0;transform:translateY(6px);transition:opacity .4s ease .1s,transform .4s var(--e) .1s}.mc:hover .mc-d{opacity:1;transform:translateY(0)}
+.more-all{display:block;text-align:center;font-family:var(--b);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;transition:color .3s}.more-all:hover{color:var(--a)}
+.wku{padding:clamp(4rem,6vw,6rem) clamp(2rem,10vw,14rem);text-align:center}
+.wku h2{font-family:var(--h);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1.2rem}
+.wku p{font-family:var(--b);font-size:.65rem;line-height:2;color:#555;max-width:500px;margin:0 auto 2rem}
+.wku-btn{display:inline-block;font-family:var(--b);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:.8rem 2.2rem;border:1px solid #1a1a1a;transition:background .4s,color .4s}.wku-btn:hover{background:#1a1a1a;color:#fff}
+footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);text-align:center}
+@media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:2rem}.intro-vid{height:60vh}.mg{grid-template-columns:repeat(2,1fr)}.masonry.g1,.masonry.g2{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}.masonry.g1 a:nth-child(1){grid-row:1/3}.masonry.g2 a:nth-child(2){grid-row:1/3;grid-column:2}}
+@media(max-width:768px){footer{grid-template-columns:1fr 1fr}.pnav-c{display:none}}
+/* FOOTER */
+footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rgba(0,0,0,.08);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2rem,3vw,4rem)}
+.ft-col h4{font-family:var(--h);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:.6rem;text-decoration:underline;text-underline-offset:4px}
+.ft-col p,.ft-col a{font-family:var(--b);font-size:.55rem;color:#666;line-height:1.8;text-decoration:none}
+.ft-col a:hover{color:#1a1a1a}
+.ft-bottom{grid-column:1/-1;text-align:center;padding-top:2.5rem;margin-top:1rem;border-top:1px solid rgba(0,0,0,.06)}
+.ft-bottom-logo{font-family:var(--h);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:1.2rem}
+.ft-bottom-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+.ft-bottom-links a{font-family:var(--b);font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:#999;text-decoration:none;transition:color .3s}
+.ft-bottom-links a:hover{color:#1a1a1a}
+.ft-copy{font-family:var(--b);font-size:.4rem;color:#ccc;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<nav id="nav"><ul class="nl"><li><a href="index.html">Home</a></li><li><a href="projects.html">Projects</a></li><li><a href="studio.html">Studio</a></li><li><a href="services.html">Services</a></li><li><a href="stories.html">Stories</a></li><li><a href="press.html">Press</a></li><li><a href="contact.html">Contact</a></li></ul><div class="hb" id="hb"><span></span><span></span><span></span></div></nav>
+<div class="mn" id="mn"><div class="mnx" id="mx"></div><div class="ml"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="studio.html">Studio</a><a href="services.html">Services</a><a href="stories.html">Stories</a><a href="press.html">Press</a><a href="contact.html">Contact</a></div><div class="mdv"></div><div class="mcc"><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p><p>53 New Oxford Street, London</p></div></div>
+<div class="snap" id="sn">
+<section class="sec hero" data-nav="light"><div class="hero-img" style="background-image:url('assets/quilon-hero.jpg')"></div><div class="hero-ov"></div><div class="hero-content"><h1><span>Quilon</span></h1><div class="hero-meta"><span>Victoria, London</span><a href="#">www.quilon.co.uk</a><a href="#">@quilonrestaurant</a></div></div></section>
+<section class="sec intro" id="intro" data-nav="dark"><div class="intro-inner">
+<div class="intro-text"><div class="intro-line"></div><h2>A refined reimagining of a Michelin-starred institution</h2><p>A refined reimagining of a Michelin-starred institution, rooted in the traditions of India's southwest coast.</p><p>Atelier Wren draws on Kerala craftsmanship and coastal architecture, layering terracotta, timber and hand-worked details to create a space that feels both grounded and transportive.</p></div>
+<div class="intro-vid"><video muted loop playsinline id="vid" poster="assets/quilon-hero.jpg"><source src="assets/quilon-video.mp4" type="video/mp4"></video><div class="vid-ov" id="vidOv"><div class="vid-btn" id="vidBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="6,3 20,12 6,21"/></svg> Tour Quilon</div></div></div>
+</div></section>
+<section class="sec sec-gallery" data-nav="light"><div class="masonry g1">
+<a href="#"><img src="assets/quilon-1.jpg" alt="Quilon bar"></a>
+<a href="#"><img src="assets/quilon-2.jpg" alt="Quilon dining"></a>
+<a href="#"><img src="assets/quilon-6.jpg" alt="Quilon tables"></a>
+</div></section>
+<section class="sec sec-gallery" data-nav="light"><div class="masonry g2">
+<a href="#"><img src="assets/quilon-4.jpg" alt="Quilon restaurant"></a>
+<a href="#"><img src="assets/quilon-3.jpg" alt="Quilon detail"></a>
+<a href="#"><img src="assets/quilon-5.jpg" alt="Quilon private dining"></a>
+</div></section>
+<section class="sec sec-quote" data-nav="dark"><div class="sec-quote-inner"><h2>From palm-frond motifs to antique doors and bronze detailing, each element reflects a deep respect for regional materiality and storytelling</h2><p>The result is an immersive, atmospheric interior that balances authenticity with a contemporary sense of quiet luxury.</p></div></section>
+<div class="bottom" data-nav="dark">
+<div class="pnav"><a href="berenjak.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Pitch Canary Wharf</a><span class="pnav-c">10 / 15</span><a href="saltiegirl.html">Saltie Girl <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+<section class="more"><div class="more-l">Discover More</div><div class="more-t">Projects</div><div class="mg">
+<a href="hoppers.html" class="mc"><img src="assets/hoppers-hero.jpg" alt="Hoppers"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Hoppers</div><div class="mc-ln"></div><div class="mc-d">Sri Lankan, Shoreditch</div></div></a>
+<a href="silva.html" class="mc"><img src="assets/img-silva.webp" alt="Silva"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Silva</div><div class="mc-ln"></div><div class="mc-d">Contemporary Mediterranean, Mayfair</div></div></a>
+<a href="houseofming.html" class="mc"><img src="assets/hom-hero.jpg" alt="House of Ming"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">House of Ming</div><div class="mc-ln"></div><div class="mc-d">East Asian fine dining, St James'</div></div></a>
+<a href="berenjak.html" class="mc"><img src="assets/berenjak-hero.jpg" alt="Berenjak"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Berenjak</div><div class="mc-ln"></div><div class="mc-d">Persian grill, Mayfair</div></div></a>
+<a href="saltiegirl.html" class="mc"><img src="assets/img-saltigirl.webp" alt="Saltie Girl"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Saltie Girl</div><div class="mc-ln"></div><div class="mc-d">Seafood bar, Mayfair</div></div></a>
+<a href="shahnamah.html" class="mc"><img src="assets/img-shahnameh.webp" alt="Shahnamah"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Shahnamah</div><div class="mc-ln"></div><div class="mc-d">Persian fine dining, Jeddah</div></div></a>
+</div><a href="projects.html" class="more-all">All Projects</a></section>
+<section class="wku"><h2>Work With Us</h2><p>Ready to create something extraordinary? We'd love to hear about your project.</p><a href="contact.html" class="wku-btn">Get in Touch</a></section>
+<footer>
+<div class="ft-col"><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
+<div class="ft-col"><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
+<div class="ft-col"><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
+<div class="ft-col"><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
+<div class="ft-bottom"><div class="ft-bottom-logo">Atelier Wren</div><div class="ft-bottom-links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="studio.html">Studio</a><a href="services.html">Services</a><a href="stories.html">Stories</a><a href="press.html">Press</a><a href="contact.html">Contact</a><a href="https://www.instagram.com/atelierwren/" target="_blank">Instagram</a></div><div class="ft-copy">&copy; 2026 Atelier Wren. All Rights Reserved.</div></div>
+</footer>
+</div></div>
+<div class="vid-popup" id="vidPop">
+<div class="vid-popup-close" id="vidPopClose"></div>
+<video id="vidFull" playsinline loop><source src="assets/quilon-video.mp4" type="video/mp4"></video>
+</div>
+<script>
+var hb=document.getElementById('hb'),mn=document.getElementById('mn'),mx=document.getElementById('mx');
+var sn=document.getElementById('sn'),intro=document.getElementById('intro'),nav=document.getElementById('nav');
+var vid=document.getElementById('vid'),vidOv=document.getElementById('vidOv'),vidBtn=document.getElementById('vidBtn');
+var vidPop=document.getElementById('vidPop'),vidPopClose=document.getElementById('vidPopClose'),vidFull=document.getElementById('vidFull');
+hb.onclick=function(){hb.classList.toggle('open');mn.classList.toggle('open')};
+mx.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')};
+document.querySelectorAll('.ml a').forEach(function(a){a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}});
+intro.classList.add('js');
+new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active')})},{root:sn,threshold:.5}).observe(intro);
+vidBtn.onclick=function(){vidPop.classList.add('show');vidFull.currentTime=0;vidFull.muted=false;vidFull.play()};
+function closePop(){vidPop.classList.remove('show');vidFull.pause();vidFull.muted=true}
+vidPopClose.onclick=closePop;
+vidPop.onclick=function(e){if(e.target===vidPop)closePop()};
+/* Nav colour switching */
+var sections=sn.querySelectorAll('[data-nav]');
+function updateNav(){var top=sn.scrollTop+60;var c='light';sections.forEach(function(s){if(s.offsetTop<=top)c=s.getAttribute('data-nav')});if(c==='dark'){nav.classList.add('dark')}else{nav.classList.remove('dark')}}
+sn.addEventListener('scroll',updateNav);
+updateNav();
+</script>
