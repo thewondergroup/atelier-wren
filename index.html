@@ -9,9 +9,7 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#080808;--text:#e8e4df;--accent:#c9a96e;--heading:'Barlow Condensed',sans-serif;--body:'Fira Code',monospace;--ease:cubic-bezier(.16,1,.3,1)}
 body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;overflow-x:hidden}
-.loader{position:fixed;inset:0;z-index:9999;background:var(--bg);pointer-events:none;animation:loaderOut 1s ease 2s forwards}
-@keyframes loaderOut{to{opacity:0;visibility:hidden}}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);animation:navIn .8s var(--ease) 2.5s forwards}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem clamp(1.5rem,4vw,4rem);opacity:0;transform:translateY(-30px);animation:navIn .8s var(--ease) .5s forwards}
 @keyframes navIn{to{opacity:1;transform:translateY(0)}}
 .nav-logo{display:none}
 .nav-links{display:flex;gap:2rem;list-style:none}
@@ -56,7 +54,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.06);transition:opacity 1.4s ease,transform 7s linear}
 .hero-slide.active{opacity:1;transform:scale(1)}
 .hero-ov{position:absolute;inset:0;background:rgba(8,8,8,.25);pointer-events:none}
-.hero-logo{position:relative;z-index:3;text-align:center;opacity:0;animation:fadeIn 1s ease 2.2s forwards}
+.hero-logo{position:relative;z-index:3;text-align:center;opacity:0;animation:fadeIn 1s ease .3s forwards}
 .hero-logo-text{font-family:var(--heading);font-size:clamp(2rem,5vw,4rem);font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff}
 .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.7rem;opacity:0;animation:fadeIn 1s ease 2.8s forwards}
 .hero-scroll span{font-family:var(--body);font-size:.45rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5)}
@@ -113,13 +111,12 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rg
 </style>
 </head>
 <body>
-<div class="loader"></div>
-<nav id="nav"><a href="#" class="nav-logo">Atelier Wren</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="#" class="goto" data-i="1">Projects</a></li><li><a href="studio.html">Studio</a></li><li><a href="services.html">Services</a></li><li><a href="stories.html">Stories</a></li><li><a href="press.html">Press</a></li><li><a href="contact.html">Contact</a></li></ul><div class="ham" id="ham"><span></span><span></span><span></span></div></nav>
+<nav id="nav"><a href="#" class="nav-logo">Atelier Wren</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="projects.html">Projects</a></li><li><a href="studio.html">Studio</a></li><li><a href="services.html">Services</a></li><li><a href="stories.html">Stories</a></li><li><a href="press.html">Press</a></li><li><a href="contact.html">Contact</a></li></ul><div class="ham" id="ham"><span></span><span></span><span></span></div></nav>
 <div class="m-nav" id="mNav">
 <div class="m-nav-close" id="mClose"></div>
 <div class="m-nav-links">
 <a href="index.html">Home</a>
-<a href="#" class="goto" data-i="1">Projects</a>
+<a href="projects.html">Projects</a>
 <a href="studio.html">Studio</a>
 <a href="services.html">Services</a>
 <a href="stories.html">Stories</a>
@@ -139,13 +136,13 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rg
 <section class="panel" data-index="1"><div class="panel-bg" style="background-image:url('assets/img-silva.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Silva</div><div class="p-loc">Mayfair, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
 <section class="panel" data-index="2"><div class="panel-bg" style="background-image:url('assets/img-rebase.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Rebase</div><div class="p-loc">Marylebone, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
 <section class="panel" data-index="3"><div class="panel-bg" style="background-image:url('assets/img-caia.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Caia</div><div class="p-loc">Notting Hill, London</div></div><div class="p-action"><a href="caia.html" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
-<section class="panel" data-index="4"><div class="panel-bg" style="background-image:url('assets/img-quilon.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Quilon</div><div class="p-loc">London</div></div><div class="p-action"><a href="caia.html" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
+<section class="panel" data-index="4"><div class="panel-bg" style="background-image:url('assets/img-quilon.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Quilon</div><div class="p-loc">London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
 <section class="panel" data-index="5"><div class="panel-bg" style="background-image:url('assets/img-shahnameh.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Shahnameh</div><div class="p-loc">Mayfair, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
 <section class="panel" data-index="6"><div class="panel-bg" style="background-image:url('assets/img-houseofming.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">House of Ming</div><div class="p-loc">St James', London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
 <section class="panel" data-index="7"><div class="panel-bg" style="background-image:url('assets/img-saltigirl.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Saltigirl</div><div class="p-loc">London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
 <section class="panel" data-index="8"><div class="panel-bg" style="background-image:url('assets/img-pitch.webp')"></div><div class="panel-ov"></div><div class="p-content"><div class="p-meta"><div class="p-label">Featured Project</div><div class="p-name">Pitch</div><div class="p-loc">Canary Wharf, London</div></div><div class="p-action"><a href="#" class="disc-btn">Discover <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></section>
 <div class="bottom">
-<div class="nav-section"><div class="nav-block"><a href="#">Projects</a></div><div class="nav-block"><a href="#">About</a></div><div class="nav-block"><a href="contact.html">Contact</a></div></div>
+<div class="nav-section"><div class="nav-block"><a href="projects.html">Projects</a></div><div class="nav-block"><a href="studio.html">About</a></div><div class="nav-block"><a href="contact.html">Contact</a></div></div>
 <footer>
 <div class="ft-col"><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
 <div class="ft-col"><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
