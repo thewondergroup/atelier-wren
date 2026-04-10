@@ -52,7 +52,7 @@ nav.dark .hb span{background:#1a1a1a}
 .mc-mob p{font-family:var(--b);font-size:.5rem;color:rgba(0,0,0,.35);line-height:2;letter-spacing:.1em}
 .mc-mob a{color:rgba(0,0,0,.45);text-decoration:none;transition:color .3s}
 .mc-mob a:hover{color:#1a1a1a}
-@media(max-width:768px){.nl{display:none}.hb{display:flex}}
+@media(max-width:768px){footer{grid-template-columns:1fr 1fr}.nl{display:none}.hb{display:flex}}
 
 /* SCROLL SNAP */
 .snap{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
@@ -113,13 +113,16 @@ nav.dark .hb span{background:#1a1a1a}
 .bottom{scroll-snap-align:start;background:#fff}
 
 /* FOOTER */
-footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);text-align:center}
-.fl{font-family:var(--h);font-size:clamp(2rem,4vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2rem}
-.ftc{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.5rem,2.5vw,3rem);text-align:left;border-top:1px solid rgba(0,0,0,.08);padding-top:2rem}
-.ftc h4{font-family:var(--h);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem;text-decoration:underline;text-underline-offset:3px}
-.ftc p,.ftc a{font-family:var(--b);font-size:.5rem;color:#666;line-height:1.8;text-decoration:none}
-.ftc a:hover{color:#1a1a1a}
-.fy{font-family:var(--b);font-size:.4rem;color:#ccc;letter-spacing:.1em;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,.06)}
+footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rgba(0,0,0,.08);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2rem,3vw,4rem)}
+.ft-col h4{font-family:var(--h);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:.6rem;text-decoration:underline;text-underline-offset:4px}
+.ft-col p,.ft-col a{font-family:var(--b);font-size:.55rem;color:#666;line-height:1.8;text-decoration:none}
+.ft-col a:hover{color:#1a1a1a}
+.ft-bottom{grid-column:1/-1;text-align:center;padding-top:2.5rem;margin-top:1rem;border-top:1px solid rgba(0,0,0,.06)}
+.ft-bottom-logo{font-family:var(--h);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:1.2rem}
+.ft-bottom-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+.ft-bottom-links a{font-family:var(--b);font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:#999;text-decoration:none;transition:color .3s}
+.ft-bottom-links a:hover{color:#1a1a1a}
+.ft-copy{font-family:var(--b);font-size:.4rem;color:#ccc;letter-spacing:.1em}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -127,7 +130,7 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 .sec-contact{height:auto;min-height:100vh;padding:clamp(6rem,10vw,8rem) 0 clamp(3rem,5vw,4rem)}
 .ct-form-row{grid-template-columns:1fr}
 }
-@media(max-width:768px){.ftc{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){footer{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -249,14 +252,11 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);te
 <!-- BOTTOM -->
 <div class="bottom" data-nav="dark">
 <footer>
-<div class="fl">Atelier Wren</div>
-<div class="ftc">
-<div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
-<div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
-<div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
-<div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
-</div>
-<div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
+<div class="ft-col"><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
+<div class="ft-col"><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
+<div class="ft-col"><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
+<div class="ft-col"><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
+<div class="ft-bottom"><div class="ft-bottom-logo">Atelier Wren</div><div class="ft-bottom-links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="studio.html">Studio</a><a href="services.html">Services</a><a href="stories.html">Stories</a><a href="press.html">Press</a><a href="contact.html">Contact</a><a href="https://www.instagram.com/atelierwren/" target="_blank">Instagram</a></div><div class="ft-copy">&copy; 2026 Atelier Wren. All Rights Reserved.</div></div>
 </footer>
 </div><!-- /bottom -->
 
