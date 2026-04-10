@@ -81,11 +81,11 @@ footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);te
 </style>
 </head>
 <body>
-<nav><ul class="nl"><li><a href="index.html">Home</a></li><li><a href="projects.html">Projects</a></li><li><a href="#">Studio</a></li><li><a href="#">Services</a></li><li><a href="#">Stories</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul><div class="hb" id="hb"><span></span><span></span><span></span></div></nav>
-<div class="mn" id="mn"><div class="mnx" id="mx"></div><div class="ml"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="#">Studio</a><a href="#">Services</a><a href="#">Stories</a><a href="#">Press</a><a href="#">Contact</a></div><div class="mdv"></div><div class="mc"><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p><p>53 New Oxford Street, London</p></div></div>
+<nav><ul class="nl"><li><a href="index.html">Home</a></li><li><a href="projects.html">Projects</a></li><li><a href="studio.html">Studio</a></li><li><a href="services.html">Services</a></li><li><a href="stories.html">Stories</a></li><li><a href="press.html">Press</a></li><li><a href="contact.html">Contact</a></li></ul><div class="hb" id="hb"><span></span><span></span><span></span></div></nav>
+<div class="mn" id="mn"><div class="mnx" id="mx"></div><div class="ml"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="studio.html">Studio</a><a href="services.html">Services</a><a href="stories.html">Stories</a><a href="press.html">Press</a><a href="contact.html">Contact</a></div><div class="mdv"></div><div class="mc"><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p><p>53 New Oxford Street, London</p></div></div>
 <section class="hero"><div class="hero-img" style="background-image:url('assets/img-caia.webp')"></div><div class="hero-ov"></div><h1><span>Projects</span></h1></section>
 <div class="grid">
-<a href="#" class="card"><img src="assets/img-caia.webp" alt="Caia"><div class="co"></div><div class="ci"><div class="cn">Caia</div><div class="cl"></div><div class="cc">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
+<a href="caia.html" class="card"><img src="assets/img-caia.webp" alt="Caia"><div class="co"></div><div class="ci"><div class="cn">Caia</div><div class="cl"></div><div class="cc">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
 <a href="#" class="card"><img src="assets/img-houseofming.webp" alt="House of Ming"><div class="co"></div><div class="ci"><div class="cn">House of Ming</div><div class="cl"></div><div class="cc">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
 <a href="#" class="card"><img src="assets/img-quilon.webp" alt="Quilon"><div class="co"></div><div class="ci"><div class="cn">Quilon</div><div class="cl"></div><div class="cc">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
 <a href="#" class="card"><img src="assets/img-pitch.webp" alt="Pitch"><div class="co"></div><div class="ci"><div class="cn">Pitch</div><div class="cl"></div><div class="cc">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></a>
@@ -104,18 +104,10 @@ footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);te
 <div><h4>Address</h4><p>2nd Floor<br>53 New Oxford Street<br>WC1A 1BL<br>London</p></div>
 <div><h4>Phone</h4><p><a href="tel:+442073875113">+44 (0) 20 7387 5113</a></p></div>
 <div><h4>Email</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
-<div><h4>Press</h4><p><a href="mailto:charlotte@thewonder.group">charlotte@thewonder.group</a></p></div>
+<div><h4>Press</h4><p><a href="mailto:info@atelierwren.com">info@atelierwren.com</a></p></div>
 </div>
 <div class="fy">&copy; 2026 Atelier Wren. All Rights Reserved.</div>
 </footer>
-<script>
 var hb=document.getElementById('hb'),mn=document.getElementById('mn'),mx=document.getElementById('mx');
 hb.onclick=function(){hb.classList.toggle('open');mn.classList.toggle('open')};
-mx.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')};
-document.querySelectorAll('.ml a').forEach(function(a){a.onclick=function(){hb.classList.remove('open');mn.classList.remove('open')}});
-var cards=document.querySelectorAll('.card');
-var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=Array.from(cards).indexOf(e.target);e.target.style.transitionDelay=(Math.floor(i/3)*.12+i%3*.06)+'s';e.target.classList.add('vis')}})},{threshold:.1});
-cards.forEach(function(c){obs.observe(c)});
-</script>
-</body>
-</html>
+mx.onclick=function(){hb.classList.remove('open');m
