@@ -45,7 +45,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .mc a{color:rgba(0,0,0,.45);text-decoration:none;transition:color .3s}
 .mc a:hover{color:#1a1a1a}
 @media(max-width:768px){footer{grid-template-columns:1fr 1fr}.nl{display:none}.hb{display:flex}}
-.hero{position:relative;height:70vh;min-height:400px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero{position:relative;height:100vh;min-height:400px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .hero-img{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.08);animation:hz 1.5s var(--e) .2s forwards}
 @keyframes hz{to{transform:scale(1)}}
 .hero-ov{position:absolute;inset:0;background:rgba(0,0,0,.3)}
@@ -69,9 +69,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .card:hover .cc{opacity:1;transform:translateY(0)}
 .cc svg{width:10px;height:10px}
 @keyframes fi{to{opacity:1}}
-footer{padding:clamp(4rem,6vw,6rem) clamp(2rem,6vw,8rem) clamp(2rem,4vw,4rem);text-align:center}
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){footer{grid-template-columns:1fr 1fr}}
 /* FOOTER */
 footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rgba(0,0,0,.08);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2rem,3vw,4rem)}
 .ft-col h4{font-family:var(--h);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin-bottom:.6rem;text-decoration:underline;text-underline-offset:4px}
@@ -83,6 +81,7 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rg
 .ft-bottom-links a{font-family:var(--b);font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:#999;text-decoration:none;transition:color .3s}
 .ft-bottom-links a:hover{color:#1a1a1a}
 .ft-copy{font-family:var(--b);font-size:.4rem;color:#ccc;letter-spacing:.1em}
+@media(max-width:768px){footer{grid-template-columns:1fr 1fr;padding:clamp(2rem,4vw,3rem) clamp(1.5rem,4vw,4rem);gap:1.5rem}.ft-bottom-links{gap:.8rem}.ft-bottom-links a{font-size:.4rem;letter-spacing:.08em}.ft-col p,.ft-col a{font-size:.5rem;word-break:break-word}}
 </style>
 </head>
 <body>
