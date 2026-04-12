@@ -108,8 +108,8 @@ nav.dark .hb span{background:#1a1a1a}
 .mc{position:relative;overflow:hidden;aspect-ratio:1/1.15;text-decoration:none;color:#fff}
 .mc img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--e)}.mc:hover img{transform:scale(1.1)}
 .mc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);transition:background .5s}.mc:hover .mc-ov{background:rgba(0,0,0,.5)}
-.mc-i{position:absolute;bottom:0;left:0;right:0;padding:clamp(.8rem,1.5vw,1.2rem)}
-.mc-n{font-family:var(--h);font-size:clamp(1.1rem,1.8vw,1.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;transition:transform .5s var(--e)}.mc:hover .mc-n{transform:translateY(-4px)}
+.mc-i{position:absolute;bottom:0;left:0;right:0;padding:clamp(.8rem,1.5vw,1.2rem);display:flex;flex-direction:column;justify-content:flex-end;min-height:4rem}
+.mc-n{font-family:var(--h);font-size:clamp(1.1rem,1.8vw,1.5rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;transition:transform .5s var(--e);line-height:1.2}.mc:hover .mc-n{transform:translateY(-4px)}
 .mc-ln{width:0;height:1px;background:var(--a);margin-top:.5rem;transition:width .5s var(--e) .05s}.mc:hover .mc-ln{width:30px}
 .mc-d{font-family:var(--b);font-size:.6rem;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-top:.4rem;opacity:0;transform:translateY(6px);transition:opacity .4s ease .1s,transform .4s var(--e) .1s}.mc:hover .mc-d{opacity:1;transform:translateY(0)}
 .more-all{display:block;text-align:center;font-family:var(--b);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;transition:color .3s}.more-all:hover{color:var(--a)}
@@ -118,7 +118,7 @@ nav.dark .hb span{background:#1a1a1a}
 .wku p{font-family:var(--b);font-size:.65rem;line-height:2;color:#555;max-width:500px;margin:0 auto 2rem}
 .wku-btn{display:inline-block;font-family:var(--b);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:.8rem 2.2rem;border:1px solid #1a1a1a;transition:background .4s,color .4s}.wku-btn:hover{background:#1a1a1a;color:#fff}
 footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem) clamp(2rem,3vw,3rem);text-align:center}
-@media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:2rem}.intro-vid{height:60vh}.mg{grid-template-columns:repeat(2,1fr)}.masonry.g1,.masonry.g2{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}.masonry.g1 a:nth-child(1){grid-row:1/3}.masonry.g2 a:nth-child(2){grid-row:1/3;grid-column:2}}
+@media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:2rem}.intro-vid{height:60vh}.mg{grid-template-columns:repeat(2,1fr)}.masonry.g1,.masonry.g2{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}.masonry.g1 a:nth-child(1){grid-row:1/3}.masonry.g2 a:nth-child(2){grid-row:1/3;grid-column:2}.mc{aspect-ratio:1/1.3}.mc-n{font-size:clamp(.85rem,3.5vw,1.1rem);min-height:2.4em}.mc-d{display:none}}
 @media(max-width:768px){footer{grid-template-columns:1fr 1fr}.pnav-c{display:none}}
 /* FOOTER */
 footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rgba(0,0,0,.08);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2rem,3vw,4rem)}
@@ -161,7 +161,7 @@ footer{padding:clamp(3rem,5vw,5rem) clamp(2rem,6vw,8rem);border-top:1px solid rg
 <a href="rebase.html" class="mc"><img src="assets/rebase-hero.jpg" alt="Rebase"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Rebase</div><div class="mc-ln"></div><div class="mc-d">Wellness retreat, Marylebone</div></div></a>
 <a href="houseofming.html" class="mc"><img src="assets/hom-hero.jpg" alt="House of Ming"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">House of Ming</div><div class="mc-ln"></div><div class="mc-d">East Asian fine dining, St James'</div></div></a>
 <a href="silva.html" class="mc"><img src="assets/silva-hero.jpg" alt="SiLVA"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">SiLVA</div><div class="mc-ln"></div><div class="mc-d">Contemporary Mediterranean, Mayfair</div></div></a>
-<a href="caia.html" class="mc"><img src="assets/img-caia.webp" alt="Caia"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Caia</div><div class="mc-ln"></div><div class="mc-d">Wine bar, Notting Hill</div></div></a>
+<a href="caia.html" class="mc"><img src="assets/caia-hero.jpg" alt="Caia"><div class="mc-ov"></div><div class="mc-i"><div class="mc-n">Caia</div><div class="mc-ln"></div><div class="mc-d">Wine bar, Notting Hill</div></div></a>
 </div><a href="projects.html" class="more-all">All Projects</a></section>
 <section class="wku"><h2>Work With Us</h2><p>Ready to create something extraordinary? We'd love to hear about your project.</p><a href="contact.html" class="wku-btn">Get in Touch</a></section>
 <footer>
